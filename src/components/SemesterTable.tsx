@@ -45,7 +45,7 @@ export const SemesterTable = ({
           <TableRow>
             <TableHead className="w-[300px]">Course</TableHead>
             <TableHead>ECTS</TableHead>
-            <TableHead className="text-right">Grade</TableHead>
+            <TableHead>Grade</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -53,7 +53,7 @@ export const SemesterTable = ({
             <TableRow key={course.name}>
               <TableCell className="font-medium">{course.name}</TableCell>
               <TableCell>{course.credits}</TableCell>
-              <TableCell className="text-right">
+              <TableCell>
                 {course.isPassFail ? (
                   <div className="flex justify-end">
                     <div className="w-[140px] h-10 bg-muted flex items-center justify-center rounded-md border border-input">
@@ -75,3 +75,4 @@ export const SemesterTable = ({
     </div>
   );
 };
+
