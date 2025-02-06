@@ -41,7 +41,7 @@ export const SemesterTable = ({
   const validCourses = courses?.filter((course): course is Course => course != null) || [];
 
   return (
-    <div className={`w-full ${isMobile ? '-mx-4 px-0' : ''}`}>
+    <div className={`w-full ${isMobile ? '-mx-6 px-0 max-w-[100vw]' : ''}`}>
       <Table>
         <TableHeader>
           <TableRow>
@@ -83,3 +83,4 @@ export const SemesterTable = ({
     </div>
   );
 };
+
