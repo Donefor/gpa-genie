@@ -24,6 +24,14 @@ export const Year3Controls = ({
 }: Year3ControlsProps) => {
   const handleExchangeChange = (value: ExchangeOption) => {
     onExchangeChange(value);
+    // Auto-select thesis period based on exchange selection
+    if (value === 'fall') {
+      onThesisChange('spring');
+    } else if (value === 'spring') {
+      onThesisChange('fall');
+    } else {
+      onThesisChange('none');
+    }
     // If enabling exchange, disable internship
     if (value !== 'none' && hasInternship) {
       onInternshipChange(false);
@@ -36,6 +44,7 @@ export const Year3Controls = ({
     // If enabling internship, disable exchange
     if (enabled && exchangeOption !== 'none') {
       onExchangeChange('none');
+      onThesisChange('none'); // Reset thesis when exchange is disabled
     }
   };
 
@@ -77,6 +86,7 @@ export const Year3Controls = ({
           <Select 
             value={thesisOption} 
             onValueChange={onThesisChange}
+            disabled={exchangeOption !== 'none'} // Disable manual thesis selection when exchange is selected
           >
             <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="Select thesis period" />
