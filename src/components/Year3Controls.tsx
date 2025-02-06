@@ -18,7 +18,7 @@ export const Year3Controls = ({
   onExchangeChange,
   onInternshipChange,
   onThesisChange,
-  exchangeOption,
+  exchangeOption = 'none',
   hasInternship,
   thesisOption
 }: Year3ControlsProps) => {
