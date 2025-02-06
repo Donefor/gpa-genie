@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { YearSection } from '@/components/YearSection';
 import { YEAR_1_COURSES, YEAR_2_COURSES, SPECIALIZATION_COURSES } from '@/data/courseData';
@@ -41,26 +42,34 @@ const Index = () => {
 
   const handleSpecializationChange = (spec: Specialization) => {
     setSecondSpecialization(null);
-    setElectiveSemester3(null);
-    setElectiveSemester4(null);
     setSpecialization(spec);
 
     if (spec) {
       const specializationCourses = SPECIALIZATION_COURSES[spec];
       setYear2Data(prev => {
         const newData = { ...prev };
-        newData.semesters[2] = {
-          courses: [specializationCourses[3][0]].map(course => ({
-            ...course,
+        // Update semester 3
+        const semester3Courses = [specializationCourses[3][0]];
+        if (electiveSemester3) {
+          semester3Courses.push({
+            name: 'Elective Course',
+            credits: 7.5,
             grade: 'Not finished' as Grade
-          }))
-        };
-        newData.semesters[3] = {
-          courses: [specializationCourses[4][0]].map(course => ({
-            ...course,
+          });
+        }
+        newData.semesters[2] = { courses: semester3Courses };
+
+        // Update semester 4
+        const semester4Courses = [specializationCourses[4][0]];
+        if (electiveSemester4) {
+          semester4Courses.push({
+            name: 'Elective Course',
+            credits: 7.5,
             grade: 'Not finished' as Grade
-          }))
-        };
+          });
+        }
+        newData.semesters[3] = { courses: semester4Courses };
+
         return newData;
       });
     }
@@ -220,3 +229,4 @@ const Index = () => {
 };
 
 export default Index;
+
