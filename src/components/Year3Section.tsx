@@ -49,30 +49,31 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
   // Update semesters when exchange, internship, or thesis options change
   useEffect(() => {
     setSemesters(prev => {
+      // Start with clean semesters
       const newSemesters = Array(4).fill(null).map(() => ({ courses: [] }));
 
       // Handle Exchange - only if internship is not selected
       if (!hasInternship && exchangeOption === 'fall') {
-        newSemesters[0].courses.push(
+        newSemesters[0].courses = [
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        );
-        newSemesters[1].courses.push(
+        ];
+        newSemesters[1].courses = [
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        );
+        ];
       } else if (!hasInternship && exchangeOption === 'spring') {
-        newSemesters[2].courses.push(
+        newSemesters[2].courses = [
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        );
-        newSemesters[3].courses.push(
+        ];
+        newSemesters[3].courses = [
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        );
+        ];
       }
 
-      // Handle Internship - Now in semesters 1 and 2
+      // Handle Internship
       if (hasInternship) {
         newSemesters[0].courses = [
           { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
