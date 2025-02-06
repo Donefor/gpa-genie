@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { YearSection } from '@/components/YearSection';
 import { YEAR_1_COURSES, YEAR_2_COURSES, SPECIALIZATION_COURSES } from '@/data/courseData';
@@ -74,7 +75,6 @@ const Index = () => {
       const specializationCourses = SPECIALIZATION_COURSES[spec];
       setYear2Data(prev => {
         const newData = { ...prev };
-        // Clear any existing elective courses and set new specialization courses
         newData.semesters[2] = {
           courses: specializationCourses[3].map(course => ({
             ...course,
@@ -101,37 +101,45 @@ const Index = () => {
 
     if (type && secondSpecialization) {
       setSecondSpecialization(null);
-      // Also clear the courses from second specialization
-      setYear2Data(prev => {
-        const newData = { ...prev };
-        if (semester === 3) {
-          newData.semesters[2] = {
-            courses: [
-              SPECIALIZATION_COURSES[specialization][3][0],
-              {
-                name: 'Elective Course',
-                credits: 7.5,
-                grade: 'Not finished',
-                isPassFail: type === 'Pass/Fail'
-              }
-            ]
-          };
-        } else {
-          newData.semesters[3] = {
-            courses: [
-              SPECIALIZATION_COURSES[specialization][4][0],
-              {
-                name: 'Elective Course',
-                credits: 7.5,
-                grade: 'Not finished',
-                isPassFail: type === 'Pass/Fail'
-              }
-            ]
-          };
-        }
-        return newData;
-      });
     }
+
+    setYear2Data(prev => {
+      const newData = { ...prev };
+      const specializationCourse = semester === 3 
+        ? SPECIALIZATION_COURSES[specialization!][3][0]
+        : SPECIALIZATION_COURSES[specialization!][4][0];
+
+      if (semester === 3) {
+        newData.semesters[2] = {
+          courses: [
+            {
+              ...specializationCourse,
+              grade: 'Not finished' as Grade
+            },
+            type ? {
+              name: 'Elective Course',
+              credits: 7.5,
+              grade: 'Not finished' as Grade
+            } : null
+          ].filter(Boolean) as Course[]
+        };
+      } else {
+        newData.semesters[3] = {
+          courses: [
+            {
+              ...specializationCourse,
+              grade: 'Not finished' as Grade
+            },
+            type ? {
+              name: 'Elective Course',
+              credits: 7.5,
+              grade: 'Not finished' as Grade
+            } : null
+          ].filter(Boolean) as Course[]
+        };
+      }
+      return newData;
+    });
   };
 
   const calculateCumulativeGPA = () => {
