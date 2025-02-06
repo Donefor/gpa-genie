@@ -23,18 +23,23 @@ export const Year3Controls = ({
   thesisOption
 }: Year3ControlsProps) => {
   const handleExchangeChange = (value: ExchangeOption) => {
-    onExchangeChange(value);
-    // Auto-select thesis period based on exchange selection
-    if (value === 'fall') {
-      onThesisChange('spring');
-    } else if (value === 'spring') {
-      onThesisChange('fall');
-    } else {
+    if (value === 'none') {
+      // When selecting "No Exchange", explicitly trigger the change to remove exchange courses
+      onExchangeChange('none');
+      // Reset thesis when exchange is disabled
       onThesisChange('none');
-    }
-    // If enabling exchange, disable internship
-    if (value !== 'none' && hasInternship) {
-      onInternshipChange(false);
+    } else {
+      onExchangeChange(value);
+      // Auto-select thesis period based on exchange selection
+      if (value === 'fall') {
+        onThesisChange('spring');
+      } else if (value === 'spring') {
+        onThesisChange('fall');
+      }
+      // If enabling exchange, disable internship
+      if (hasInternship) {
+        onInternshipChange(false);
+      }
     }
   };
 
