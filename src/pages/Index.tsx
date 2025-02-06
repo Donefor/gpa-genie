@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { YearSection } from '@/components/YearSection';
 import { YEAR_1_COURSES, YEAR_2_COURSES, SPECIALIZATION_COURSES } from '@/data/courseData';
@@ -150,39 +149,50 @@ const Index = () => {
     }
 
     if (specialization) {
-      const specializationCourses = SPECIALIZATION_COURSES[specialization];
       setYear2Data(prev => {
         const newData = { ...prev };
+        const specializationCourses = SPECIALIZATION_COURSES[specialization];
         
         if (semester === 3) {
-          // Only update semester 3, keep semester 4 unchanged
-          newData.semesters[2] = {
-            courses: [
-              specializationCourses[3][0],
-              type ? {
-                name: 'Elective Course',
-                credits: 7.5,
-                grade: 'Not finished' as Grade
-              } : null
-            ].filter(Boolean) as Course[]
-          };
-          // Keep semester 4 as is
-          newData.semesters[3] = prev.semesters[3];
+          // Update semester 3 while preserving semester 4
+          const semester3Courses: Course[] = [
+            {
+              ...specializationCourses[3][0],
+              grade: prev.semesters[2].courses[0].grade
+            }
+          ];
+          
+          if (type) {
+            semester3Courses.push({
+              name: 'Elective Course',
+              credits: 7.5,
+              grade: 'Not finished' as Grade,
+              isPassFail: type === 'Pass/Fail'
+            });
+          }
+          
+          newData.semesters[2] = { courses: semester3Courses };
         } else {
-          // Only update semester 4, keep semester 3 unchanged
-          newData.semesters[3] = {
-            courses: [
-              specializationCourses[4][0],
-              type ? {
-                name: 'Elective Course',
-                credits: 7.5,
-                grade: 'Not finished' as Grade
-              } : null
-            ].filter(Boolean) as Course[]
-          };
-          // Keep semester 3 as is
-          newData.semesters[2] = prev.semesters[2];
+          // Update semester 4 while preserving semester 3
+          const semester4Courses: Course[] = [
+            {
+              ...specializationCourses[4][0],
+              grade: prev.semesters[3].courses[0].grade
+            }
+          ];
+          
+          if (type) {
+            semester4Courses.push({
+              name: 'Elective Course',
+              credits: 7.5,
+              grade: 'Not finished' as Grade,
+              isPassFail: type === 'Pass/Fail'
+            });
+          }
+          
+          newData.semesters[3] = { courses: semester4Courses };
         }
+        
         return newData;
       });
     }
