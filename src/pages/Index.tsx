@@ -4,6 +4,7 @@ import { YEAR_1_COURSES, YEAR_2_COURSES, SPECIALIZATION_COURSES } from '@/data/c
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { calculateGPA } from '@/utils/calculations';
 import { Badge } from '@/components/ui/badge';
+import { Year3Section } from '@/components/Year3Section';
 
 const Index = () => {
   const [year1Data, setYear1Data] = useState({
@@ -207,6 +208,8 @@ const Index = () => {
   };
 
   const year1Courses = year1Data.semesters.flatMap(s => s.courses);
+  const year2Courses = year2Data.semesters.flatMap(s => s.courses);
+  const previousYearCourses = [...year1Courses, ...year2Courses];
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -242,6 +245,7 @@ const Index = () => {
             onElectiveSemester3Change={(type) => handleElectiveTypeChange(type, 3)}
             onElectiveSemester4Change={(type) => handleElectiveTypeChange(type, 4)}
           />
+          <Year3Section previousYearCourses={previousYearCourses} />
         </div>
       </div>
     </div>
