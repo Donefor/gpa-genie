@@ -49,14 +49,19 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
   // Update semesters when exchange, internship, or thesis options change
   useEffect(() => {
     const createEmptySemesters = () => Array(4).fill(null).map(() => ({ courses: [] }));
-    
+
     // Start with clean semesters
     let newSemesters = createEmptySemesters();
+
+    // Clear all exchange courses first, regardless of the selected option
+    newSemesters.forEach(semester => {
+      semester.courses = semester.courses.filter(course => course.name !== 'Exchange');
+    });
 
     // Handle Exchange courses - only if internship is not selected
     if (!hasInternship) {
       const exchangeCourse = { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true };
-      
+
       if (exchangeOption === 'fall') {
         newSemesters[0].courses = [exchangeCourse, exchangeCourse];
         newSemesters[1].courses = [exchangeCourse, exchangeCourse];
@@ -69,11 +74,6 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         newSemesters[1].courses = [];
         newSemesters[2].courses = [exchangeCourse, exchangeCourse];
         newSemesters[3].courses = [exchangeCourse, exchangeCourse];
-      } else {
-        // If no exchange option is selected, ensure all exchange courses are removed
-        newSemesters.forEach(semester => {
-          semester.courses = semester.courses.filter(course => course.name !== 'Exchange');
-        });
       }
     }
 
@@ -148,3 +148,4 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     </Card>
   );
 };
+
