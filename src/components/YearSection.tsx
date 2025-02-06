@@ -62,9 +62,10 @@ export const YearSection = ({
   const handleSecondSpecializationChange = (spec: Specialization) => {
     if (!specialization) return; // Prevent selecting second spec without primary
     
-    // Clear all electives first
+    // Clear all electives when setting second specialization
     if (onElectiveSemester3Change) onElectiveSemester3Change(null);
     if (onElectiveSemester4Change) onElectiveSemester4Change(null);
+    if (onElectiveTypeChange) onElectiveTypeChange(null);
     
     // Set the second specialization
     if (onSecondSpecializationChange) {
@@ -159,7 +160,7 @@ export const YearSection = ({
                         <ElectiveSelect
                           value={electiveSemester3}
                           onChange={(type) => handleElectiveChange(type, onElectiveSemester3Change)}
-                          disabled={!specialization}
+                          disabled={!specialization || secondSpecialization !== null}
                         />
                       </div>
                       <div className="flex-1">
@@ -167,7 +168,7 @@ export const YearSection = ({
                         <ElectiveSelect
                           value={electiveSemester4}
                           onChange={(type) => handleElectiveChange(type, onElectiveSemester4Change)}
-                          disabled={!specialization}
+                          disabled={!specialization || secondSpecialization !== null}
                         />
                       </div>
                     </div>
