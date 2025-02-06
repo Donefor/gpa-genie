@@ -49,7 +49,12 @@ const Index = () => {
       setYear2Data(prev => {
         const newData = { ...prev };
         // Update semester 3
-        const semester3Courses = [specializationCourses[3][0]];
+        const semester3Courses: Course[] = [
+          {
+            ...specializationCourses[3][0],
+            grade: 'Not finished' as Grade
+          }
+        ];
         if (electiveSemester3) {
           semester3Courses.push({
             name: 'Elective Course',
@@ -60,7 +65,12 @@ const Index = () => {
         newData.semesters[2] = { courses: semester3Courses };
 
         // Update semester 4
-        const semester4Courses = [specializationCourses[4][0]];
+        const semester4Courses: Course[] = [
+          {
+            ...specializationCourses[4][0],
+            grade: 'Not finished' as Grade
+          }
+        ];
         if (electiveSemester4) {
           semester4Courses.push({
             name: 'Elective Course',
@@ -229,4 +239,3 @@ const Index = () => {
 };
 
 export default Index;
-
