@@ -89,12 +89,12 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         );
       }
 
-      // Handle Internship
+      // Handle Internship - Now in semesters 1 and 2
       if (hasInternship) {
-        newSemesters[2].courses = [
+        newSemesters[0].courses = [
           { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
         ];
-        newSemesters[3].courses = [
+        newSemesters[1].courses = [
           { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
         ];
       }
