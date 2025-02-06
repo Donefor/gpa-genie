@@ -5,6 +5,7 @@ export type Course = {
   name: string;
   credits: number;
   grade: Grade;
+  isPassFail?: boolean;
 };
 
 export type Semester = {
@@ -28,3 +29,6 @@ export interface CourseData {
   name: string;
   credits: number;
 }
+
+export type ElectiveType = 'Graded' | 'Pass/Fail' | null;
+
