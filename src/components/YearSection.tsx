@@ -49,29 +49,39 @@ export const YearSection = ({
     const allCourses = [...previousYearCourses, ...semesters.flatMap(semester => semester.courses)];
     const calculatedGPA = calculateGPA(allCourses);
     setGpa(calculatedGPA);
-  }, [semesters, previousYearCourses, JSON.stringify(semesters)]);
+  }, [semesters, previousYearCourses]);
+
+  const handleSpecializationChange = (spec: Specialization) => {
+    // Clear second specialization and electives when changing primary
+    if (onSecondSpecializationChange) onSecondSpecializationChange(null);
+    if (onElectiveTypeChange) onElectiveTypeChange(null);
+    if (onElectiveSemester3Change) onElectiveSemester3Change(null);
+    if (onElectiveSemester4Change) onElectiveSemester4Change(null);
+    
+    // Then set the new primary specialization
+    if (onSpecializationChange) onSpecializationChange(spec);
+  };
 
   const handleSecondSpecializationChange = (spec: Specialization) => {
-    if (!specialization && spec) {
-      return; // Prevent selecting second specialization without primary
-    }
+    if (!specialization) return; // Prevent selecting second spec without primary
 
-    // First clear all electives if selecting a second specialization
-    if (spec) {
-      // Make sure to use optional chaining and check if handlers exist
-      if (onElectiveTypeChange) onElectiveTypeChange(null);
-      if (onElectiveSemester3Change) onElectiveSemester3Change(null);
-      if (onElectiveSemester4Change) onElectiveSemester4Change(null);
-    }
+    // Clear all electives first
+    if (onElectiveTypeChange) onElectiveTypeChange(null);
+    if (onElectiveSemester3Change) onElectiveSemester3Change(null);
+    if (onElectiveSemester4Change) onElectiveSemester4Change(null);
 
-    // Then update the second specialization
+    // Then set the second specialization
     if (onSecondSpecializationChange) {
       onSecondSpecializationChange(spec);
     }
   };
 
   const handleElectiveChange = (type: ElectiveType, semesterHandler: ((type: ElectiveType) => void) | undefined) => {
-    if (secondSpecialization) return; // Don't allow elective changes if there's a second specialization
+    if (secondSpecialization) {
+      // Clear second specialization if adding elective
+      if (onSecondSpecializationChange) onSecondSpecializationChange(null);
+    }
+    
     if (semesterHandler) {
       semesterHandler(type);
     }
@@ -131,7 +141,7 @@ export const YearSection = ({
                         <span className="block text-sm font-medium mb-2">Primary Specialization</span>
                         <SpecializationSelect
                           value={specialization || null}
-                          onChange={onSpecializationChange!}
+                          onChange={handleSpecializationChange}
                           disabledOptions={secondSpecialization ? [secondSpecialization] : []}
                         />
                       </div>
