@@ -51,8 +51,8 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     setSemesters(prev => {
       const newSemesters = Array(4).fill(null).map(() => ({ courses: [] }));
 
-      // Handle Exchange
-      if (exchangeOption === 'fall') {
+      // Handle Exchange - only if internship is not selected
+      if (!hasInternship && exchangeOption === 'fall') {
         newSemesters[0].courses.push(
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
@@ -61,7 +61,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
         );
-      } else if (exchangeOption === 'spring') {
+      } else if (!hasInternship && exchangeOption === 'spring') {
         newSemesters[2].courses.push(
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
