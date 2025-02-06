@@ -11,16 +11,17 @@ interface YearSectionProps {
   semesters: { courses: Course[] }[];
   onGradeChange: (semesterIndex: number, courseIndex: number, grade: Grade) => void;
   isThirdYear?: boolean;
+  previousYearCourses?: Course[];
 }
 
-export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear }: YearSectionProps) => {
+export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear, previousYearCourses = [] }: YearSectionProps) => {
   const [gpa, setGpa] = useState(0);
 
   useEffect(() => {
-    const allCourses = semesters.flatMap(semester => semester.courses);
+    const allCourses = [...previousYearCourses, ...semesters.flatMap(semester => semester.courses)];
     const calculatedGPA = calculateGPA(allCourses);
     setGpa(calculatedGPA);
-  }, [semesters, JSON.stringify(semesters)]); // Add JSON.stringify to ensure deep comparison
+  }, [semesters, previousYearCourses, JSON.stringify(semesters)]); // Add JSON.stringify to ensure deep comparison
 
   const getYearLabel = (year: number) => {
     switch (year) {
@@ -38,7 +39,9 @@ export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear 
   return (
     <Card className="mb-8 overflow-hidden">
       <CardHeader className="bg-secondary">
-        <CardTitle className="text-2xl font-semibold">Year {yearNumber}</CardTitle>
+        <CardTitle className="text-2xl font-semibold">
+          {yearNumber === 1 ? "First year" : yearNumber === 2 ? "Second year" : `Year ${yearNumber}`}
+        </CardTitle>
       </CardHeader>
       <CardContent className="pt-6">
         {semesters.map((semester, semesterIndex) => (

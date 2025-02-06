@@ -43,6 +43,8 @@ const Index = () => {
     return calculateGPA(allCourses);
   };
 
+  const year1Courses = year1Data.semesters.flatMap(s => s.courses);
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
@@ -66,6 +68,7 @@ const Index = () => {
             yearNumber={2}
             semesters={year2Data.semesters}
             onGradeChange={handleYear2GradeChange}
+            previousYearCourses={year1Courses}
           />
         </div>
       </div>
