@@ -36,6 +36,7 @@ export const YearSection = ({
   previousYearCourses = [] 
 }: YearSectionProps) => {
   const [gpa, setGpa] = useState(0);
+  const [electiveSemesters, setElectiveSemesters] = useState<number[]>([]);
 
   useEffect(() => {
     const allCourses = [...previousYearCourses, ...semesters.flatMap(semester => semester.courses)];
@@ -44,16 +45,32 @@ export const YearSection = ({
   }, [semesters, previousYearCourses, JSON.stringify(semesters)]);
 
   const handleElectiveTypeChange = (semester: number, type: ElectiveType) => {
-    if (type && secondSpecialization) {
-      // Only remove second specialization if selecting an elective
-      onSecondSpecializationChange(null);
+    if (type) {
+      // If selecting an elective for a specific semester
+      if (secondSpecialization) {
+        // If there's a second specialization, remove it only for this semester
+        const updatedElectives = [...electiveSemesters];
+        if (!updatedElectives.includes(semester)) {
+          updatedElectives.push(semester);
+        }
+        setElectiveSemesters(updatedElectives);
+        
+        // If this was the last non-elective semester, remove second specialization
+        if (updatedElectives.length === 2) {
+          onSecondSpecializationChange(null);
+        }
+      }
+      onElectiveTypeChange(type);
+    } else {
+      // If removing an elective
+      setElectiveSemesters(electiveSemesters.filter(sem => sem !== semester));
     }
-    onElectiveTypeChange(type);
   };
 
   const handleSecondSpecializationChange = (spec: Specialization) => {
-    if (spec && electiveType) {
-      // Remove elective if selecting a second specialization
+    if (spec) {
+      // If selecting a second specialization, remove any existing electives
+      setElectiveSemesters([]);
       onElectiveTypeChange(null);
     }
     onSecondSpecializationChange(spec);
@@ -131,7 +148,7 @@ export const YearSection = ({
                       <div className="flex-1">
                         <span className="block text-sm font-medium mb-2">Semester 3 Elective</span>
                         <ElectiveSelect
-                          value={electiveType || null}
+                          value={electiveSemesters.includes(3) ? electiveType : null}
                           onChange={(type) => handleElectiveTypeChange(3, type)}
                           disabled={false}
                         />
@@ -139,9 +156,9 @@ export const YearSection = ({
                       <div className="flex-1">
                         <span className="block text-sm font-medium mb-2">Semester 4 Elective</span>
                         <ElectiveSelect
-                          value={electiveType || null}
+                          value={electiveSemesters.includes(4) ? electiveType : null}
                           onChange={(type) => handleElectiveTypeChange(4, type)}
-                          disabled={!!electiveType}
+                          disabled={false}
                         />
                       </div>
                     </div>
