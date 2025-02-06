@@ -1,0 +1,50 @@
+
+import { useState, useEffect } from 'react';
+import { Course, Grade } from '@/types';
+import { SemesterTable } from './SemesterTable';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { calculateGPA } from '@/utils/calculations';
+import { Badge } from '@/components/ui/badge';
+
+interface YearSectionProps {
+  yearNumber: number;
+  semesters: { courses: Course[] }[];
+  onGradeChange: (semesterIndex: number, courseIndex: number, grade: Grade) => void;
+  isThirdYear?: boolean;
+}
+
+export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear }: YearSectionProps) => {
+  const [gpa, setGpa] = useState(0);
+
+  useEffect(() => {
+    const allCourses = semesters.flatMap(semester => semester.courses);
+    setGpa(calculateGPA(allCourses));
+  }, [semesters]);
+
+  return (
+    <Card className="mb-8 overflow-hidden">
+      <CardHeader className="bg-secondary">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-2xl font-semibold">Year {yearNumber}</CardTitle>
+          <Badge variant="secondary" className="text-lg px-4 py-1">
+            GPA: {gpa.toFixed(2)}
+          </Badge>
+        </div>
+      </CardHeader>
+      <CardContent className="pt-6">
+        {semesters.map((semester, semesterIndex) => (
+          <div key={semesterIndex} className="mb-8 last:mb-0">
+            <h3 className="text-lg font-medium mb-4">Semester {semesterIndex + 1}</h3>
+            <SemesterTable
+              courses={semester.courses}
+              onGradeChange={(courseIndex, grade) => 
+                onGradeChange(semesterIndex, courseIndex, grade)
+              }
+              isThirdYear={isThirdYear}
+            />
+          </div>
+        ))}
+      </CardContent>
+    </Card>
+  );
+};
