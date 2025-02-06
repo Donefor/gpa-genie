@@ -48,56 +48,39 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
   // Update semesters when exchange, internship, or thesis options change
   useEffect(() => {
-    setSemesters(prev => {
-      // Start with clean semesters
+    setSemesters(() => {
+      // Always start with completely clean semesters
       const newSemesters = Array(4).fill(null).map(() => ({ courses: [] }));
 
       // Handle Exchange - only if internship is not selected
-      if (!hasInternship && exchangeOption === 'fall') {
-        newSemesters[0].courses = [
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
-        newSemesters[1].courses = [
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
-      } else if (!hasInternship && exchangeOption === 'spring') {
-        newSemesters[2].courses = [
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
-        newSemesters[3].courses = [
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
+      if (!hasInternship) {
+        if (exchangeOption === 'fall') {
+          const exchangeCourse = { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true };
+          newSemesters[0].courses = [exchangeCourse, exchangeCourse];
+          newSemesters[1].courses = [exchangeCourse, exchangeCourse];
+        } else if (exchangeOption === 'spring') {
+          const exchangeCourse = { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true };
+          newSemesters[2].courses = [exchangeCourse, exchangeCourse];
+          newSemesters[3].courses = [exchangeCourse, exchangeCourse];
+        }
       }
 
       // Handle Internship
       if (hasInternship) {
-        newSemesters[0].courses = [
-          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
-        newSemesters[1].courses = [
-          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
+        const internshipCourse = { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true };
+        newSemesters[0].courses = [internshipCourse];
+        newSemesters[1].courses = [internshipCourse];
       }
 
       // Handle Thesis
       if (thesisOption === 'fall') {
-        newSemesters[0].courses.push(
-          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
-        );
-        newSemesters[1].courses.push(
-          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
-        );
+        const thesisCourse = { name: 'Thesis', credits: 7.5, grade: 'Not finished' };
+        newSemesters[0].courses.push(thesisCourse);
+        newSemesters[1].courses.push(thesisCourse);
       } else if (thesisOption === 'spring') {
-        newSemesters[2].courses.push(
-          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
-        );
-        newSemesters[3].courses.push(
-          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
-        );
+        const thesisCourse = { name: 'Thesis', credits: 7.5, grade: 'Not finished' };
+        newSemesters[2].courses.push(thesisCourse);
+        newSemesters[3].courses.push(thesisCourse);
       }
 
       return newSemesters;
