@@ -45,23 +45,23 @@ export const SemesterTable = ({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className={isMobile ? "w-[50%] px-2" : "w-[300px]"}>Course</TableHead>
-            <TableHead className={isMobile ? "w-[20%] text-center px-2" : "w-[300px]"}>ECTS</TableHead>
-            <TableHead className={isMobile ? "w-[30%] text-right px-2" : "w-[300px] pl-[160px]"}>Grade</TableHead>
+            <TableHead className={isMobile ? "w-[45%] px-1" : "w-[300px]"}>Course</TableHead>
+            <TableHead className={isMobile ? "w-[15%] text-center px-1" : "w-[300px]"}>ECTS</TableHead>
+            <TableHead className={isMobile ? "w-[40%] text-right px-1" : "w-[300px] pl-[160px]"}>Grade</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {validCourses.map((course, index) => (
             <TableRow key={course.name} className={isMobile ? "px-0" : ""}>
-              <TableCell className={`font-medium ${isMobile ? "px-2" : ""}`}>
+              <TableCell className={`font-medium ${isMobile ? "px-1" : ""}`}>
                 <div className={isMobile ? "text-sm break-words" : ""}>
                   {course.name}
                 </div>
               </TableCell>
-              <TableCell className={`${isMobile ? "text-center text-sm px-2" : ""}`}>
+              <TableCell className={`${isMobile ? "text-center text-sm px-1" : ""}`}>
                 {course.credits}
               </TableCell>
-              <TableCell className={isMobile ? "px-2" : ""}>
+              <TableCell className={isMobile ? "px-1" : ""}>
                 <div className={isMobile ? "flex justify-end w-full" : ""}>
                   {course.isPassFail ? (
                     <div className={`${isMobile ? "w-full text-sm" : "w-[140px]"} h-10 bg-muted flex items-center justify-center rounded-md border border-input`}>

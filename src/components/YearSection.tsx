@@ -104,19 +104,21 @@ export const YearSection = ({
 
   return (
     <Card className="mb-8">
-      <CardHeader className={`${yearNumber === 2 ? 'bg-secondary w-full' : 'bg-secondary'}`}>
+      <CardHeader className={`${yearNumber === 2 ? 'bg-secondary w-full' : 'bg-secondary'} ${isMobile ? 'px-2' : ''}`}>
         <CardTitle className="text-2xl font-semibold">
           {yearNumber === 1 ? "First year" : yearNumber === 2 ? "Second year" : `Year ${yearNumber}`}
         </CardTitle>
       </CardHeader>
-      <CardContent className="pt-6">
+      <CardContent className={`pt-6 ${isMobile ? 'px-1' : ''}`}>
         {semesters.map((semester, semesterIndex) => {
           const showSelectionMenu = semesterIndex === 1 && showSpecializationMenu;
           
           return (
             <div key={semesterIndex}>
               <div className="mb-8">
-                <h3 className="text-lg font-medium mb-4 px-4">Semester {semesterIndex + 1}</h3>
+                <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
+                  Semester {semesterIndex + 1}
+                </h3>
                 <SemesterTable
                   courses={semester.courses}
                   onGradeChange={(courseIndex, grade) => 
@@ -134,7 +136,7 @@ export const YearSection = ({
               </div>
 
               {showSelectionMenu && (
-                <Card className="mb-8 mx-4 bg-muted shadow-sm p-4">
+                <Card className={`mb-8 ${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4`}>
                   <div className={`space-y-6 ${isMobile ? "flex flex-col" : ""}`}>
                     <div className={`${isMobile ? "flex flex-col space-y-4" : "flex items-start space-x-8"}`}>
                       <div className={`${isMobile ? "w-full" : "flex-1"}`}>
@@ -180,7 +182,7 @@ export const YearSection = ({
             </div>
           );
         })}
-        <div className="mt-6 w-full bg-muted p-4 rounded-lg shadow-sm">
+        <div className={`mt-6 w-full bg-muted ${isMobile ? 'p-2' : 'p-4'} rounded-lg shadow-sm`}>
           <Badge variant="secondary" className="text-lg px-4 py-1">
             {getYearLabel(yearNumber)}: {gpa.toFixed(2)}
           </Badge>
