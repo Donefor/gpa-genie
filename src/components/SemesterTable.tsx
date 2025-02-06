@@ -38,51 +38,48 @@ export const SemesterTable = ({
     return sum + course.credits;
   }, 0) || 0;
 
-  // Filter out any undefined or null courses
   const validCourses = courses?.filter((course): course is Course => course != null) || [];
 
   return (
-    <div className="w-full">
-      <div className="overflow-x-auto">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className={isMobile ? "w-[50%]" : "w-[300px]"}>Course</TableHead>
-              <TableHead className={isMobile ? "w-[20%] text-center" : "w-[300px]"}>ECTS</TableHead>
-              <TableHead className={isMobile ? "w-[30%] text-right" : "w-[300px] pl-[160px]"}>Grade</TableHead>
+    <div className={`w-full ${isMobile ? '-mx-4 px-0' : ''}`}>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className={isMobile ? "w-[50%] px-2" : "w-[300px]"}>Course</TableHead>
+            <TableHead className={isMobile ? "w-[20%] text-center px-2" : "w-[300px]"}>ECTS</TableHead>
+            <TableHead className={isMobile ? "w-[30%] text-right px-2" : "w-[300px] pl-[160px]"}>Grade</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {validCourses.map((course, index) => (
+            <TableRow key={course.name} className={isMobile ? "px-0" : ""}>
+              <TableCell className={`font-medium ${isMobile ? "px-2" : ""}`}>
+                <div className={isMobile ? "text-sm break-words" : ""}>
+                  {course.name}
+                </div>
+              </TableCell>
+              <TableCell className={`${isMobile ? "text-center text-sm px-2" : ""}`}>
+                {course.credits}
+              </TableCell>
+              <TableCell className={isMobile ? "px-2" : ""}>
+                <div className={isMobile ? "flex justify-end w-full" : ""}>
+                  {course.isPassFail ? (
+                    <div className={`${isMobile ? "w-full text-sm" : "w-[140px]"} h-10 bg-muted flex items-center justify-center rounded-md border border-input`}>
+                      Pass/Fail
+                    </div>
+                  ) : (
+                    <GradeSelect
+                      value={course.grade}
+                      onChange={(grade) => onGradeChange(index, grade)}
+                      isThirdYear={isThirdYear}
+                    />
+                  )}
+                </div>
+              </TableCell>
             </TableRow>
-          </TableHeader>
-          <TableBody>
-            {validCourses.map((course, index) => (
-              <TableRow key={course.name}>
-                <TableCell className="font-medium">
-                  <div className={isMobile ? "text-sm break-words" : ""}>
-                    {course.name}
-                  </div>
-                </TableCell>
-                <TableCell className={isMobile ? "text-center text-sm" : ""}>
-                  {course.credits}
-                </TableCell>
-                <TableCell>
-                  <div className={isMobile ? "flex justify-end w-full" : ""}>
-                    {course.isPassFail ? (
-                      <div className={`${isMobile ? "w-full text-sm" : "w-[140px]"} h-10 bg-muted flex items-center justify-center rounded-md border border-input`}>
-                        Pass/Fail
-                      </div>
-                    ) : (
-                      <GradeSelect
-                        value={course.grade}
-                        onChange={(grade) => onGradeChange(index, grade)}
-                        isThirdYear={isThirdYear}
-                      />
-                    )}
-                  </div>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 };
