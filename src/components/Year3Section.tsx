@@ -22,41 +22,24 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
   const [gpa, setGpa] = useState(0);
   const isMobile = useIsMobile();
 
-  const updateThesisGrade = (semesterIndex: number, courseIndex: number, grade: Grade) => {
-    setSemesters(prev => {
-      const newSemesters = [...prev];
-      const targetSemesters = thesisOption === 'fall' ? [0, 1] : [2, 3];
-      
-      targetSemesters.forEach(semesterIdx => {
-        const courseIdx = newSemesters[semesterIdx].courses.findIndex(
-          course => course.name === 'Thesis'
-        );
-        if (courseIdx !== -1) {
-          newSemesters[semesterIdx] = {
-            courses: newSemesters[semesterIdx].courses.map((course, idx) =>
-              course.name === 'Thesis' ? { ...course, grade } : course
-            )
-          };
-        }
-      });
-      
-      return newSemesters;
-    });
-  };
-
   const handleGradeChange = (semesterIndex: number, courseIndex: number, grade: Grade) => {
     setSemesters(prev => {
       const newSemesters = [...prev];
       const course = newSemesters[semesterIndex].courses[courseIndex];
       
       if (course.name === 'Thesis') {
-        updateThesisGrade(semesterIndex, courseIndex, grade);
-        return newSemesters;
+        // If it's a thesis course, update all thesis courses across semesters
+        return newSemesters.map(semester => ({
+          courses: semester.courses.map(c => 
+            c.name === 'Thesis' ? { ...c, grade } : c
+          )
+        }));
       }
       
+      // For non-thesis courses, just update the specific course
       newSemesters[semesterIndex] = {
-        courses: newSemesters[semesterIndex].courses.map((course, idx) =>
-          idx === courseIndex ? { ...course, grade } : course
+        courses: newSemesters[semesterIndex].courses.map((c, idx) =>
+          idx === courseIndex ? { ...c, grade } : c
         )
       };
       return newSemesters;
@@ -169,4 +152,3 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     </Card>
   );
 };
-
