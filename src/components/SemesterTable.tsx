@@ -41,7 +41,7 @@ export const SemesterTable = ({
   const validCourses = courses?.filter((course): course is Course => course != null) || [];
 
   return (
-    <div className="w-full">
+    <div className="w-full overflow-x-auto">
       <Table>
         <TableHeader>
           <TableRow>
