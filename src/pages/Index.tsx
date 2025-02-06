@@ -43,6 +43,9 @@ const Index = () => {
 
   const handleSpecializationChange = (spec: Specialization) => {
     setSpecialization(spec);
+    // Clear second specialization when changing primary
+    setSecondSpecialization(null);
+    
     if (spec) {
       const specializationCourses = SPECIALIZATION_COURSES[spec];
       setYear2Data(prev => {
