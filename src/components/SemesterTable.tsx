@@ -65,7 +65,7 @@ export const SemesterTable = ({
                 <div className={isMobile ? "flex justify-end w-full" : ""}>
                   {course.isPassFail ? (
                     <div className={`${isMobile ? "w-full text-sm" : "w-[140px]"} h-10 bg-muted flex items-center justify-end px-3 rounded-md border border-input ml-auto`}>
-                      Pass/Fail
+                      <span className="flex-1 text-center">Pass/Fail</span>
                     </div>
                   ) : (
                     <GradeSelect
