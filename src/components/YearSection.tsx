@@ -18,8 +18,9 @@ export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear 
 
   useEffect(() => {
     const allCourses = semesters.flatMap(semester => semester.courses);
-    setGpa(calculateGPA(allCourses));
-  }, [semesters]);
+    const calculatedGPA = calculateGPA(allCourses);
+    setGpa(calculatedGPA);
+  }, [semesters, JSON.stringify(semesters)]); // Add JSON.stringify to ensure deep comparison
 
   const getYearLabel = (year: number) => {
     switch (year) {
