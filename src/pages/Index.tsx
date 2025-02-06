@@ -22,6 +22,8 @@ const Index = () => {
   const [specialization, setSpecialization] = useState<Specialization>(null);
   const [secondSpecialization, setSecondSpecialization] = useState<Specialization>(null);
   const [electiveType, setElectiveType] = useState<ElectiveType>(null);
+  const [electiveSemester3, setElectiveSemester3] = useState<ElectiveType>(null);
+  const [electiveSemester4, setElectiveSemester4] = useState<ElectiveType>(null);
 
   const handleYear1GradeChange = (semesterIndex: number, courseIndex: number, grade: Grade) => {
     setYear1Data(prev => {
@@ -41,7 +43,6 @@ const Index = () => {
 
   const handleSpecializationChange = (spec: Specialization) => {
     setSpecialization(spec);
-    // Update semester 3 and 4 courses based on specialization
     if (spec) {
       const specializationCourses = SPECIALIZATION_COURSES[spec];
       setYear2Data(prev => {
@@ -65,7 +66,11 @@ const Index = () => {
 
   const handleSecondSpecializationChange = (spec: Specialization) => {
     setSecondSpecialization(spec);
-    if (spec && !electiveType) {
+    if (spec) {
+      // Clear any existing electives when adding second specialization
+      setElectiveSemester3(null);
+      setElectiveSemester4(null);
+      
       const specializationCourses = SPECIALIZATION_COURSES[spec];
       setYear2Data(prev => {
         const newData = { ...prev };
@@ -88,30 +93,40 @@ const Index = () => {
     }
   };
 
-  const handleElectiveTypeChange = (type: ElectiveType) => {
-    setElectiveType(type);
-    if (type) {
+  const handleElectiveTypeChange = (type: ElectiveType, semester: number) => {
+    if (semester === 3) {
+      setElectiveSemester3(type);
+    } else {
+      setElectiveSemester4(type);
+    }
+
+    if (type && secondSpecialization) {
       setSecondSpecialization(null);
-      setYear2Data(prev => {
-        const newData = { ...prev };
-        // Add elective course
-        const electiveCourse: Course = {
-          name: 'Elective Course',
-          credits: 7.5,
-          grade: 'Not finished',
-          isPassFail: type === 'Pass/Fail'
-        };
+    }
+
+    setYear2Data(prev => {
+      const newData = { ...prev };
+      const electiveCourse: Course = {
+        name: 'Elective Course',
+        credits: 7.5,
+        grade: 'Not finished',
+        isPassFail: type === 'Pass/Fail'
+      };
+
+      if (semester === 3) {
         newData.semesters[2].courses = [
           ...newData.semesters[2].courses.slice(0, 1),
-          electiveCourse
+          type ? electiveCourse : newData.semesters[2].courses[1]
         ];
+      } else if (semester === 4) {
         newData.semesters[3].courses = [
           ...newData.semesters[3].courses.slice(0, 1),
-          electiveCourse
+          type ? electiveCourse : newData.semesters[3].courses[1]
         ];
-        return newData;
-      });
-    }
+      }
+
+      return newData;
+    });
   };
 
   const calculateCumulativeGPA = () => {
@@ -153,8 +168,18 @@ const Index = () => {
             electiveType={electiveType}
             onSpecializationChange={handleSpecializationChange}
             onSecondSpecializationChange={handleSecondSpecializationChange}
-            onElectiveTypeChange={handleElectiveTypeChange}
+            onElectiveTypeChange={(type) => {
+              setElectiveType(type);
+              if (type === null) {
+                setElectiveSemester3(null);
+                setElectiveSemester4(null);
+              }
+            }}
             previousYearCourses={year1Courses}
+            electiveSemester3={electiveSemester3}
+            electiveSemester4={electiveSemester4}
+            onElectiveSemester3Change={(type) => handleElectiveTypeChange(type, 3)}
+            onElectiveSemester4Change={(type) => handleElectiveTypeChange(type, 4)}
           />
         </div>
       </div>
