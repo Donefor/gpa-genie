@@ -9,13 +9,13 @@ import { Badge } from '@/components/ui/badge';
 const Index = () => {
   const [year1Data, setYear1Data] = useState({
     semesters: Object.values(YEAR_1_COURSES).map(courses => ({
-      courses: courses.map(course => ({ ...course, grade: null as Grade }))
+      courses: courses.map(course => ({ ...course, grade: 'Not finished' as Grade }))
     }))
   });
 
   const [year2Data, setYear2Data] = useState({
     semesters: Object.values(YEAR_2_COURSES).map(courses => ({
-      courses: courses.map(course => ({ ...course, grade: null as Grade }))
+      courses: courses.map(course => ({ ...course, grade: 'Not finished' as Grade }))
     }))
   });
 

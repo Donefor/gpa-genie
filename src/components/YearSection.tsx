@@ -24,12 +24,7 @@ export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear 
   return (
     <Card className="mb-8 overflow-hidden">
       <CardHeader className="bg-secondary">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-2xl font-semibold">Year {yearNumber}</CardTitle>
-          <Badge variant="secondary" className="text-lg px-4 py-1">
-            GPA: {gpa.toFixed(2)}
-          </Badge>
-        </div>
+        <CardTitle className="text-2xl font-semibold">Year {yearNumber}</CardTitle>
       </CardHeader>
       <CardContent className="pt-6">
         {semesters.map((semester, semesterIndex) => (
@@ -44,6 +39,11 @@ export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear 
             />
           </div>
         ))}
+        <div className="mt-6 text-right">
+          <Badge variant="secondary" className="text-lg px-4 py-1">
+            GPA: {gpa.toFixed(2)}
+          </Badge>
+        </div>
       </CardContent>
     </Card>
   );

@@ -16,9 +16,9 @@ interface GradeSelectProps {
 
 export const GradeSelect = ({ value, onChange, isThirdYear }: GradeSelectProps) => {
   return (
-    <Select value={value || undefined} onValueChange={onChange}>
+    <Select value={value || "Not finished"} onValueChange={onChange}>
       <SelectTrigger className="w-[140px]">
-        <SelectValue placeholder="Select grade" />
+        <SelectValue placeholder="Not finished" />
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="Not finished">Not finished</SelectItem>
