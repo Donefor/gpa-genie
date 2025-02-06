@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { YearSection } from '@/components/YearSection';
 import { YEAR_1_COURSES, YEAR_2_COURSES, SPECIALIZATION_COURSES } from '@/data/courseData';
@@ -67,27 +66,27 @@ const Index = () => {
   const handleSecondSpecializationChange = (spec: Specialization) => {
     setSecondSpecialization(spec);
     if (spec) {
-      // Clear any existing electives when adding second specialization
+      // Clear any existing electives
       setElectiveSemester3(null);
       setElectiveSemester4(null);
+      setElectiveType(null);
       
       const specializationCourses = SPECIALIZATION_COURSES[spec];
       setYear2Data(prev => {
         const newData = { ...prev };
-        newData.semesters[2].courses = [
-          ...newData.semesters[2].courses,
-          ...specializationCourses[3].map(course => ({
+        // Clear any existing elective courses and set new specialization courses
+        newData.semesters[2] = {
+          courses: specializationCourses[3].map(course => ({
             ...course,
             grade: 'Not finished' as Grade
           }))
-        ];
-        newData.semesters[3].courses = [
-          ...newData.semesters[3].courses,
-          ...specializationCourses[4].map(course => ({
+        };
+        newData.semesters[3] = {
+          courses: specializationCourses[4].map(course => ({
             ...course,
             grade: 'Not finished' as Grade
           }))
-        ];
+        };
         return newData;
       });
     }
@@ -102,31 +101,37 @@ const Index = () => {
 
     if (type && secondSpecialization) {
       setSecondSpecialization(null);
+      // Also clear the courses from second specialization
+      setYear2Data(prev => {
+        const newData = { ...prev };
+        if (semester === 3) {
+          newData.semesters[2] = {
+            courses: [
+              SPECIALIZATION_COURSES[specialization][3][0],
+              {
+                name: 'Elective Course',
+                credits: 7.5,
+                grade: 'Not finished',
+                isPassFail: type === 'Pass/Fail'
+              }
+            ]
+          };
+        } else {
+          newData.semesters[3] = {
+            courses: [
+              SPECIALIZATION_COURSES[specialization][4][0],
+              {
+                name: 'Elective Course',
+                credits: 7.5,
+                grade: 'Not finished',
+                isPassFail: type === 'Pass/Fail'
+              }
+            ]
+          };
+        }
+        return newData;
+      });
     }
-
-    setYear2Data(prev => {
-      const newData = { ...prev };
-      const electiveCourse: Course = {
-        name: 'Elective Course',
-        credits: 7.5,
-        grade: 'Not finished',
-        isPassFail: type === 'Pass/Fail'
-      };
-
-      if (semester === 3) {
-        newData.semesters[2].courses = [
-          ...newData.semesters[2].courses.slice(0, 1),
-          type ? electiveCourse : newData.semesters[2].courses[1]
-        ];
-      } else if (semester === 4) {
-        newData.semesters[3].courses = [
-          ...newData.semesters[3].courses.slice(0, 1),
-          type ? electiveCourse : newData.semesters[3].courses[1]
-        ];
-      }
-
-      return newData;
-    });
   };
 
   const calculateCumulativeGPA = () => {

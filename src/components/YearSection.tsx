@@ -74,7 +74,7 @@ export const YearSection = ({
   };
 
   const handleElectiveChange = (type: ElectiveType, semesterHandler: ((type: ElectiveType) => void) | undefined) => {
-    // Always remove second specialization courses first if they exist
+    // If second specialization exists, remove it first
     if (secondSpecialization && onSecondSpecializationChange) {
       onSecondSpecializationChange(null);
     }
@@ -132,7 +132,7 @@ export const YearSection = ({
               </div>
 
               {showSelectionMenu && (
-                <Card className="mb-8 bg-muted p-6">
+                <Card className="mb-8 bg-muted p-6 shadow-sm">
                   <div className="space-y-6">
                     <div className="flex items-start space-x-8">
                       <div className="flex-1">
