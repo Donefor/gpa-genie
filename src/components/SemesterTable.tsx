@@ -16,7 +16,7 @@ export const SemesterTable = ({ courses, onGradeChange, isThirdYear }: SemesterT
         <TableRow>
           <TableHead className="w-[300px]">Course</TableHead>
           <TableHead>ECTS</TableHead>
-          <TableHead className="text-right">Grade</TableHead>
+          <TableHead>Grade</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -24,7 +24,7 @@ export const SemesterTable = ({ courses, onGradeChange, isThirdYear }: SemesterT
           <TableRow key={course.name}>
             <TableCell className="font-medium">{course.name}</TableCell>
             <TableCell>{course.credits}</TableCell>
-            <TableCell className="text-right">
+            <TableCell>
               <GradeSelect
                 value={course.grade}
                 onChange={(grade) => onGradeChange(index, grade)}
