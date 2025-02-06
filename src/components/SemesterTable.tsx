@@ -4,6 +4,7 @@ import { GradeSelect } from './GradeSelect';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { SpecializationSelect } from './SpecializationSelect';
 import { ElectiveSelect } from './ElectiveSelect';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface SemesterTableProps {
   courses: Course[];
@@ -30,6 +31,8 @@ export const SemesterTable = ({
   onSecondSpecializationChange,
   onElectiveTypeChange
 }: SemesterTableProps) => {
+  const isMobile = useIsMobile();
+  
   const totalCredits = courses?.reduce((sum, course) => {
     if (!course) return sum;
     return sum + course.credits;
@@ -43,20 +46,20 @@ export const SemesterTable = ({
       <Table className="fade-in">
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[300px]">Course</TableHead>
-            <TableHead className="w-[300px]">ECTS</TableHead>
-            <TableHead className="w-[300px] pl-[160px]">Grade</TableHead>
+            <TableHead className={isMobile ? "w-[150px]" : "w-[300px]"}>Course</TableHead>
+            <TableHead className={isMobile ? "w-[50px] text-center" : "w-[300px]"}>ECTS</TableHead>
+            <TableHead className={isMobile ? "w-[100px]" : "w-[300px] pl-[160px]"}>Grade</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {validCourses.map((course, index) => (
             <TableRow key={course.name}>
-              <TableCell className="font-medium">{course.name}</TableCell>
-              <TableCell>{course.credits}</TableCell>
+              <TableCell className={`font-medium ${isMobile ? "text-sm" : ""}`}>{course.name}</TableCell>
+              <TableCell className={isMobile ? "text-center text-sm" : ""}>{course.credits}</TableCell>
               <TableCell>
                 {course.isPassFail ? (
                   <div className="flex justify-end">
-                    <div className="w-[140px] h-10 bg-muted flex items-center justify-center rounded-md border border-input">
+                    <div className={`${isMobile ? "w-[100px] text-sm" : "w-[140px]"} h-10 bg-muted flex items-center justify-center rounded-md border border-input`}>
                       Pass/Fail
                     </div>
                   </div>
@@ -75,3 +78,4 @@ export const SemesterTable = ({
     </div>
   );
 };
+
