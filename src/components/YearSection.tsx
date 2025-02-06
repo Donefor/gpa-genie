@@ -52,13 +52,17 @@ export const YearSection = ({
   }, [semesters, previousYearCourses, JSON.stringify(semesters)]);
 
   const handleSecondSpecializationChange = (spec: Specialization) => {
+    if (!specialization && spec) {
+      // If trying to select second specialization without primary, prevent it
+      return;
+    }
     if (spec) {
       // If selecting a second specialization, remove any existing electives
-      onElectiveSemester3Change(null);
-      onElectiveSemester4Change(null);
-      onElectiveTypeChange(null);
+      onElectiveSemester3Change?.(null);
+      onElectiveSemester4Change?.(null);
+      onElectiveTypeChange?.(null);
     }
-    onSecondSpecializationChange(spec);
+    onSecondSpecializationChange?.(spec);
   };
 
   const getYearLabel = (year: number) => {
@@ -124,6 +128,7 @@ export const YearSection = ({
                         <SpecializationSelect
                           value={secondSpecialization || null}
                           onChange={handleSecondSpecializationChange}
+                          disabled={!specialization}
                           disabledOptions={specialization ? [specialization] : []}
                         />
                       </div>
@@ -135,7 +140,7 @@ export const YearSection = ({
                         <ElectiveSelect
                           value={electiveSemester3}
                           onChange={onElectiveSemester3Change}
-                          disabled={false}
+                          disabled={!!secondSpecialization}
                         />
                       </div>
                       <div className="flex-1">
@@ -143,7 +148,7 @@ export const YearSection = ({
                         <ElectiveSelect
                           value={electiveSemester4}
                           onChange={onElectiveSemester4Change}
-                          disabled={false}
+                          disabled={!!secondSpecialization}
                         />
                       </div>
                     </div>
