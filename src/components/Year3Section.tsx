@@ -69,6 +69,11 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         newSemesters[1].courses = [];
         newSemesters[2].courses = [exchangeCourse, exchangeCourse];
         newSemesters[3].courses = [exchangeCourse, exchangeCourse];
+      } else {
+        // If no exchange option is selected, ensure all exchange courses are removed
+        newSemesters.forEach(semester => {
+          semester.courses = semester.courses.filter(course => course.name !== 'Exchange');
+        });
       }
     }
 
