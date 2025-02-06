@@ -34,7 +34,9 @@ export const YEAR_2_COURSES: { [key: number]: CourseData[] } = {
     { name: 'Data Analytics III', credits: 3 },
     { name: 'Strategy', credits: 6 },
     { name: 'Global Challenges II: Shifting', credits: 6 }
-  ]
+  ],
+  3: [], // Will be populated based on specialization/elective choice
+  4: []  // Will be populated based on specialization/elective choice
 };
 
 export const SPECIALIZATION_COURSES: { [key: string]: { [key: number]: CourseData[] } } = {

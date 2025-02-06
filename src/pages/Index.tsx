@@ -1,8 +1,8 @@
 
 import { useState } from 'react';
 import { YearSection } from '@/components/YearSection';
-import { YEAR_1_COURSES, YEAR_2_COURSES } from '@/data/courseData';
-import { Course, Grade } from '@/types';
+import { YEAR_1_COURSES, YEAR_2_COURSES, SPECIALIZATION_COURSES } from '@/data/courseData';
+import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { calculateGPA } from '@/utils/calculations';
 import { Badge } from '@/components/ui/badge';
 
@@ -19,6 +19,10 @@ const Index = () => {
     }))
   });
 
+  const [specialization, setSpecialization] = useState<Specialization>(null);
+  const [secondSpecialization, setSecondSpecialization] = useState<Specialization>(null);
+  const [electiveType, setElectiveType] = useState<ElectiveType>(null);
+
   const handleYear1GradeChange = (semesterIndex: number, courseIndex: number, grade: Grade) => {
     setYear1Data(prev => {
       const newData = { ...prev };
@@ -33,6 +37,81 @@ const Index = () => {
       newData.semesters[semesterIndex].courses[courseIndex].grade = grade;
       return newData;
     });
+  };
+
+  const handleSpecializationChange = (spec: Specialization) => {
+    setSpecialization(spec);
+    // Update semester 3 and 4 courses based on specialization
+    if (spec) {
+      const specializationCourses = SPECIALIZATION_COURSES[spec];
+      setYear2Data(prev => {
+        const newData = { ...prev };
+        newData.semesters[2] = {
+          courses: specializationCourses[3].map(course => ({
+            ...course,
+            grade: 'Not finished' as Grade
+          }))
+        };
+        newData.semesters[3] = {
+          courses: specializationCourses[4].map(course => ({
+            ...course,
+            grade: 'Not finished' as Grade
+          }))
+        };
+        return newData;
+      });
+    }
+  };
+
+  const handleSecondSpecializationChange = (spec: Specialization) => {
+    setSecondSpecialization(spec);
+    if (spec && !electiveType) {
+      const specializationCourses = SPECIALIZATION_COURSES[spec];
+      setYear2Data(prev => {
+        const newData = { ...prev };
+        newData.semesters[2].courses = [
+          ...newData.semesters[2].courses,
+          ...specializationCourses[3].map(course => ({
+            ...course,
+            grade: 'Not finished' as Grade
+          }))
+        ];
+        newData.semesters[3].courses = [
+          ...newData.semesters[3].courses,
+          ...specializationCourses[4].map(course => ({
+            ...course,
+            grade: 'Not finished' as Grade
+          }))
+        ];
+        return newData;
+      });
+    }
+  };
+
+  const handleElectiveTypeChange = (type: ElectiveType) => {
+    setElectiveType(type);
+    if (type) {
+      setSecondSpecialization(null);
+      setYear2Data(prev => {
+        const newData = { ...prev };
+        // Add elective course
+        const electiveCourse: Course = {
+          name: 'Elective Course',
+          credits: 7.5,
+          grade: 'Not finished',
+          isPassFail: type === 'Pass/Fail'
+        };
+        newData.semesters[2].courses = [
+          ...newData.semesters[2].courses.slice(0, 1),
+          electiveCourse
+        ];
+        newData.semesters[3].courses = [
+          ...newData.semesters[3].courses.slice(0, 1),
+          electiveCourse
+        ];
+        return newData;
+      });
+    }
   };
 
   const calculateCumulativeGPA = () => {
@@ -68,6 +147,13 @@ const Index = () => {
             yearNumber={2}
             semesters={year2Data.semesters}
             onGradeChange={handleYear2GradeChange}
+            isThirdYear={true}
+            specialization={specialization}
+            secondSpecialization={secondSpecialization}
+            electiveType={electiveType}
+            onSpecializationChange={handleSpecializationChange}
+            onSecondSpecializationChange={handleSecondSpecializationChange}
+            onElectiveTypeChange={handleElectiveTypeChange}
             previousYearCourses={year1Courses}
           />
         </div>
