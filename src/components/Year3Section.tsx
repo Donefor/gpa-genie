@@ -48,27 +48,36 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
   // Update semesters when exchange, internship, or thesis options change
   useEffect(() => {
-    // Create a completely new semesters array each time
-    const newSemesters = Array(4).fill(null).map(() => ({ courses: [] }));
+    const createEmptySemesters = () => Array(4).fill(null).map(() => ({ courses: [] }));
+    
+    // Start with clean semesters
+    let newSemesters = createEmptySemesters();
 
     // Handle Exchange courses - only if internship is not selected
     if (!hasInternship) {
       const exchangeCourse = { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true };
       
       if (exchangeOption === 'fall') {
-        newSemesters[0] = { courses: [exchangeCourse, exchangeCourse] };
-        newSemesters[1] = { courses: [exchangeCourse, exchangeCourse] };
+        newSemesters[0].courses = [exchangeCourse, exchangeCourse];
+        newSemesters[1].courses = [exchangeCourse, exchangeCourse];
+        // Explicitly ensure spring semesters are empty
+        newSemesters[2].courses = [];
+        newSemesters[3].courses = [];
       } else if (exchangeOption === 'spring') {
-        newSemesters[2] = { courses: [exchangeCourse, exchangeCourse] };
-        newSemesters[3] = { courses: [exchangeCourse, exchangeCourse] };
+        // Explicitly ensure fall semesters are empty
+        newSemesters[0].courses = [];
+        newSemesters[1].courses = [];
+        newSemesters[2].courses = [exchangeCourse, exchangeCourse];
+        newSemesters[3].courses = [exchangeCourse, exchangeCourse];
       }
     }
 
-    // Handle Internship
+    // Handle Internship (clears any exchange courses)
     if (hasInternship) {
+      newSemesters = createEmptySemesters(); // Reset all semesters
       const internshipCourse = { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true };
-      newSemesters[0] = { courses: [internshipCourse] };
-      newSemesters[1] = { courses: [internshipCourse] };
+      newSemesters[0].courses = [internshipCourse];
+      newSemesters[1].courses = [internshipCourse];
     }
 
     // Handle Thesis
@@ -82,7 +91,6 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       newSemesters[3].courses.push(thesisCourse);
     }
 
-    // Set the new semesters state
     setSemesters(newSemesters);
   }, [exchangeOption, hasInternship, thesisOption]);
 
@@ -135,4 +143,3 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     </Card>
   );
 };
-
