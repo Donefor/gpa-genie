@@ -38,9 +38,9 @@ export const YearSection = ({
   electiveSemester4,
   onSpecializationChange,
   onSecondSpecializationChange,
+  onElectiveTypeChange,
   onElectiveSemester3Change,
   onElectiveSemester4Change,
-  onElectiveTypeChange,
   previousYearCourses = [] 
 }: YearSectionProps) => {
   const [gpa, setGpa] = useState(0);
@@ -61,6 +61,10 @@ export const YearSection = ({
 
   const handleSecondSpecializationChange = (spec: Specialization) => {
     if (!specialization) return; // Prevent selecting second spec without primary
+    
+    // Clear all electives first
+    if (onElectiveSemester3Change) onElectiveSemester3Change(null);
+    if (onElectiveSemester4Change) onElectiveSemester4Change(null);
     
     // Set the second specialization
     if (onSecondSpecializationChange) {
