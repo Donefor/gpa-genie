@@ -33,7 +33,7 @@ export const SpecializationSelect = ({ value, onChange, disabled, disabledOption
       onValueChange={(val) => onChange(val as Specialization)}
       disabled={disabled || isAllDisabled}
     >
-      <SelectTrigger className="w-[280px]">
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Select specialization" />
       </SelectTrigger>
       <SelectContent>

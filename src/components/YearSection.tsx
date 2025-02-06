@@ -43,6 +43,26 @@ export const YearSection = ({
     setGpa(calculatedGPA);
   }, [semesters, previousYearCourses, JSON.stringify(semesters)]);
 
+  const handleElectiveTypeChange = (type: ElectiveType) => {
+    if (type) {
+      // Remove second specialization if total credits would exceed 15
+      if (secondSpecialization) {
+        onSecondSpecializationChange(null);
+      }
+    }
+    onElectiveTypeChange(type);
+  };
+
+  const handleSecondSpecializationChange = (spec: Specialization) => {
+    if (spec) {
+      // Remove elective if total credits would exceed 15
+      if (electiveType) {
+        onElectiveTypeChange(null);
+      }
+    }
+    onSecondSpecializationChange(spec);
+  };
+
   const getYearLabel = (year: number) => {
     switch (year) {
       case 1:
@@ -67,7 +87,6 @@ export const YearSection = ({
       </CardHeader>
       <CardContent className="pt-6">
         {semesters.map((semester, semesterIndex) => {
-          // Show selection menu after semester 2
           const showSelectionMenu = semesterIndex === 1 && showSpecializationMenu;
           
           return (
@@ -92,45 +111,43 @@ export const YearSection = ({
 
               {showSelectionMenu && (
                 <Card className="mb-8 bg-muted p-6">
-                  <div className="grid grid-cols-2 gap-8">
-                    <div className="space-y-4">
-                      <div className="flex items-center space-x-4">
-                        <span className="min-w-[120px]">Specialization:</span>
+                  <div className="space-y-6">
+                    <div className="flex items-start space-x-8">
+                      <div className="flex-1">
+                        <span className="block text-sm font-medium mb-2">Primary Specialization</span>
                         <SpecializationSelect
                           value={specialization || null}
                           onChange={onSpecializationChange!}
                           disabledOptions={secondSpecialization ? [secondSpecialization] : []}
                         />
                       </div>
-                      
-                      <div className="flex items-center space-x-4">
-                        <span className="min-w-[120px]">Second Specialization:</span>
+                      <div className="flex-1">
+                        <span className="block text-sm font-medium mb-2">Second Specialization</span>
                         <SpecializationSelect
                           value={secondSpecialization || null}
-                          onChange={onSecondSpecializationChange!}
+                          onChange={handleSecondSpecializationChange}
                           disabledOptions={[
                             ...(specialization ? [specialization] : []),
-                            ...(electiveType ? ['ALL' as Specialization] : [])
+                            ...(electiveType ? ['ALL' as const] : [])
                           ]}
                         />
                       </div>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex items-center space-x-4">
-                        <span className="min-w-[120px]">Semester 3 Elective:</span>
+                    <div className="flex items-start space-x-8">
+                      <div className="flex-1">
+                        <span className="block text-sm font-medium mb-2">Semester 3 Elective</span>
                         <ElectiveSelect
                           value={electiveType || null}
-                          onChange={onElectiveTypeChange!}
+                          onChange={handleElectiveTypeChange}
                           disabled={!!secondSpecialization}
                         />
                       </div>
-                      
-                      <div className="flex items-center space-x-4">
-                        <span className="min-w-[120px]">Semester 4 Elective:</span>
+                      <div className="flex-1">
+                        <span className="block text-sm font-medium mb-2">Semester 4 Elective</span>
                         <ElectiveSelect
                           value={electiveType || null}
-                          onChange={onElectiveTypeChange!}
+                          onChange={handleElectiveTypeChange}
                           disabled={!!secondSpecialization || !!electiveType}
                         />
                       </div>
