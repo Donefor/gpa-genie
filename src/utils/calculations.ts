@@ -21,6 +21,8 @@ export const calculateGPA = (courses: Course[]): number => {
   let totalCredits = 0;
 
   courses.forEach(course => {
+    if (!course) return; // Skip undefined courses
+    
     // Skip pass/fail courses in GPA calculation
     if (!course.isPassFail && course.grade && course.grade !== 'Not finished' && course.grade !== 'Pass/Fail') {
       totalPoints += course.credits * getGradeValue(course.grade);
@@ -32,6 +34,9 @@ export const calculateGPA = (courses: Course[]): number => {
 };
 
 export const validateCredits = (courses: Course[]): boolean => {
-  const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
+  const totalCredits = courses.reduce((sum, course) => {
+    if (!course) return sum; // Skip undefined courses
+    return sum + course.credits;
+  }, 0);
   return totalCredits <= 15;
 };
