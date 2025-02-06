@@ -40,7 +40,7 @@ export const Year3Controls = ({
   };
 
   return (
-    <div className="space-y-4 mb-6">
+    <div className="flex flex-wrap gap-6 mb-6">
       <div className="space-y-2">
         <label className="text-sm font-medium">Exchange Program</label>
         <Select value={exchangeOption} onValueChange={handleExchangeChange}>
