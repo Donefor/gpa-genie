@@ -41,10 +41,10 @@ export const Year3Controls = ({
   const handleInternshipChange = (value: string) => {
     const enabled = value === 'true';
     onInternshipChange(enabled);
-    // If enabling internship, disable exchange
-    if (enabled && exchangeOption !== 'none') {
+    // If enabling internship, disable exchange and thesis
+    if (enabled) {
       onExchangeChange('none');
-      onThesisChange('none'); // Reset thesis when exchange is disabled
+      onThesisChange('none');
     }
   };
 
