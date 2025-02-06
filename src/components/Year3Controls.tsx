@@ -57,7 +57,7 @@ export const Year3Controls = ({
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium">Internship</label>
+          <label className="text-sm font-medium">Internship Program</label>
           <Select 
             value={hasInternship ? 'true' : 'false'} 
             onValueChange={handleInternshipChange}
