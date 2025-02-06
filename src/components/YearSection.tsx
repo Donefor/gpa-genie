@@ -21,7 +21,7 @@ export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear,
     const allCourses = [...previousYearCourses, ...semesters.flatMap(semester => semester.courses)];
     const calculatedGPA = calculateGPA(allCourses);
     setGpa(calculatedGPA);
-  }, [semesters, previousYearCourses, JSON.stringify(semesters)]); // Add JSON.stringify to ensure deep comparison
+  }, [semesters, previousYearCourses, JSON.stringify(semesters)]);
 
   const getYearLabel = (year: number) => {
     switch (year) {
@@ -38,7 +38,7 @@ export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear,
 
   return (
     <Card className="mb-8 overflow-hidden">
-      <CardHeader className="bg-secondary">
+      <CardHeader className={`${yearNumber === 2 ? 'bg-secondary w-full' : 'bg-secondary'}`}>
         <CardTitle className="text-2xl font-semibold">
           {yearNumber === 1 ? "First year" : yearNumber === 2 ? "Second year" : `Year ${yearNumber}`}
         </CardTitle>

@@ -16,7 +16,7 @@ export const SemesterTable = ({ courses, onGradeChange, isThirdYear }: SemesterT
         <TableRow>
           <TableHead className="w-[300px]">Course</TableHead>
           <TableHead>ECTS</TableHead>
-          <TableHead className="pl-[360px]">Grade</TableHead>
+          <TableHead className="pl-[405px]">Grade</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
