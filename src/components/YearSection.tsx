@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { SemesterTable } from './SemesterTable';
@@ -7,6 +6,7 @@ import { calculateGPA } from '@/utils/calculations';
 import { Badge } from '@/components/ui/badge';
 import { SpecializationSelect } from './SpecializationSelect';
 import { ElectiveSelect } from './ElectiveSelect';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface YearSectionProps {
   yearNumber: number;
@@ -44,6 +44,7 @@ export const YearSection = ({
   previousYearCourses = [] 
 }: YearSectionProps) => {
   const [gpa, setGpa] = useState(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const allCourses = [...previousYearCourses, ...semesters.flatMap(semester => semester.courses)];
@@ -132,10 +133,10 @@ export const YearSection = ({
               </div>
 
               {showSelectionMenu && (
-                <Card className="mb-8 bg-muted p-6 shadow-sm">
-                  <div className="space-y-6">
-                    <div className="flex items-start space-x-8">
-                      <div className="flex-1">
+                <Card className="mb-8 bg-muted p-4 md:p-6 shadow-sm">
+                  <div className={`space-y-6 ${isMobile ? "flex flex-col" : ""}`}>
+                    <div className={`${isMobile ? "flex flex-col space-y-4" : "flex items-start space-x-8"}`}>
+                      <div className={`${isMobile ? "w-full" : "flex-1"}`}>
                         <span className="block text-sm font-medium mb-2">Primary Specialization</span>
                         <SpecializationSelect
                           value={specialization || null}
@@ -143,7 +144,7 @@ export const YearSection = ({
                           disabledOptions={secondSpecialization ? [secondSpecialization] : []}
                         />
                       </div>
-                      <div className="flex-1">
+                      <div className={`${isMobile ? "w-full" : "flex-1"}`}>
                         <span className="block text-sm font-medium mb-2">Second Specialization</span>
                         <SpecializationSelect
                           value={secondSpecialization || null}
@@ -154,8 +155,8 @@ export const YearSection = ({
                       </div>
                     </div>
 
-                    <div className="flex items-start space-x-8">
-                      <div className="flex-1">
+                    <div className={`${isMobile ? "flex flex-col space-y-4" : "flex items-start space-x-8"}`}>
+                      <div className={`${isMobile ? "w-full" : "flex-1"}`}>
                         <span className="block text-sm font-medium mb-2">Semester 3 Elective</span>
                         <ElectiveSelect
                           value={electiveSemester3}
@@ -163,7 +164,7 @@ export const YearSection = ({
                           disabled={!specialization}
                         />
                       </div>
-                      <div className="flex-1">
+                      <div className={`${isMobile ? "w-full" : "flex-1"}`}>
                         <span className="block text-sm font-medium mb-2">Semester 4 Elective</span>
                         <ElectiveSelect
                           value={electiveSemester4}
@@ -178,7 +179,7 @@ export const YearSection = ({
             </div>
           );
         })}
-        <div className="mt-6 w-full bg-muted p-6 rounded-lg shadow-sm">
+        <div className="mt-6 w-full bg-muted p-4 md:p-6 rounded-lg shadow-sm">
           <Badge variant="secondary" className="text-lg px-4 py-1">
             {getYearLabel(yearNumber)}: {gpa.toFixed(2)}
           </Badge>
