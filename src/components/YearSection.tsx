@@ -43,9 +43,9 @@ export const YearSection = ({
     setGpa(calculatedGPA);
   }, [semesters, previousYearCourses, JSON.stringify(semesters)]);
 
-  const handleElectiveTypeChange = (type: ElectiveType) => {
+  const handleElectiveTypeChange = (semester: number, type: ElectiveType) => {
     if (type && secondSpecialization) {
-      // Remove second specialization if selecting an elective
+      // Only remove second specialization if selecting an elective
       onSecondSpecializationChange(null);
     }
     onElectiveTypeChange(type);
@@ -132,7 +132,7 @@ export const YearSection = ({
                         <span className="block text-sm font-medium mb-2">Semester 3 Elective</span>
                         <ElectiveSelect
                           value={electiveType || null}
-                          onChange={handleElectiveTypeChange}
+                          onChange={(type) => handleElectiveTypeChange(3, type)}
                           disabled={false}
                         />
                       </div>
@@ -140,7 +140,7 @@ export const YearSection = ({
                         <span className="block text-sm font-medium mb-2">Semester 4 Elective</span>
                         <ElectiveSelect
                           value={electiveType || null}
-                          onChange={handleElectiveTypeChange}
+                          onChange={(type) => handleElectiveTypeChange(4, type)}
                           disabled={!!electiveType}
                         />
                       </div>

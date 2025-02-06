@@ -39,7 +39,7 @@ export const SemesterTable = ({
           <TableRow>
             <TableHead className="w-[300px]">Course</TableHead>
             <TableHead>ECTS</TableHead>
-            <TableHead className="pl-[405px]">Grade</TableHead>
+            <TableHead className="text-right">Grade</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -47,9 +47,13 @@ export const SemesterTable = ({
             <TableRow key={course.name}>
               <TableCell className="font-medium">{course.name}</TableCell>
               <TableCell>{course.credits}</TableCell>
-              <TableCell>
+              <TableCell className="text-right">
                 {course.isPassFail ? (
-                  <span className="text-gray-500">(Pass/Fail)</span>
+                  <div className="flex justify-end">
+                    <div className="w-[140px] h-10 bg-muted flex items-center justify-center rounded-md border border-input">
+                      Pass/Fail
+                    </div>
+                  </div>
                 ) : (
                   <GradeSelect
                     value={course.grade}
