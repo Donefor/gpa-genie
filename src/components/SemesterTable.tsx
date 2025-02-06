@@ -30,7 +30,10 @@ export const SemesterTable = ({
   onSecondSpecializationChange,
   onElectiveTypeChange
 }: SemesterTableProps) => {
-  const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
+  const totalCredits = courses.reduce((sum, course) => {
+    if (!course) return sum;
+    return sum + course.credits;
+  }, 0);
 
   return (
     <div className="space-y-4">
