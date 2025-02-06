@@ -102,13 +102,13 @@ export const YearSection = ({
   const showSpecializationMenu = isThirdYear && yearNumber === 2;
 
   return (
-    <Card className="mb-8 overflow-hidden">
+    <Card className={`mb-8 overflow-hidden ${isMobile ? 'mx-[-2rem]' : ''}`}>
       <CardHeader className={`${yearNumber === 2 ? 'bg-secondary w-full' : 'bg-secondary'}`}>
         <CardTitle className="text-2xl font-semibold">
           {yearNumber === 1 ? "First year" : yearNumber === 2 ? "Second year" : `Year ${yearNumber}`}
         </CardTitle>
       </CardHeader>
-      <CardContent className="pt-6">
+      <CardContent className={`pt-6 ${isMobile ? 'px-2' : ''}`}>
         {semesters.map((semester, semesterIndex) => {
           const showSelectionMenu = semesterIndex === 1 && showSpecializationMenu;
           
@@ -133,7 +133,7 @@ export const YearSection = ({
               </div>
 
               {showSelectionMenu && (
-                <Card className="mb-8 bg-muted p-4 md:p-6 shadow-sm">
+                <Card className={`mb-8 bg-muted shadow-sm ${isMobile ? 'p-3' : 'p-4 md:p-6'}`}>
                   <div className={`space-y-6 ${isMobile ? "flex flex-col" : ""}`}>
                     <div className={`${isMobile ? "flex flex-col space-y-4" : "flex items-start space-x-8"}`}>
                       <div className={`${isMobile ? "w-full" : "flex-1"}`}>
