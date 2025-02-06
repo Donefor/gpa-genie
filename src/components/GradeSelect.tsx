@@ -16,20 +16,23 @@ interface GradeSelectProps {
 
 export const GradeSelect = ({ value, onChange, isThirdYear }: GradeSelectProps) => {
   return (
-    <Select value={value || "Not finished"} onValueChange={onChange}>
-      <SelectTrigger className="w-[140px]">
-        <SelectValue placeholder="Not finished" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="Not finished">Not finished</SelectItem>
-        <SelectItem value="Pass">Pass (3.0)</SelectItem>
-        <SelectItem value="Good">Good (3.5)</SelectItem>
-        <SelectItem value="Very good">Very good (4.0)</SelectItem>
-        <SelectItem value="Excellent">Excellent (5.0)</SelectItem>
-        {isThirdYear && (
-          <SelectItem value="Pass/Fail">Pass/Fail</SelectItem>
-        )}
-      </SelectContent>
-    </Select>
+    <div className="flex justify-end">
+      <Select value={value || "Not finished"} onValueChange={onChange}>
+        <SelectTrigger className="w-[140px]">
+          <SelectValue placeholder="Not finished" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="Not finished">Not finished</SelectItem>
+          <SelectItem value="Pass">Pass (3.0)</SelectItem>
+          <SelectItem value="Good">Good (3.5)</SelectItem>
+          <SelectItem value="Very good">Very good (4.0)</SelectItem>
+          <SelectItem value="Excellent">Excellent (5.0)</SelectItem>
+          {isThirdYear && (
+            <SelectItem value="Pass/Fail">Pass/Fail</SelectItem>
+          )}
+        </SelectContent>
+      </Select>
+    </div>
   );
 };
+
