@@ -19,15 +19,6 @@ const Index = () => {
     }))
   });
 
-  const [year3Data, setYear3Data] = useState({
-    semesters: [
-      { courses: [] },
-      { courses: [] },
-      { courses: [] },
-      { courses: [] }
-    ]
-  });
-
   const handleYear1GradeChange = (semesterIndex: number, courseIndex: number, grade: Grade) => {
     setYear1Data(prev => {
       const newData = { ...prev };
@@ -44,19 +35,10 @@ const Index = () => {
     });
   };
 
-  const handleYear3GradeChange = (semesterIndex: number, courseIndex: number, grade: Grade) => {
-    setYear3Data(prev => {
-      const newData = { ...prev };
-      newData.semesters[semesterIndex].courses[courseIndex].grade = grade;
-      return newData;
-    });
-  };
-
   const calculateCumulativeGPA = () => {
     const allCourses: Course[] = [
       ...year1Data.semesters.flatMap(s => s.courses),
-      ...year2Data.semesters.flatMap(s => s.courses),
-      ...year3Data.semesters.flatMap(s => s.courses)
+      ...year2Data.semesters.flatMap(s => s.courses)
     ];
     return calculateGPA(allCourses);
   };
@@ -84,12 +66,6 @@ const Index = () => {
             yearNumber={2}
             semesters={year2Data.semesters}
             onGradeChange={handleYear2GradeChange}
-          />
-          <YearSection
-            yearNumber={3}
-            semesters={year3Data.semesters}
-            onGradeChange={handleYear3GradeChange}
-            isThirdYear={true}
           />
         </div>
       </div>
