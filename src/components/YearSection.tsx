@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { SemesterTable } from './SemesterTable';
@@ -177,7 +176,7 @@ export const YearSection = ({
             </div>
           );
         })}
-        <div className="mt-6 w-full bg-muted p-4">
+        <div className="mt-6 w-full bg-muted p-4 rounded-lg">
           <Badge variant="secondary" className="text-lg px-4 py-1">
             {getYearLabel(yearNumber)}: {gpa.toFixed(2)}
           </Badge>
@@ -186,4 +185,3 @@ export const YearSection = ({
     </Card>
   );
 };
-
