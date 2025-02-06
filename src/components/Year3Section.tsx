@@ -71,21 +71,21 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       // Handle Exchange
       if (exchangeOption === 'fall') {
         newSemesters[0].courses.push(
-          { name: 'Exchange Course 1', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange Course 2', credits: 7.5, grade: 'Not finished', isPassFail: true }
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
         );
         newSemesters[1].courses.push(
-          { name: 'Exchange Course 1', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange Course 2', credits: 7.5, grade: 'Not finished', isPassFail: true }
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
         );
       } else if (exchangeOption === 'spring') {
         newSemesters[2].courses.push(
-          { name: 'Exchange Course 1', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange Course 2', credits: 7.5, grade: 'Not finished', isPassFail: true }
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
         );
         newSemesters[3].courses.push(
-          { name: 'Exchange Course 1', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange Course 2', credits: 7.5, grade: 'Not finished', isPassFail: true }
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
         );
       }
 
