@@ -36,19 +36,14 @@ export const Year3Controls = ({
       } else if (value === 'spring') {
         onThesisChange('fall');
       }
-      // If enabling exchange, disable internship
-      if (hasInternship) {
-        onInternshipChange(false);
-      }
     }
   };
 
   const handleInternshipChange = (value: string) => {
     const enabled = value === 'true';
     onInternshipChange(enabled);
-    // If enabling internship, disable exchange and thesis (same as selecting "No Exchange")
+    // If enabling internship, reset thesis and remove exchange courses from table
     if (enabled) {
-      onExchangeChange('none');
       onThesisChange('none');
     }
   };
