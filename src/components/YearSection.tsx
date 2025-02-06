@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Course, Grade } from '@/types';
+import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { SemesterTable } from './SemesterTable';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { calculateGPA } from '@/utils/calculations';
@@ -11,10 +11,28 @@ interface YearSectionProps {
   semesters: { courses: Course[] }[];
   onGradeChange: (semesterIndex: number, courseIndex: number, grade: Grade) => void;
   isThirdYear?: boolean;
+  specialization?: Specialization;
+  secondSpecialization?: Specialization;
+  electiveType?: ElectiveType;
+  onSpecializationChange?: (spec: Specialization) => void;
+  onSecondSpecializationChange?: (spec: Specialization) => void;
+  onElectiveTypeChange?: (type: ElectiveType) => void;
   previousYearCourses?: Course[];
 }
 
-export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear, previousYearCourses = [] }: YearSectionProps) => {
+export const YearSection = ({ 
+  yearNumber, 
+  semesters, 
+  onGradeChange, 
+  isThirdYear,
+  specialization,
+  secondSpecialization,
+  electiveType,
+  onSpecializationChange,
+  onSecondSpecializationChange,
+  onElectiveTypeChange,
+  previousYearCourses = [] 
+}: YearSectionProps) => {
   const [gpa, setGpa] = useState(0);
 
   useEffect(() => {
@@ -53,6 +71,13 @@ export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear,
                 onGradeChange(semesterIndex, courseIndex, grade)
               }
               isThirdYear={isThirdYear}
+              semester={semesterIndex + 1}
+              specialization={specialization}
+              secondSpecialization={secondSpecialization}
+              electiveType={electiveType}
+              onSpecializationChange={onSpecializationChange}
+              onSecondSpecializationChange={onSecondSpecializationChange}
+              onElectiveTypeChange={onElectiveTypeChange}
             />
           </div>
         ))}
