@@ -155,6 +155,7 @@ export const YearSection = ({
                         <ElectiveSelect
                           value={electiveSemester3}
                           onChange={(type) => handleElectiveChange(type, onElectiveSemester3Change)}
+                          disabled={!specialization}
                         />
                       </div>
                       <div className="flex-1">
@@ -162,6 +163,7 @@ export const YearSection = ({
                         <ElectiveSelect
                           value={electiveSemester4}
                           onChange={(type) => handleElectiveChange(type, onElectiveSemester4Change)}
+                          disabled={!specialization}
                         />
                       </div>
                     </div>
@@ -180,4 +182,3 @@ export const YearSection = ({
     </Card>
   );
 };
-
