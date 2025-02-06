@@ -21,7 +21,6 @@ const Index = () => {
 
   const [specialization, setSpecialization] = useState<Specialization>(null);
   const [secondSpecialization, setSecondSpecialization] = useState<Specialization>(null);
-  const [electiveType, setElectiveType] = useState<ElectiveType>(null);
   const [electiveSemester3, setElectiveSemester3] = useState<ElectiveType>(null);
   const [electiveSemester4, setElectiveSemester4] = useState<ElectiveType>(null);
 
@@ -42,22 +41,24 @@ const Index = () => {
   };
 
   const handleSpecializationChange = (spec: Specialization) => {
-    setSpecialization(spec);
-    // Clear second specialization when changing primary
+    // Clear second specialization and electives when changing primary specialization
     setSecondSpecialization(null);
-    
+    setElectiveSemester3(null);
+    setElectiveSemester4(null);
+    setSpecialization(spec);
+
     if (spec) {
       const specializationCourses = SPECIALIZATION_COURSES[spec];
       setYear2Data(prev => {
         const newData = { ...prev };
         newData.semesters[2] = {
-          courses: specializationCourses[3].map(course => ({
+          courses: [specializationCourses[3][0]].map(course => ({
             ...course,
             grade: 'Not finished' as Grade
           }))
         };
         newData.semesters[3] = {
-          courses: specializationCourses[4].map(course => ({
+          courses: [specializationCourses[4][0]].map(course => ({
             ...course,
             grade: 'Not finished' as Grade
           }))
@@ -68,27 +69,33 @@ const Index = () => {
   };
 
   const handleSecondSpecializationChange = (spec: Specialization) => {
+    // Clear electives when setting second specialization
+    setElectiveSemester3(null);
+    setElectiveSemester4(null);
     setSecondSpecialization(spec);
-    if (spec) {
-      // Clear any existing electives
-      setElectiveSemester3(null);
-      setElectiveSemester4(null);
-      setElectiveType(null);
-      
+
+    if (spec && specialization) {
       const specializationCourses = SPECIALIZATION_COURSES[spec];
       setYear2Data(prev => {
         const newData = { ...prev };
+        // Combine courses from both specializations
         newData.semesters[2] = {
-          courses: specializationCourses[3].map(course => ({
-            ...course,
-            grade: 'Not finished' as Grade
-          }))
+          courses: [
+            ...newData.semesters[2].courses,
+            ...specializationCourses[3].map(course => ({
+              ...course,
+              grade: 'Not finished' as Grade
+            }))
+          ]
         };
         newData.semesters[3] = {
-          courses: specializationCourses[4].map(course => ({
-            ...course,
-            grade: 'Not finished' as Grade
-          }))
+          courses: [
+            ...newData.semesters[3].courses,
+            ...specializationCourses[4].map(course => ({
+              ...course,
+              grade: 'Not finished' as Grade
+            }))
+          ]
         };
         return newData;
       });
@@ -96,53 +103,47 @@ const Index = () => {
   };
 
   const handleElectiveTypeChange = (type: ElectiveType, semester: number) => {
+    // Clear second specialization if it exists
+    if (secondSpecialization) {
+      setSecondSpecialization(null);
+    }
+
     if (semester === 3) {
       setElectiveSemester3(type);
     } else {
       setElectiveSemester4(type);
     }
 
-    if (type && secondSpecialization) {
-      setSecondSpecialization(null);
+    if (specialization) {
+      const specializationCourses = SPECIALIZATION_COURSES[specialization];
+      setYear2Data(prev => {
+        const newData = { ...prev };
+        if (semester === 3) {
+          newData.semesters[2] = {
+            courses: [
+              specializationCourses[3][0],
+              type ? {
+                name: 'Elective Course',
+                credits: 7.5,
+                grade: 'Not finished' as Grade
+              } : null
+            ].filter(Boolean) as Course[]
+          };
+        } else {
+          newData.semesters[3] = {
+            courses: [
+              specializationCourses[4][0],
+              type ? {
+                name: 'Elective Course',
+                credits: 7.5,
+                grade: 'Not finished' as Grade
+              } : null
+            ].filter(Boolean) as Course[]
+          };
+        }
+        return newData;
+      });
     }
-
-    setYear2Data(prev => {
-      const newData = { ...prev };
-      const specializationCourse = semester === 3 
-        ? SPECIALIZATION_COURSES[specialization!][3][0]
-        : SPECIALIZATION_COURSES[specialization!][4][0];
-
-      if (semester === 3) {
-        newData.semesters[2] = {
-          courses: [
-            {
-              ...specializationCourse,
-              grade: 'Not finished' as Grade
-            },
-            type ? {
-              name: 'Elective Course',
-              credits: 7.5,
-              grade: 'Not finished' as Grade
-            } : null
-          ].filter(Boolean) as Course[]
-        };
-      } else {
-        newData.semesters[3] = {
-          courses: [
-            {
-              ...specializationCourse,
-              grade: 'Not finished' as Grade
-            },
-            type ? {
-              name: 'Elective Course',
-              credits: 7.5,
-              grade: 'Not finished' as Grade
-            } : null
-          ].filter(Boolean) as Course[]
-        };
-      }
-      return newData;
-    });
   };
 
   const calculateCumulativeGPA = () => {
@@ -181,16 +182,8 @@ const Index = () => {
             isThirdYear={true}
             specialization={specialization}
             secondSpecialization={secondSpecialization}
-            electiveType={electiveType}
             onSpecializationChange={handleSpecializationChange}
             onSecondSpecializationChange={handleSecondSpecializationChange}
-            onElectiveTypeChange={(type) => {
-              setElectiveType(type);
-              if (type === null) {
-                setElectiveSemester3(null);
-                setElectiveSemester4(null);
-              }
-            }}
             previousYearCourses={year1Courses}
             electiveSemester3={electiveSemester3}
             electiveSemester4={electiveSemester4}
