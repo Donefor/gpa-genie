@@ -31,4 +31,3 @@ export interface CourseData {
 }
 
 export type ElectiveType = 'Graded' | 'Pass/Fail' | null;
-

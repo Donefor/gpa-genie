@@ -31,4 +31,3 @@ export const ElectiveSelect = ({ value, onChange, disabled }: ElectiveSelectProp
     </Select>
   );
 };
-

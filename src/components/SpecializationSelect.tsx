@@ -47,4 +47,3 @@ export const SpecializationSelect = ({ value, onChange, disabled, disabledOption
     </Select>
   );
 };
-

@@ -1,3 +1,4 @@
+
 import { CourseData } from '@/types';
 
 export const YEAR_1_COURSES: { [key: number]: CourseData[] } = {
