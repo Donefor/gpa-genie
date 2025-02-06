@@ -69,11 +69,12 @@ export const YearSection = ({
   };
 
   const handleElectiveChange = (type: ElectiveType, semesterHandler: ((type: ElectiveType) => void) | undefined) => {
-    // If adding an elective and we have a second specialization, remove the second specialization courses
-    if (type && secondSpecialization) {
-      if (onSecondSpecializationChange) onSecondSpecializationChange(null);
+    // Always remove second specialization courses first if they exist
+    if (secondSpecialization && onSecondSpecializationChange) {
+      onSecondSpecializationChange(null);
     }
     
+    // Then set the new elective
     if (semesterHandler) {
       semesterHandler(type);
     }
@@ -179,3 +180,4 @@ export const YearSection = ({
     </Card>
   );
 };
+
