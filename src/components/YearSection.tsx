@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { SemesterTable } from './SemesterTable';
@@ -176,7 +177,7 @@ export const YearSection = ({
             </div>
           );
         })}
-        <div className="mt-6 w-full bg-muted p-4 rounded-lg">
+        <div className="mt-6 w-full bg-muted p-6 rounded-lg shadow-sm">
           <Badge variant="secondary" className="text-lg px-4 py-1">
             {getYearLabel(yearNumber)}: {gpa.toFixed(2)}
           </Badge>
