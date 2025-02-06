@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { YearSection } from '@/components/YearSection';
 import { YEAR_1_COURSES, YEAR_2_COURSES, SPECIALIZATION_COURSES } from '@/data/courseData';
@@ -41,7 +40,6 @@ const Index = () => {
   };
 
   const handleSpecializationChange = (spec: Specialization) => {
-    // Clear second specialization and electives when changing primary specialization
     setSecondSpecialization(null);
     setElectiveSemester3(null);
     setElectiveSemester4(null);
@@ -69,7 +67,6 @@ const Index = () => {
   };
 
   const handleSecondSpecializationChange = (spec: Specialization) => {
-    // Clear electives when setting second specialization
     setElectiveSemester3(null);
     setElectiveSemester4(null);
     setSecondSpecialization(spec);
@@ -78,7 +75,6 @@ const Index = () => {
       const specializationCourses = SPECIALIZATION_COURSES[spec];
       setYear2Data(prev => {
         const newData = { ...prev };
-        // Combine courses from both specializations
         newData.semesters[2] = {
           courses: [
             ...newData.semesters[2].courses,
@@ -108,6 +104,7 @@ const Index = () => {
       setSecondSpecialization(null);
     }
 
+    // Set the elective state
     if (semester === 3) {
       setElectiveSemester3(type);
     } else {
@@ -118,6 +115,7 @@ const Index = () => {
       const specializationCourses = SPECIALIZATION_COURSES[specialization];
       setYear2Data(prev => {
         const newData = { ...prev };
+        // Only keep primary specialization courses and add elective if selected
         if (semester === 3) {
           newData.semesters[2] = {
             courses: [
