@@ -38,9 +38,9 @@ export const YearSection = ({
   electiveSemester4,
   onSpecializationChange,
   onSecondSpecializationChange,
-  onElectiveTypeChange,
   onElectiveSemester3Change,
   onElectiveSemester4Change,
+  onElectiveTypeChange,
   previousYearCourses = [] 
 }: YearSectionProps) => {
   const [gpa, setGpa] = useState(0);
@@ -53,16 +53,28 @@ export const YearSection = ({
 
   const handleSecondSpecializationChange = (spec: Specialization) => {
     if (!specialization && spec) {
-      // If trying to select second specialization without primary, prevent it
-      return;
+      return; // Prevent selecting second specialization without primary
     }
+
+    // First clear all electives if selecting a second specialization
     if (spec) {
-      // If selecting a second specialization, remove any existing electives
-      onElectiveSemester3Change?.(null);
-      onElectiveSemester4Change?.(null);
-      onElectiveTypeChange?.(null);
+      // Make sure to use optional chaining and check if handlers exist
+      if (onElectiveTypeChange) onElectiveTypeChange(null);
+      if (onElectiveSemester3Change) onElectiveSemester3Change(null);
+      if (onElectiveSemester4Change) onElectiveSemester4Change(null);
     }
-    onSecondSpecializationChange?.(spec);
+
+    // Then update the second specialization
+    if (onSecondSpecializationChange) {
+      onSecondSpecializationChange(spec);
+    }
+  };
+
+  const handleElectiveChange = (type: ElectiveType, semesterHandler: ((type: ElectiveType) => void) | undefined) => {
+    if (secondSpecialization) return; // Don't allow elective changes if there's a second specialization
+    if (semesterHandler) {
+      semesterHandler(type);
+    }
   };
 
   const getYearLabel = (year: number) => {
@@ -139,7 +151,7 @@ export const YearSection = ({
                         <span className="block text-sm font-medium mb-2">Semester 3 Elective</span>
                         <ElectiveSelect
                           value={electiveSemester3}
-                          onChange={onElectiveSemester3Change}
+                          onChange={(type) => handleElectiveChange(type, onElectiveSemester3Change)}
                           disabled={!!secondSpecialization}
                         />
                       </div>
@@ -147,7 +159,7 @@ export const YearSection = ({
                         <span className="block text-sm font-medium mb-2">Semester 4 Elective</span>
                         <ElectiveSelect
                           value={electiveSemester4}
-                          onChange={onElectiveSemester4Change}
+                          onChange={(type) => handleElectiveChange(type, onElectiveSemester4Change)}
                           disabled={!!secondSpecialization}
                         />
                       </div>
