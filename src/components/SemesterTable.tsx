@@ -64,7 +64,7 @@ export const SemesterTable = ({
               <TableCell className={isMobile ? "px-1" : ""}>
                 <div className={isMobile ? "flex justify-end w-full" : ""}>
                   {course.isPassFail ? (
-                    <div className={`${isMobile ? "w-full text-sm" : "w-[140px]"} h-10 bg-muted flex items-center justify-center rounded-md border border-input`}>
+                    <div className={`${isMobile ? "w-full text-sm" : "w-[140px]"} h-10 bg-muted flex items-center justify-end px-3 rounded-md border border-input ml-auto`}>
                       Pass/Fail
                     </div>
                   ) : (
@@ -83,4 +83,3 @@ export const SemesterTable = ({
     </div>
   );
 };
-
