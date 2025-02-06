@@ -53,27 +53,29 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     // Start with clean semesters
     let newSemesters = createEmptySemesters();
 
-    // Clear all exchange courses first, regardless of the selected option
-    newSemesters.forEach(semester => {
-      semester.courses = semester.courses.filter(course => course.name !== 'Exchange');
-    });
-
     // Handle Exchange courses - only if internship is not selected
     if (!hasInternship) {
       const exchangeCourse = { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true };
 
       if (exchangeOption === 'fall') {
+        // Add exchange courses to fall semesters
         newSemesters[0].courses = [exchangeCourse, exchangeCourse];
         newSemesters[1].courses = [exchangeCourse, exchangeCourse];
         // Explicitly ensure spring semesters are empty
         newSemesters[2].courses = [];
         newSemesters[3].courses = [];
       } else if (exchangeOption === 'spring') {
+        // Add exchange courses to spring semesters
+        newSemesters[2].courses = [exchangeCourse, exchangeCourse];
+        newSemesters[3].courses = [exchangeCourse, exchangeCourse];
         // Explicitly ensure fall semesters are empty
         newSemesters[0].courses = [];
         newSemesters[1].courses = [];
-        newSemesters[2].courses = [exchangeCourse, exchangeCourse];
-        newSemesters[3].courses = [exchangeCourse, exchangeCourse];
+      } else {
+        // If no exchange option is selected, ensure all exchange courses are removed
+        newSemesters.forEach(semester => {
+          semester.courses = semester.courses.filter(course => course.name !== 'Exchange');
+        });
       }
     }
 
@@ -148,4 +150,3 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     </Card>
   );
 };
-
