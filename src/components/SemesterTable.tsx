@@ -45,7 +45,7 @@ export const SemesterTable = ({
           <TableRow>
             <TableHead className="w-[300px]">Course</TableHead>
             <TableHead className="w-[300px]">ECTS</TableHead>
-            <TableHead className="w-[300px] pl-[100px]">Grade</TableHead>
+            <TableHead className="w-[300px] pl-[160px]">Grade</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
