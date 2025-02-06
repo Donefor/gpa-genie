@@ -44,21 +44,17 @@ export const YearSection = ({
   }, [semesters, previousYearCourses, JSON.stringify(semesters)]);
 
   const handleElectiveTypeChange = (type: ElectiveType) => {
-    if (type) {
-      // Remove second specialization if total credits would exceed 15
-      if (secondSpecialization) {
-        onSecondSpecializationChange(null);
-      }
+    if (type && secondSpecialization) {
+      // Remove second specialization if selecting an elective
+      onSecondSpecializationChange(null);
     }
     onElectiveTypeChange(type);
   };
 
   const handleSecondSpecializationChange = (spec: Specialization) => {
-    if (spec) {
-      // Remove elective if total credits would exceed 15
-      if (electiveType) {
-        onElectiveTypeChange(null);
-      }
+    if (spec && electiveType) {
+      // Remove elective if selecting a second specialization
+      onElectiveTypeChange(null);
     }
     onSecondSpecializationChange(spec);
   };
@@ -126,10 +122,7 @@ export const YearSection = ({
                         <SpecializationSelect
                           value={secondSpecialization || null}
                           onChange={handleSecondSpecializationChange}
-                          disabledOptions={[
-                            ...(specialization ? [specialization] : []),
-                            ...(electiveType ? ['ALL' as const] : [])
-                          ]}
+                          disabledOptions={specialization ? [specialization] : []}
                         />
                       </div>
                     </div>
@@ -140,7 +133,7 @@ export const YearSection = ({
                         <ElectiveSelect
                           value={electiveType || null}
                           onChange={handleElectiveTypeChange}
-                          disabled={!!secondSpecialization}
+                          disabled={false}
                         />
                       </div>
                       <div className="flex-1">
@@ -148,7 +141,7 @@ export const YearSection = ({
                         <ElectiveSelect
                           value={electiveType || null}
                           onChange={handleElectiveTypeChange}
-                          disabled={!!secondSpecialization || !!electiveType}
+                          disabled={!!electiveType}
                         />
                       </div>
                     </div>
