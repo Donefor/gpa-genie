@@ -30,46 +30,10 @@ export const SemesterTable = ({
   onSecondSpecializationChange,
   onElectiveTypeChange
 }: SemesterTableProps) => {
-  const showSpecializationSelect = isThirdYear && (semester === 3 || semester === 4);
   const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
 
   return (
     <div className="space-y-4">
-      {showSpecializationSelect && (
-        <div className="space-y-4 mb-4">
-          <div className="flex items-center space-x-4">
-            <span className="min-w-[120px]">Specialization:</span>
-            <SpecializationSelect
-              value={specialization || null}
-              onChange={onSpecializationChange!}
-              disabledOptions={secondSpecialization ? [secondSpecialization] : []}
-            />
-          </div>
-          
-          {totalCredits < 15 && (
-            <>
-              <div className="flex items-center space-x-4">
-                <span className="min-w-[120px]">Second Specialization:</span>
-                <SpecializationSelect
-                  value={secondSpecialization || null}
-                  onChange={onSecondSpecializationChange!}
-                  disabledOptions={specialization ? [specialization] : []}
-                />
-              </div>
-              
-              <div className="flex items-center space-x-4">
-                <span className="min-w-[120px]">Elective:</span>
-                <ElectiveSelect
-                  value={electiveType || null}
-                  onChange={onElectiveTypeChange!}
-                  disabled={totalCredits >= 15}
-                />
-              </div>
-            </>
-          )}
-        </div>
-      )}
-
       <Table className="fade-in">
         <TableHeader>
           <TableRow>

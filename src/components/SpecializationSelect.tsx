@@ -12,7 +12,7 @@ interface SpecializationSelectProps {
   value: Specialization;
   onChange: (value: Specialization) => void;
   disabled?: boolean;
-  disabledOptions?: Specialization[];
+  disabledOptions?: (Specialization | 'ALL')[];
 }
 
 export const SpecializationSelect = ({ value, onChange, disabled, disabledOptions = [] }: SpecializationSelectProps) => {
@@ -24,11 +24,14 @@ export const SpecializationSelect = ({ value, onChange, disabled, disabledOption
     'Management'
   ];
 
+  // If 'ALL' is in disabledOptions, disable all options
+  const isAllDisabled = disabledOptions.includes('ALL');
+
   return (
     <Select 
       value={value || ""} 
       onValueChange={(val) => onChange(val as Specialization)}
-      disabled={disabled}
+      disabled={disabled || isAllDisabled}
     >
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="Select specialization" />
