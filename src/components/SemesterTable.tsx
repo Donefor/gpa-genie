@@ -30,10 +30,13 @@ export const SemesterTable = ({
   onSecondSpecializationChange,
   onElectiveTypeChange
 }: SemesterTableProps) => {
-  const totalCredits = courses.reduce((sum, course) => {
+  const totalCredits = courses?.reduce((sum, course) => {
     if (!course) return sum;
     return sum + course.credits;
-  }, 0);
+  }, 0) || 0;
+
+  // Filter out any undefined or null courses
+  const validCourses = courses?.filter((course): course is Course => course != null) || [];
 
   return (
     <div className="space-y-4">
@@ -46,7 +49,7 @@ export const SemesterTable = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {courses.map((course, index) => (
+          {validCourses.map((course, index) => (
             <TableRow key={course.name}>
               <TableCell className="font-medium">{course.name}</TableCell>
               <TableCell>{course.credits}</TableCell>
