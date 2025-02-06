@@ -49,7 +49,6 @@ export const Year3Controls = ({
               <SelectValue placeholder="Select exchange option" />
             </SelectTrigger>
             <SelectContent className="min-w-[200px]" align="start" position="item-aligned">
-              <SelectItem value="pass/fail">Pass/Fail</SelectItem>
               <SelectItem value="none">No Exchange</SelectItem>
               <SelectItem value="fall">Exchange in Fall</SelectItem>
               <SelectItem value="spring">Exchange in Spring</SelectItem>
@@ -93,3 +92,4 @@ export const Year3Controls = ({
     </div>
   );
 };
+
