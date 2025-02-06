@@ -99,12 +99,10 @@ const Index = () => {
   };
 
   const handleElectiveTypeChange = (type: ElectiveType, semester: number) => {
-    // Clear second specialization if it exists
     if (secondSpecialization) {
       setSecondSpecialization(null);
     }
 
-    // Set the elective state
     if (semester === 3) {
       setElectiveSemester3(type);
     } else {
@@ -115,8 +113,9 @@ const Index = () => {
       const specializationCourses = SPECIALIZATION_COURSES[specialization];
       setYear2Data(prev => {
         const newData = { ...prev };
-        // Only keep primary specialization courses and add elective if selected
+        
         if (semester === 3) {
+          // Only update semester 3, keep semester 4 unchanged
           newData.semesters[2] = {
             courses: [
               specializationCourses[3][0],
@@ -127,7 +126,10 @@ const Index = () => {
               } : null
             ].filter(Boolean) as Course[]
           };
+          // Keep semester 4 as is
+          newData.semesters[3] = prev.semesters[3];
         } else {
+          // Only update semester 4, keep semester 3 unchanged
           newData.semesters[3] = {
             courses: [
               specializationCourses[4][0],
@@ -138,6 +140,8 @@ const Index = () => {
               } : null
             ].filter(Boolean) as Course[]
           };
+          // Keep semester 3 as is
+          newData.semesters[2] = prev.semesters[2];
         }
         return newData;
       });
