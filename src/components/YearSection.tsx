@@ -41,7 +41,7 @@ export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear 
         ))}
         <div className="mt-6 text-right">
           <Badge variant="secondary" className="text-lg px-4 py-1">
-            GPA: {gpa.toFixed(2)}
+            GPA for Year {yearNumber}: {gpa.toFixed(2)}
           </Badge>
         </div>
       </CardContent>
