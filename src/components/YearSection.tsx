@@ -21,6 +21,19 @@ export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear 
     setGpa(calculateGPA(allCourses));
   }, [semesters]);
 
+  const getYearLabel = (year: number) => {
+    switch (year) {
+      case 1:
+        return "First year GPA";
+      case 2:
+        return "Second year GPA";
+      case 3:
+        return "Third year GPA";
+      default:
+        return `Year ${year} GPA`;
+    }
+  };
+
   return (
     <Card className="mb-8 overflow-hidden">
       <CardHeader className="bg-secondary">
@@ -41,7 +54,7 @@ export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear 
         ))}
         <div className="mt-6 text-right">
           <Badge variant="secondary" className="text-lg px-4 py-1">
-            GPA: {gpa.toFixed(2)}
+            {getYearLabel(yearNumber)}: {gpa.toFixed(2)}
           </Badge>
         </div>
       </CardContent>
