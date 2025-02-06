@@ -61,16 +61,10 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         // Add exchange courses to fall semesters
         newSemesters[0].courses = [exchangeCourse, exchangeCourse];
         newSemesters[1].courses = [exchangeCourse, exchangeCourse];
-        // Explicitly ensure spring semesters are empty
-        newSemesters[2].courses = [];
-        newSemesters[3].courses = [];
       } else if (exchangeOption === 'spring') {
         // Add exchange courses to spring semesters
         newSemesters[2].courses = [exchangeCourse, exchangeCourse];
         newSemesters[3].courses = [exchangeCourse, exchangeCourse];
-        // Explicitly ensure fall semesters are empty
-        newSemesters[0].courses = [];
-        newSemesters[1].courses = [];
       } else {
         // If no exchange option is selected, ensure all exchange courses are removed
         newSemesters.forEach(semester => {
@@ -150,3 +144,4 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     </Card>
   );
 };
+
