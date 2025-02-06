@@ -101,6 +101,27 @@ const Index = () => {
   const handleElectiveTypeChange = (type: ElectiveType, semester: number) => {
     if (secondSpecialization) {
       setSecondSpecialization(null);
+      // When an elective is selected and spec2 exists, remove spec2 courses from both semesters
+      setYear2Data(prev => {
+        const newData = { ...prev };
+        if (specialization) {
+          const specializationCourses = SPECIALIZATION_COURSES[specialization];
+          // Reset both semesters to only contain spec1 courses
+          newData.semesters[2] = {
+            courses: [specializationCourses[3][0]].map(course => ({
+              ...course,
+              grade: 'Not finished' as Grade
+            }))
+          };
+          newData.semesters[3] = {
+            courses: [specializationCourses[4][0]].map(course => ({
+              ...course,
+              grade: 'Not finished' as Grade
+            }))
+          };
+        }
+        return newData;
+      });
     }
 
     if (semester === 3) {
