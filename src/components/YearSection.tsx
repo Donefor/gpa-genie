@@ -56,8 +56,8 @@ export const YearSection = ({ yearNumber, semesters, onGradeChange, isThirdYear,
             />
           </div>
         ))}
-        <div className="mt-6 text-left">
-          <Badge variant="secondary" className="text-lg px-4 py-1">
+        <div className="mt-6 w-full bg-secondary p-4">
+          <Badge variant="secondary" className="text-lg px-4 py-1 w-full justify-center">
             {getYearLabel(yearNumber)}: {gpa.toFixed(2)}
           </Badge>
         </div>
