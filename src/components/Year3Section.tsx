@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -168,14 +167,12 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
         {/* Fall Semester Section */}
         {!hasInternship && exchangeOption === 'none' && (
-          <>
+          <div className="space-y-8">
             {/* Semester 1 */}
-            <div className="mb-8">
-              <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
-                Semester 1
-              </h3>
-              <Card className={`${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4 mb-4`}>
-                <div className={`space-y-4`}>
+            <div>
+              <h3 className="text-lg font-medium mb-4 px-4">Semester 1</h3>
+              <Card className={`mx-4 bg-muted shadow-sm p-4 mb-4`}>
+                <div className="space-y-4">
                   <div>
                     <span className="block text-sm font-medium mb-2">Elective 1</span>
                     <ElectiveSelect
@@ -209,12 +206,10 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
             </div>
 
             {/* Semester 2 */}
-            <div className="mb-8">
-              <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
-                Semester 2
-              </h3>
-              <Card className={`${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4 mb-4`}>
-                <div className={`space-y-4`}>
+            <div>
+              <h3 className="text-lg font-medium mb-4 px-4">Semester 2</h3>
+              <Card className={`mx-4 bg-muted shadow-sm p-4 mb-4`}>
+                <div className="space-y-4">
                   <div>
                     <span className="block text-sm font-medium mb-2">Elective 1</span>
                     <ElectiveSelect
@@ -246,16 +241,16 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
                 semester={2}
               />
             </div>
-          </>
+          </div>
         )}
 
         {/* Spring Semester Section with Specializations */}
         {!hasInternship && exchangeOption !== 'spring' && (
-          <>
+          <div className="space-y-8 mt-8">
             {/* Specializations Selection */}
-            <Card className={`mb-8 ${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4`}>
+            <Card className={`mx-4 bg-muted shadow-sm p-4`}>
               <h3 className="text-lg font-medium mb-4">Specializations</h3>
-              <div className={`space-y-6`}>
+              <div className="space-y-6">
                 <div>
                   <span className="block text-sm font-medium mb-2">First Specialization</span>
                   <SpecializationSelect
@@ -277,10 +272,8 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
             </Card>
 
             {/* Semester 3 */}
-            <div className="mb-8">
-              <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
-                Semester 3
-              </h3>
+            <div>
+              <h3 className="text-lg font-medium mb-4 px-4">Semester 3</h3>
               <SemesterTable
                 courses={semesters[2].courses}
                 onGradeChange={(courseIndex, grade) => handleGradeChange(2, courseIndex, grade)}
@@ -290,10 +283,8 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
             </div>
 
             {/* Semester 4 */}
-            <div className="mb-8">
-              <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
-                Semester 4
-              </h3>
+            <div>
+              <h3 className="text-lg font-medium mb-4 px-4">Semester 4</h3>
               <SemesterTable
                 courses={semesters[3].courses}
                 onGradeChange={(courseIndex, grade) => handleGradeChange(3, courseIndex, grade)}
@@ -301,10 +292,10 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
                 semester={4}
               />
             </div>
-          </>
+          </div>
         )}
 
-        <div className={`mt-6 w-full bg-muted ${isMobile ? 'p-2' : 'p-4'} rounded-lg shadow-sm`}>
+        <div className="mt-6 w-full bg-muted p-4 rounded-lg shadow-sm">
           <Badge variant="secondary" className="text-lg px-4 py-1">
             Third year GPA: {gpa.toFixed(2)}
           </Badge>
