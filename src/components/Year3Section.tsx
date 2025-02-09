@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -152,10 +153,10 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
   return (
     <Card className="mb-8">
-      <CardHeader className={`bg-secondary ${isMobile ? 'px-2' : ''}`}>
+      <CardHeader className="bg-secondary">
         <CardTitle className="text-2xl font-semibold">Third year</CardTitle>
       </CardHeader>
-      <CardContent className={`pt-6 ${isMobile ? 'px-1' : ''}`}>
+      <CardContent className="pt-6">
         <Year3Controls
           exchangeOption={exchangeOption}
           hasInternship={hasInternship}
@@ -165,133 +166,191 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
           onThesisChange={setThesisOption}
         />
 
-        {/* Fall Semester Section */}
+        {/* Fall Semester Electives Menu */}
         {!hasInternship && exchangeOption === 'none' && (
           <div className="space-y-8">
-            {/* Semester 1 */}
-            <div>
-              <h3 className="text-lg font-medium mb-4 px-4">Semester 1</h3>
-              <Card className={`mx-4 bg-muted shadow-sm p-4 mb-4`}>
+            <Card className="mx-4 bg-[#F2FCE2] shadow-lg p-6 mb-8 hover:shadow-xl transition-shadow duration-200">
+              <h3 className="text-xl font-semibold mb-6 text-[#1A1F2C]">Fall Semester Electives</h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Semester 1 Electives */}
                 <div className="space-y-4">
-                  <div>
-                    <span className="block text-sm font-medium mb-2">Elective 1</span>
-                    <ElectiveSelect
-                      value={semester1Electives[0]}
-                      onChange={(type) => {
-                        const newElectives = [...semester1Electives];
-                        newElectives[0] = type;
-                        setSemester1Electives(newElectives);
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <span className="block text-sm font-medium mb-2">Elective 2</span>
-                    <ElectiveSelect
-                      value={semester1Electives[1]}
-                      onChange={(type) => {
-                        const newElectives = [...semester1Electives];
-                        newElectives[1] = type;
-                        setSemester1Electives(newElectives);
-                      }}
-                    />
+                  <h4 className="text-lg font-medium text-[#403E43]">Semester 1</h4>
+                  <div className="space-y-4">
+                    <div>
+                      <span className="block text-sm font-medium mb-2">Elective 1</span>
+                      <ElectiveSelect
+                        value={semester1Electives[0]}
+                        onChange={(type) => {
+                          const newElectives = [...semester1Electives];
+                          newElectives[0] = type;
+                          setSemester1Electives(newElectives);
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <span className="block text-sm font-medium mb-2">Elective 2</span>
+                      <ElectiveSelect
+                        value={semester1Electives[1]}
+                        onChange={(type) => {
+                          const newElectives = [...semester1Electives];
+                          newElectives[1] = type;
+                          setSemester1Electives(newElectives);
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
-              </Card>
-              <SemesterTable
-                courses={semesters[0].courses}
-                onGradeChange={(courseIndex, grade) => handleGradeChange(0, courseIndex, grade)}
-                isThirdYear={true}
-                semester={1}
-              />
-            </div>
 
-            {/* Semester 2 */}
-            <div>
-              <h3 className="text-lg font-medium mb-4 px-4">Semester 2</h3>
-              <Card className={`mx-4 bg-muted shadow-sm p-4 mb-4`}>
+                {/* Semester 2 Electives */}
                 <div className="space-y-4">
-                  <div>
-                    <span className="block text-sm font-medium mb-2">Elective 1</span>
-                    <ElectiveSelect
-                      value={semester2Electives[0]}
-                      onChange={(type) => {
-                        const newElectives = [...semester2Electives];
-                        newElectives[0] = type;
-                        setSemester2Electives(newElectives);
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <span className="block text-sm font-medium mb-2">Elective 2</span>
-                    <ElectiveSelect
-                      value={semester2Electives[1]}
-                      onChange={(type) => {
-                        const newElectives = [...semester2Electives];
-                        newElectives[1] = type;
-                        setSemester2Electives(newElectives);
-                      }}
-                    />
+                  <h4 className="text-lg font-medium text-[#403E43]">Semester 2</h4>
+                  <div className="space-y-4">
+                    <div>
+                      <span className="block text-sm font-medium mb-2">Elective 1</span>
+                      <ElectiveSelect
+                        value={semester2Electives[0]}
+                        onChange={(type) => {
+                          const newElectives = [...semester2Electives];
+                          newElectives[0] = type;
+                          setSemester2Electives(newElectives);
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <span className="block text-sm font-medium mb-2">Elective 2</span>
+                      <ElectiveSelect
+                        value={semester2Electives[1]}
+                        onChange={(type) => {
+                          const newElectives = [...semester2Electives];
+                          newElectives[1] = type;
+                          setSemester2Electives(newElectives);
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
-              </Card>
-              <SemesterTable
-                courses={semesters[1].courses}
-                onGradeChange={(courseIndex, grade) => handleGradeChange(1, courseIndex, grade)}
-                isThirdYear={true}
-                semester={2}
-              />
-            </div>
+              </div>
+            </Card>
+
+            {/* Semester Tables */}
+            <SemesterTable
+              courses={semesters[0].courses}
+              onGradeChange={(courseIndex, grade) => handleGradeChange(0, courseIndex, grade)}
+              isThirdYear={true}
+              semester={1}
+            />
+            <SemesterTable
+              courses={semesters[1].courses}
+              onGradeChange={(courseIndex, grade) => handleGradeChange(1, courseIndex, grade)}
+              isThirdYear={true}
+              semester={2}
+            />
           </div>
         )}
 
         {/* Spring Semester Section with Specializations */}
         {!hasInternship && exchangeOption !== 'spring' && (
           <div className="space-y-8 mt-8">
-            {/* Specializations Selection */}
-            <Card className={`mx-4 bg-muted shadow-sm p-4`}>
-              <h3 className="text-lg font-medium mb-4">Specializations</h3>
-              <div className="space-y-6">
-                <div>
-                  <span className="block text-sm font-medium mb-2">First Specialization</span>
-                  <SpecializationSelect
-                    value={specialization1}
-                    onChange={setSpecialization1}
-                    disabledOptions={specialization2 ? [specialization2] : []}
-                  />
+            <Card className="mx-4 bg-gradient-to-r from-[#D3E4FD] to-[#E5DEFF] shadow-lg p-6 hover:shadow-xl transition-shadow duration-200">
+              <h3 className="text-xl font-semibold mb-6 text-[#1A1F2C]">Spring Semester Configuration</h3>
+              <div className="grid md:grid-cols-3 gap-8">
+                {/* Specializations */}
+                <div className="space-y-4">
+                  <h4 className="text-lg font-medium text-[#403E43]">Specializations</h4>
+                  <div className="space-y-4">
+                    <div>
+                      <span className="block text-sm font-medium mb-2">First Specialization</span>
+                      <SpecializationSelect
+                        value={specialization1}
+                        onChange={setSpecialization1}
+                        disabledOptions={specialization2 ? [specialization2] : []}
+                      />
+                    </div>
+                    <div>
+                      <span className="block text-sm font-medium mb-2">Second Specialization</span>
+                      <SpecializationSelect
+                        value={specialization2}
+                        onChange={setSpecialization2}
+                        disabled={!specialization1}
+                        disabledOptions={specialization1 ? [specialization1] : []}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <span className="block text-sm font-medium mb-2">Second Specialization</span>
-                  <SpecializationSelect
-                    value={specialization2}
-                    onChange={setSpecialization2}
-                    disabled={!specialization1}
-                    disabledOptions={specialization1 ? [specialization1] : []}
-                  />
+
+                {/* Semester 3 Electives */}
+                <div className="space-y-4">
+                  <h4 className="text-lg font-medium text-[#403E43]">Semester 3 Electives</h4>
+                  <div className="space-y-4">
+                    <div>
+                      <span className="block text-sm font-medium mb-2">Elective 1</span>
+                      <ElectiveSelect
+                        value={semester1Electives[0]}
+                        onChange={(type) => {
+                          const newElectives = [...semester1Electives];
+                          newElectives[0] = type;
+                          setSemester1Electives(newElectives);
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <span className="block text-sm font-medium mb-2">Elective 2</span>
+                      <ElectiveSelect
+                        value={semester1Electives[1]}
+                        onChange={(type) => {
+                          const newElectives = [...semester1Electives];
+                          newElectives[1] = type;
+                          setSemester1Electives(newElectives);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Semester 4 Electives */}
+                <div className="space-y-4">
+                  <h4 className="text-lg font-medium text-[#403E43]">Semester 4 Electives</h4>
+                  <div className="space-y-4">
+                    <div>
+                      <span className="block text-sm font-medium mb-2">Elective 1</span>
+                      <ElectiveSelect
+                        value={semester2Electives[0]}
+                        onChange={(type) => {
+                          const newElectives = [...semester2Electives];
+                          newElectives[0] = type;
+                          setSemester2Electives(newElectives);
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <span className="block text-sm font-medium mb-2">Elective 2</span>
+                      <ElectiveSelect
+                        value={semester2Electives[1]}
+                        onChange={(type) => {
+                          const newElectives = [...semester2Electives];
+                          newElectives[1] = type;
+                          setSemester2Electives(newElectives);
+                        }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </Card>
 
-            {/* Semester 3 */}
-            <div>
-              <h3 className="text-lg font-medium mb-4 px-4">Semester 3</h3>
-              <SemesterTable
-                courses={semesters[2].courses}
-                onGradeChange={(courseIndex, grade) => handleGradeChange(2, courseIndex, grade)}
-                isThirdYear={true}
-                semester={3}
-              />
-            </div>
-
-            {/* Semester 4 */}
-            <div>
-              <h3 className="text-lg font-medium mb-4 px-4">Semester 4</h3>
-              <SemesterTable
-                courses={semesters[3].courses}
-                onGradeChange={(courseIndex, grade) => handleGradeChange(3, courseIndex, grade)}
-                isThirdYear={true}
-                semester={4}
-              />
-            </div>
+            {/* Semester Tables */}
+            <SemesterTable
+              courses={semesters[2].courses}
+              onGradeChange={(courseIndex, grade) => handleGradeChange(2, courseIndex, grade)}
+              isThirdYear={true}
+              semester={3}
+            />
+            <SemesterTable
+              courses={semesters[3].courses}
+              onGradeChange={(courseIndex, grade) => handleGradeChange(3, courseIndex, grade)}
+              isThirdYear={true}
+              semester={4}
+            />
           </div>
         )}
 
