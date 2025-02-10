@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -152,15 +153,15 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
   return (
     <Card className="mb-8">
-      <CardHeader className="bg-gradient-to-r from-[#E5DEFF] to-[#D3E4FD]">
+      <CardHeader className="bg-[#F1F0FB]">
         <CardTitle className="text-2xl font-semibold flex items-center gap-2">
           <div className="h-8 w-2 bg-primary rounded-full" />
-          Third Year
+          Third year
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-6">
-        <Card className="mb-6 bg-secondary/50">
-          <CardContent>
+        <Card className="mb-6 bg-secondary/30 w-full">
+          <CardContent className="p-6">
             <Year3Controls
               exchangeOption={exchangeOption}
               hasInternship={hasInternship}
@@ -175,7 +176,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         {/* Fall Semester Electives Menu */}
         {!hasInternship && exchangeOption === 'none' && (
           <div className="space-y-8">
-            <Card className="mx-4 bg-gradient-to-r from-[#D3E4FD] to-[#E5DEFF] shadow-lg p-6 mb-8">
+            <Card className="mx-0 bg-gradient-to-r from-[#D3E4FD]/70 to-[#E5DEFF]/70 shadow-lg p-6 mb-8">
               <h3 className="text-xl font-semibold mb-6 text-[#1A1F2C]">Fall Semester</h3>
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Semester 1 & 2 Electives */}
@@ -256,7 +257,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         {/* Spring Semester Section with Specializations */}
         {!hasInternship && exchangeOption !== 'spring' && (
           <div className="space-y-8 mt-8">
-            <Card className="mx-4 bg-gradient-to-r from-[#D3E4FD] to-[#E5DEFF] shadow-lg p-6">
+            <Card className="mx-0 bg-gradient-to-r from-[#D3E4FD]/70 to-[#E5DEFF]/70 shadow-lg p-6">
               <h3 className="text-xl font-semibold mb-6 text-[#1A1F2C]">Spring Semester</h3>
               <div className="grid md:grid-cols-3 gap-8">
                 {/* Specializations */}
@@ -359,9 +360,9 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
           </div>
         )}
 
-        <div className="mt-6 w-full bg-gradient-to-r from-[#E5DEFF] to-[#D3E4FD] p-4 rounded-lg shadow-sm">
+        <div className="mt-6 w-full bg-[#F1F0FB] p-4 rounded-lg shadow-sm">
           <Badge variant="secondary" className="text-lg px-4 py-1">
-            Third Year GPA: {gpa.toFixed(2)}
+            Third year GPA: {gpa.toFixed(2)}
           </Badge>
         </div>
       </CardContent>
