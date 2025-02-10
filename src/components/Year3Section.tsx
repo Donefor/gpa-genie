@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -154,8 +153,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
   return (
     <Card className="mb-8">
       <CardHeader className="bg-[#F1F0FB]">
-        <CardTitle className="text-2xl font-semibold flex items-center gap-2">
-          <div className="h-8 w-2 bg-primary rounded-full" />
+        <CardTitle className="text-2xl font-semibold">
           Third year
         </CardTitle>
       </CardHeader>
@@ -360,7 +358,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
           </div>
         )}
 
-        <div className="mt-6 w-full bg-[#F1F0FB] p-4 rounded-lg shadow-sm">
+        <div className="mt-6 w-full bg-white p-4 rounded-lg shadow-sm">
           <Badge variant="secondary" className="text-lg px-4 py-1">
             Third year GPA: {gpa.toFixed(2)}
           </Badge>
