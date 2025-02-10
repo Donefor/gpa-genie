@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -153,15 +152,15 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
   return (
     <Card className="mb-8">
-      <CardHeader className="bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/5 dark:to-primary/2">
+      <CardHeader className="bg-gradient-to-r from-[#E5DEFF] to-[#D3E4FD]">
         <CardTitle className="text-2xl font-semibold flex items-center gap-2">
           <div className="h-8 w-2 bg-primary rounded-full" />
-          Third year
+          Third Year
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-6">
-        <Card className="mb-6 bg-secondary/50 shadow-md hover:shadow-lg transition-shadow">
-          <CardContent className="p-4">
+        <Card className="mb-6 bg-secondary/50">
+          <CardContent>
             <Year3Controls
               exchangeOption={exchangeOption}
               hasInternship={hasInternship}
@@ -173,15 +172,15 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
           </CardContent>
         </Card>
 
-        {/* Fall Term Electives Menu */}
+        {/* Fall Semester Electives Menu */}
         {!hasInternship && exchangeOption === 'none' && (
           <div className="space-y-8">
-            <Card className="mx-4 bg-[#F2FCE2] shadow-lg p-6 mb-8 hover:shadow-xl transition-shadow">
-              <h3 className="text-xl font-semibold mb-6 text-[#1A1F2C]">Fall Term Electives</h3>
+            <Card className="mx-4 bg-gradient-to-r from-[#D3E4FD] to-[#E5DEFF] shadow-lg p-6 mb-8">
+              <h3 className="text-xl font-semibold mb-6 text-[#1A1F2C]">Fall Semester</h3>
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Semester 1 & 2 Electives */}
                 <div className="space-y-4">
-                  <h4 className="text-lg font-medium text-[#403E43]">Term 1</h4>
+                  <h4 className="text-lg font-medium text-[#403E43]">Semester 1</h4>
                   <div className="space-y-4">
                     <div>
                       <span className="block text-sm font-medium mb-2">Elective 1</span>
@@ -209,7 +208,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
                 </div>
 
                 <div className="space-y-4">
-                  <h4 className="text-lg font-medium text-[#403E43]">Term 2</h4>
+                  <h4 className="text-lg font-medium text-[#403E43]">Semester 2</h4>
                   <div className="space-y-4">
                     <div>
                       <span className="block text-sm font-medium mb-2">Elective 1</span>
@@ -254,11 +253,11 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
           </div>
         )}
 
-        {/* Spring Term Section with Specializations */}
+        {/* Spring Semester Section with Specializations */}
         {!hasInternship && exchangeOption !== 'spring' && (
           <div className="space-y-8 mt-8">
-            <Card className="mx-4 bg-gradient-to-r from-[#D3E4FD] to-[#E5DEFF] shadow-lg p-6 hover:shadow-xl transition-shadow">
-              <h3 className="text-xl font-semibold mb-6 text-[#1A1F2C]">Spring Term Configuration</h3>
+            <Card className="mx-4 bg-gradient-to-r from-[#D3E4FD] to-[#E5DEFF] shadow-lg p-6">
+              <h3 className="text-xl font-semibold mb-6 text-[#1A1F2C]">Spring Semester</h3>
               <div className="grid md:grid-cols-3 gap-8">
                 {/* Specializations */}
                 <div className="space-y-4">
@@ -362,11 +361,10 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
         <div className="mt-6 w-full bg-gradient-to-r from-[#E5DEFF] to-[#D3E4FD] p-4 rounded-lg shadow-sm">
           <Badge variant="secondary" className="text-lg px-4 py-1">
-            Third year GPA: {gpa.toFixed(2)}
+            Third Year GPA: {gpa.toFixed(2)}
           </Badge>
         </div>
       </CardContent>
     </Card>
   );
 };
-
