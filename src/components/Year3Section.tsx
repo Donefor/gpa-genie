@@ -25,6 +25,8 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
   // State for electives and specializations
   const [semester1Electives, setSemester1Electives] = useState<ElectiveType[]>([null, null]);
   const [semester2Electives, setSemester2Electives] = useState<ElectiveType[]>([null, null]);
+  const [semester3Electives, setSemester3Electives] = useState<ElectiveType[]>([null, null]);
+  const [semester4Electives, setSemester4Electives] = useState<ElectiveType[]>([null, null]);
   const [specialization1, setSpecialization1] = useState<Specialization>(null);
   const [specialization2, setSpecialization2] = useState<Specialization>(null);
 
@@ -60,7 +62,14 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       return setSemesters(newSemesters);
     }
 
-    // Handle Exchange courses - overrides everything in the semester
+    // Clear any existing exchange or thesis courses first
+    newSemesters = newSemesters.map(semester => ({
+      courses: semester.courses.filter(course => 
+        !['Exchange', 'Thesis'].includes(course?.name || '')
+      )
+    }));
+
+    // Handle Exchange courses
     if (exchangeOption === 'fall') {
       const exchangeCourse = { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true };
       newSemesters[0].courses = [exchangeCourse, exchangeCourse];
@@ -71,21 +80,30 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       newSemesters[3].courses = [exchangeCourse, exchangeCourse];
     }
 
-    // Handle Thesis - takes priority over electives
+    // Handle Thesis
     if (thesisOption === 'fall') {
       const thesisCourse = { name: 'Thesis', credits: 7.5, grade: 'Not finished' };
-      newSemesters[0].courses = newSemesters[0].courses.length < 2 ? [...newSemesters[0].courses, thesisCourse] : newSemesters[0].courses;
-      newSemesters[1].courses = newSemesters[1].courses.length < 2 ? [...newSemesters[1].courses, thesisCourse] : newSemesters[1].courses;
+      newSemesters[0].courses = [...(newSemesters[0].courses || []), thesisCourse];
+      newSemesters[1].courses = [...(newSemesters[1].courses || []), thesisCourse];
     } else if (thesisOption === 'spring') {
       const thesisCourse = { name: 'Thesis', credits: 7.5, grade: 'Not finished' };
-      newSemesters[2].courses = newSemesters[2].courses.length < 2 ? [...newSemesters[2].courses, thesisCourse] : newSemesters[2].courses;
-      newSemesters[3].courses = newSemesters[3].courses.length < 2 ? [...newSemesters[3].courses, thesisCourse] : newSemesters[3].courses;
+      newSemesters[2].courses = [...(newSemesters[2].courses || []), thesisCourse];
+      newSemesters[3].courses = [...(newSemesters[3].courses || []), thesisCourse];
     }
 
-    // Add electives for fall semester if space available
-    if (exchangeOption !== 'fall' && !hasInternship) {
-      [semester1Electives, semester2Electives].forEach((semesterElectives, semesterIndex) => {
-        semesterElectives.forEach((type, index) => {
+    // Add electives for all semesters if space available
+    [
+      [semester1Electives, 0],
+      [semester2Electives, 1],
+      [semester3Electives, 2],
+      [semester4Electives, 3]
+    ].forEach(([semesterElectives, semesterIndex]) => {
+      const isExchangeSemester = 
+        (exchangeOption === 'fall' && semesterIndex < 2) || 
+        (exchangeOption === 'spring' && semesterIndex > 1);
+
+      if (!isExchangeSemester && !hasInternship) {
+        (semesterElectives as ElectiveType[]).forEach((type, index) => {
           if (type && newSemesters[semesterIndex].courses.length < 2) {
             newSemesters[semesterIndex].courses.push({
               name: `Elective ${index + 1}`,
@@ -95,10 +113,10 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
             });
           }
         });
-      });
-    }
+      }
+    });
 
-    // Add specialization courses if no exchange in spring
+    // Add specialization courses for spring semester if no exchange
     if (!hasInternship && exchangeOption !== 'spring') {
       if (specialization1) {
         const spec1Course = {
@@ -128,6 +146,8 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     thesisOption,
     semester1Electives,
     semester2Electives,
+    semester3Electives,
+    semester4Electives,
     specialization1,
     specialization2
   ]);
@@ -241,58 +261,71 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
           />
         </div>
 
-        {/* Spring Semester Section with Specializations */}
+        {/* Spring Semester Section with Electives and Specializations */}
         <div className="space-y-8 mt-8">
           <Card className="mx-0 bg-gradient-to-r from-[#D3E4FD]/30 to-[#E5DEFF]/30 shadow-lg p-6">
             <h3 className="text-xl font-semibold mb-6 text-[#1A1F2C]">Spring Semester</h3>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-3 gap-8">
               <div className="space-y-4">
-                <h4 className="text-lg font-medium text-[#403E43]">Specializations</h4>
+                <h4 className="text-lg font-medium text-[#403E43]">Semester 3</h4>
                 <div className="space-y-4">
                   <div>
-                    <span className="block text-sm font-medium mb-2">First Specialization</span>
-                    <SpecializationSelect
-                      value={specialization1}
-                      onChange={setSpecialization1}
-                      disabledOptions={specialization2 ? [specialization2] : []}
-                      disabled={exchangeOption === 'spring'}
+                    <span className="block text-sm font-medium mb-2">Elective 1</span>
+                    <ElectiveSelect
+                      value={semester3Electives[0]}
+                      onChange={(type) => {
+                        const newElectives = [...semester3Electives];
+                        newElectives[0] = type;
+                        setSemester3Electives(newElectives);
+                      }}
+                      disabled={exchangeOption === 'spring' || hasInternship}
                     />
                   </div>
                   <div>
-                    <span className="block text-sm font-medium mb-2">Second Specialization</span>
-                    <SpecializationSelect
-                      value={specialization2}
-                      onChange={setSpecialization2}
-                      disabled={!specialization1 || exchangeOption === 'spring'}
-                      disabledOptions={specialization1 ? [specialization1] : []}
+                    <span className="block text-sm font-medium mb-2">Elective 2</span>
+                    <ElectiveSelect
+                      value={semester3Electives[1]}
+                      onChange={(type) => {
+                        const newElectives = [...semester3Electives];
+                        newElectives[1] = type;
+                        setSemester3Electives(newElectives);
+                      }}
+                      disabled={exchangeOption === 'spring' || hasInternship}
                     />
                   </div>
                 </div>
               </div>
-            </div>
-          </Card>
 
-          <SemesterTable
-            courses={semesters[2].courses}
-            onGradeChange={(courseIndex, grade) => handleGradeChange(2, courseIndex, grade)}
-            isThirdYear={true}
-            semester={3}
-          />
-          <SemesterTable
-            courses={semesters[3].courses}
-            onGradeChange={(courseIndex, grade) => handleGradeChange(3, courseIndex, grade)}
-            isThirdYear={true}
-            semester={4}
-          />
-        </div>
+              <div className="space-y-4">
+                <h4 className="text-lg font-medium text-[#403E43]">Semester 4</h4>
+                <div className="space-y-4">
+                  <div>
+                    <span className="block text-sm font-medium mb-2">Elective 1</span>
+                    <ElectiveSelect
+                      value={semester4Electives[0]}
+                      onChange={(type) => {
+                        const newElectives = [...semester4Electives];
+                        newElectives[0] = type;
+                        setSemester4Electives(newElectives);
+                      }}
+                      disabled={exchangeOption === 'spring' || hasInternship}
+                    />
+                  </div>
+                  <div>
+                    <span className="block text-sm font-medium mb-2">Elective 2</span>
+                    <ElectiveSelect
+                      value={semester4Electives[1]}
+                      onChange={(type) => {
+                        const newElectives = [...semester4Electives];
+                        newElectives[1] = type;
+                        setSemester4Electives(newElectives);
+                      }}
+                      disabled={exchangeOption === 'spring' || hasInternship}
+                    />
+                  </div>
+                </div>
+              </div>
 
-        <div className="mt-6 w-full bg-gradient-to-r from-[#D3E4FD]/50 to-[#E5DEFF]/50 p-4 rounded-lg shadow-sm">
-          <Badge variant="secondary" className="text-lg px-4 py-1">
-            Third year GPA: {gpa.toFixed(2)}
-          </Badge>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
-
+              <div className="space-y-4">
+                <h4 className="text-lg font-medium text-[#403E43]">Specializations</h4>
+                <div className="space
