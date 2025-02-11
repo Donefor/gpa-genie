@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -50,6 +51,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
   // Update semesters when options change
   useEffect(() => {
+    // Start with a clean slate - initialize empty semesters
     let newSemesters = Array(4).fill(null).map(() => ({ courses: [] }));
 
     // Handle Internship - overrides everything
@@ -61,7 +63,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       return;
     }
 
-    // Add Exchange courses first (they take priority)
+    // Handle Exchange courses based on selected option
     if (exchangeOption === 'fall') {
       const exchangeCourse = { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true };
       newSemesters[0].courses = [exchangeCourse, exchangeCourse];
@@ -72,7 +74,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       newSemesters[3].courses = [exchangeCourse, exchangeCourse];
     }
 
-    // Handle Thesis
+    // Handle Thesis only if there's no exchange in the same semester
     if (thesisOption === 'fall' && exchangeOption !== 'fall') {
       const thesisCourse = { name: 'Thesis', credits: 7.5, grade: 'Not finished' };
       newSemesters[0].courses = [...(newSemesters[0].courses || []), thesisCourse];
@@ -83,7 +85,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       newSemesters[3].courses = [...(newSemesters[3].courses || []), thesisCourse];
     }
 
-    // Add electives for all semesters if space available
+    // Add electives for semesters that don't have exchange courses
     const electivesBySemester = [
       { electives: semester1Electives, index: 0 },
       { electives: semester2Electives, index: 1 },
