@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { SemesterTable } from './SemesterTable';
 import { Year3Controls } from './Year3Controls';
 import { calculateGPA } from '@/utils/calculations';
@@ -328,4 +327,42 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
               <div className="space-y-4">
                 <h4 className="text-lg font-medium text-[#403E43]">Specializations</h4>
-                <div className="space
+                <div className="space-y-4">
+                  <div>
+                    <span className="block text-sm font-medium mb-2">Specialization 1</span>
+                    <SpecializationSelect
+                      value={specialization1}
+                      onChange={setSpecialization1}
+                      disabled={exchangeOption === 'spring' || hasInternship}
+                    />
+                  </div>
+                  <div>
+                    <span className="block text-sm font-medium mb-2">Specialization 2</span>
+                    <SpecializationSelect
+                      value={specialization2}
+                      onChange={setSpecialization2}
+                      disabled={exchangeOption === 'spring' || hasInternship}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <SemesterTable
+            courses={semesters[2].courses}
+            onGradeChange={(courseIndex, grade) => handleGradeChange(2, courseIndex, grade)}
+            isThirdYear={true}
+            semester={3}
+          />
+          <SemesterTable
+            courses={semesters[3].courses}
+            onGradeChange={(courseIndex, grade) => handleGradeChange(3, courseIndex, grade)}
+            isThirdYear={true}
+            semester={4}
+          />
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
