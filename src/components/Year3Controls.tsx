@@ -27,11 +27,25 @@ export const Year3Controls = ({
       onThesisChange('none');
     } else {
       onExchangeChange(value);
+      // When exchange is selected, automatically set thesis to the opposite semester
       if (value === 'fall') {
         onThesisChange('spring');
       } else if (value === 'spring') {
         onThesisChange('fall');
       }
+      // Disable internship when exchange is selected
+      if (hasInternship) {
+        onInternshipChange(false);
+      }
+    }
+  };
+
+  const handleInternshipChange = (value: boolean) => {
+    onInternshipChange(value);
+    if (value) {
+      // Disable exchange and thesis when internship is selected
+      onExchangeChange('none');
+      onThesisChange('none');
     }
   };
 
@@ -50,7 +64,7 @@ export const Year3Controls = ({
 
       <Select 
         value={hasInternship ? 'true' : 'false'} 
-        onValueChange={(value) => onInternshipChange(value === 'true')}
+        onValueChange={(value) => handleInternshipChange(value === 'true')}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Internship Program" />
@@ -78,3 +92,4 @@ export const Year3Controls = ({
     </div>
   );
 };
+
