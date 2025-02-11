@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -51,85 +52,84 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
   // Update semesters when options change
   useEffect(() => {
-    const createEmptySemesters = () => Array(4).fill(null).map(() => ({ courses: [] }));
-    let newSemesters = createEmptySemesters();
+    let newSemesters = Array(4).fill(null).map(() => ({ courses: [] }));
 
-    // Handle Exchange courses - only if internship is not selected
-    if (!hasInternship) {
+    // Handle Exchange courses - overrides everything in the semester
+    if (exchangeOption === 'fall') {
       const exchangeCourse = { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true };
+      newSemesters[0].courses = [exchangeCourse, exchangeCourse];
+      newSemesters[1].courses = [exchangeCourse, exchangeCourse];
+    } else if (exchangeOption === 'spring') {
+      const exchangeCourse = { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true };
+      newSemesters[2].courses = [exchangeCourse, exchangeCourse];
+      newSemesters[3].courses = [exchangeCourse, exchangeCourse];
+    }
 
-      if (exchangeOption === 'fall') {
-        newSemesters[0].courses = [exchangeCourse, exchangeCourse];
-        newSemesters[1].courses = [exchangeCourse, exchangeCourse];
-      } else if (exchangeOption === 'spring') {
-        newSemesters[2].courses = [exchangeCourse, exchangeCourse];
-        newSemesters[3].courses = [exchangeCourse, exchangeCourse];
+    // Handle Internship - overrides everything
+    if (hasInternship) {
+      newSemesters = Array(4).fill(null).map(() => ({ courses: [] }));
+      const internshipCourse = { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true };
+      newSemesters[0].courses = [internshipCourse, internshipCourse];
+      newSemesters[1].courses = [internshipCourse, internshipCourse];
+      return setSemesters(newSemesters);
+    }
+
+    // Handle Thesis - takes priority over electives
+    if (thesisOption === 'fall') {
+      const thesisCourse = { name: 'Thesis', credits: 7.5, grade: 'Not finished' };
+      if (newSemesters[0].courses.length < 2) {
+        newSemesters[0].courses.push(thesisCourse);
+      }
+      if (newSemesters[1].courses.length < 2) {
+        newSemesters[1].courses.push(thesisCourse);
+      }
+    } else if (thesisOption === 'spring') {
+      const thesisCourse = { name: 'Thesis', credits: 7.5, grade: 'Not finished' };
+      if (newSemesters[2].courses.length < 2) {
+        newSemesters[2].courses.push(thesisCourse);
+      }
+      if (newSemesters[3].courses.length < 2) {
+        newSemesters[3].courses.push(thesisCourse);
       }
     }
 
-    // Handle Internship
-    if (hasInternship) {
-      newSemesters = createEmptySemesters();
-      const internshipCourse = { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true };
-      newSemesters[0].courses = [internshipCourse];
-      newSemesters[1].courses = [internshipCourse];
-    }
-
-    // Add electives for semesters 1 and 2 if no exchange/internship
+    // Add electives if space available (less than 15 ECTS)
     if (!hasInternship && exchangeOption === 'none') {
-      semester1Electives.forEach((type, index) => {
-        if (type) {
-          newSemesters[0].courses.push({
-            name: `Elective ${index + 1}`,
-            credits: 7.5,
-            grade: 'Not finished',
-            isPassFail: type === 'Pass/Fail'
-          });
-        }
-      });
-
-      semester2Electives.forEach((type, index) => {
-        if (type) {
-          newSemesters[1].courses.push({
-            name: `Elective ${index + 1}`,
-            credits: 7.5,
-            grade: 'Not finished',
-            isPassFail: type === 'Pass/Fail'
-          });
-        }
+      [semester1Electives, semester2Electives].forEach((semesterElectives, semesterIndex) => {
+        semesterElectives.forEach((type, index) => {
+          if (type && newSemesters[semesterIndex].courses.length < 2) {
+            newSemesters[semesterIndex].courses.push({
+              name: `Elective ${index + 1}`,
+              credits: 7.5,
+              grade: 'Not finished',
+              isPassFail: type === 'Pass/Fail'
+            });
+          }
+        });
       });
     }
 
-    // Add specialization courses for semesters 3 and 4
-    if (specialization1 && !hasInternship && exchangeOption !== 'spring') {
-      const spec1Course = {
-        name: `${specialization1} Specialization`,
-        credits: 7.5,
-        grade: 'Not finished'
-      };
-      newSemesters[2].courses.push(spec1Course);
-      newSemesters[3].courses.push(spec1Course);
-    }
+    // Add specialization courses if no exchange in spring
+    if (!hasInternship && exchangeOption !== 'spring') {
+      if (specialization1) {
+        const spec1Course = {
+          name: `${specialization1} Specialization`,
+          credits: 7.5,
+          grade: 'Not finished'
+        };
+        if (newSemesters[2].courses.length < 2) newSemesters[2].courses.push(spec1Course);
+        if (newSemesters[3].courses.length < 2) newSemesters[3].courses.push(spec1Course);
+      }
 
-    if (specialization2 && !hasInternship && exchangeOption !== 'spring') {
-      const spec2Course = {
-        name: `${specialization2} Specialization`,
-        credits: 7.5,
-        grade: 'Not finished'
-      };
-      newSemesters[2].courses.push(spec2Course);
-      newSemesters[3].courses.push(spec2Course);
-    }
-
-    // Handle Thesis
-    if (thesisOption === 'fall') {
-      const thesisCourse = { name: 'Thesis', credits: 7.5, grade: 'Not finished' };
-      newSemesters[0].courses.push(thesisCourse);
-      newSemesters[1].courses.push(thesisCourse);
-    } else if (thesisOption === 'spring') {
-      const thesisCourse = { name: 'Thesis', credits: 7.5, grade: 'Not finished' };
-      newSemesters[2].courses.push(thesisCourse);
-      newSemesters[3].courses.push(thesisCourse);
+      if (specialization2) {
+        const spec2Course = {
+          name: `${specialization2} Specialization`,
+          credits: 7.5,
+          grade: 'Not finished'
+        };
+        if (newSemesters[2].courses.length < 2) newSemesters[2].courses.push(spec2Course);
+        if (newSemesters[3].courses.length < 2) newSemesters[3].courses.push(spec2Course);
+      }
     }
 
     setSemesters(newSemesters);
@@ -152,7 +152,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
   return (
     <Card className="mb-8">
-      <CardHeader className="bg-[#F1F1F1]">
+      <CardHeader className="bg-secondary">
         <CardTitle className="text-2xl font-semibold">
           Third year
         </CardTitle>
