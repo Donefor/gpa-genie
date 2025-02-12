@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -49,104 +48,105 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     });
   };
 
+  const handleExchangeSelect = (value: 'none' | 'fall' | 'spring') => {
+    setExchangeOption(value);
+    if (value === 'fall') {
+      setThesisOption('spring');
+    } else if (value === 'spring') {
+      setThesisOption('fall');
+    } else {
+      setThesisOption('none');
+    }
+    if (value !== 'none') {
+      setHasInternship(false);
+    }
+  };
+
+  const handleInternshipSelect = (value: boolean) => {
+    setHasInternship(value);
+    if (value) {
+      setExchangeOption('none');
+      setThesisOption('none');
+    }
+  };
+
+  const handleThesisSelect = (value: 'none' | 'fall' | 'spring') => {
+    setThesisOption(value);
+  };
+
   // Update semesters when options change
   useEffect(() => {
-    // Start with a clean slate - initialize empty semesters
-    let newSemesters = Array(4).fill(null).map(() => ({ courses: [] }));
+    setSemesters(prev => {
+      const updatedSemesters = Array(4).fill(null).map(() => ({ courses: [] }));
 
-    // Handle Internship - overrides everything
-    if (hasInternship) {
-      const internshipCourse = { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true };
-      newSemesters[0].courses = [internshipCourse, internshipCourse];
-      newSemesters[1].courses = [internshipCourse, internshipCourse];
-      setSemesters(newSemesters);
-      return;
-    }
+      // Helper function to filter out special courses
+      const filterSpecialCourses = (courses: Course[]) =>
+        courses.filter(course => 
+          !['Exchange', 'Thesis', 'Internship'].includes(course.name)
+        );
 
-    // Handle Exchange courses based on selected option
-    if (exchangeOption === 'fall') {
-      const exchangeCourse = { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true };
-      newSemesters[0].courses = [exchangeCourse, exchangeCourse];
-      newSemesters[1].courses = [exchangeCourse, exchangeCourse];
-    } else if (exchangeOption === 'spring') {
-      const exchangeCourse = { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true };
-      newSemesters[2].courses = [exchangeCourse, exchangeCourse];
-      newSemesters[3].courses = [exchangeCourse, exchangeCourse];
-    }
+      // Start with existing courses minus special courses
+      prev.forEach((semester, index) => {
+        updatedSemesters[index].courses = filterSpecialCourses(semester.courses);
+      });
 
-    // Handle Thesis only if there's no exchange in the same semester
-    if (thesisOption === 'fall' && exchangeOption !== 'fall') {
-      const thesisCourse = { name: 'Thesis', credits: 7.5, grade: 'Not finished' };
-      newSemesters[0].courses = [...(newSemesters[0].courses || []), thesisCourse];
-      newSemesters[1].courses = [...(newSemesters[1].courses || []), thesisCourse];
-    } else if (thesisOption === 'spring' && exchangeOption !== 'spring') {
-      const thesisCourse = { name: 'Thesis', credits: 7.5, grade: 'Not finished' };
-      newSemesters[2].courses = [...(newSemesters[2].courses || []), thesisCourse];
-      newSemesters[3].courses = [...(newSemesters[3].courses || []), thesisCourse];
-    }
-
-    // Add electives for semesters that don't have exchange courses
-    const electivesBySemester = [
-      { electives: semester1Electives, index: 0 },
-      { electives: semester2Electives, index: 1 },
-      { electives: semester3Electives, index: 2 },
-      { electives: semester4Electives, index: 3 }
-    ];
-
-    electivesBySemester.forEach(({ electives, index }) => {
-      const isExchangeSemester = 
-        (exchangeOption === 'fall' && index <= 1) || 
-        (exchangeOption === 'spring' && index >= 2);
-
-      if (!isExchangeSemester && !hasInternship) {
-        electives.forEach((type, electiveIndex) => {
-          if (type && newSemesters[index].courses.length < 2) {
-            newSemesters[index].courses.push({
-              name: `Elective ${electiveIndex + 1}`,
-              credits: 7.5,
-              grade: 'Not finished',
-              isPassFail: type === 'Pass/Fail'
-            });
-          }
-        });
+      // Add Exchange courses
+      if (exchangeOption === 'fall') {
+        updatedSemesters[0].courses = [
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
+        ];
+        updatedSemesters[1].courses = [
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
+        ];
+      } else if (exchangeOption === 'spring') {
+        updatedSemesters[2].courses = [
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
+        ];
+        updatedSemesters[3].courses = [
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
+          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
+        ];
       }
+
+      // Add Thesis
+      if (thesisOption === 'fall') {
+        updatedSemesters[0].courses = [
+          ...updatedSemesters[0].courses,
+          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
+        ];
+        updatedSemesters[1].courses = [
+          ...updatedSemesters[1].courses,
+          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
+        ];
+      } else if (thesisOption === 'spring') {
+        updatedSemesters[2].courses = [
+          ...updatedSemesters[2].courses,
+          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
+        ];
+        updatedSemesters[3].courses = [
+          ...updatedSemesters[3].courses,
+          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
+        ];
+      }
+
+      // Add Internship (overrides everything)
+      if (hasInternship) {
+        updatedSemesters[0].courses = [
+          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true },
+          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
+        ];
+        updatedSemesters[1].courses = [
+          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true },
+          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
+        ];
+      }
+
+      return updatedSemesters;
     });
-
-    // Add specialization courses for spring semester if no exchange
-    if (!hasInternship && exchangeOption !== 'spring') {
-      if (specialization1) {
-        const spec1Course = {
-          name: `${specialization1} Specialization`,
-          credits: 7.5,
-          grade: 'Not finished'
-        };
-        if (newSemesters[2].courses.length < 2) newSemesters[2].courses.push(spec1Course);
-        if (newSemesters[3].courses.length < 2) newSemesters[3].courses.push(spec1Course);
-      }
-
-      if (specialization2) {
-        const spec2Course = {
-          name: `${specialization2} Specialization`,
-          credits: 7.5,
-          grade: 'Not finished'
-        };
-        if (newSemesters[2].courses.length < 2) newSemesters[2].courses.push(spec2Course);
-        if (newSemesters[3].courses.length < 2) newSemesters[3].courses.push(spec2Course);
-      }
-    }
-
-    setSemesters(newSemesters);
-  }, [
-    exchangeOption,
-    hasInternship,
-    thesisOption,
-    semester1Electives,
-    semester2Electives,
-    semester3Electives,
-    semester4Electives,
-    specialization1,
-    specialization2
-  ]);
+  }, [exchangeOption, hasInternship, thesisOption]);
 
   // Calculate GPA
   useEffect(() => {
@@ -169,9 +169,9 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
               exchangeOption={exchangeOption}
               hasInternship={hasInternship}
               thesisOption={thesisOption}
-              onExchangeChange={setExchangeOption}
-              onInternshipChange={setHasInternship}
-              onThesisChange={setThesisOption}
+              onExchangeChange={handleExchangeSelect}
+              onInternshipChange={handleInternshipSelect}
+              onThesisChange={handleThesisSelect}
             />
           </CardContent>
         </Card>
