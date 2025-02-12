@@ -27,12 +27,8 @@ export const GradeSelect = ({ value, onChange, isThirdYear }: GradeSelectProps) 
           <SelectItem value="Good">Good (3.5)</SelectItem>
           <SelectItem value="Very good">Very good (4.0)</SelectItem>
           <SelectItem value="Excellent">Excellent (5.0)</SelectItem>
-          {isThirdYear && (
-            <SelectItem value="Pass/Fail">Pass/Fail</SelectItem>
-          )}
         </SelectContent>
       </Select>
     </div>
   );
 };
-
