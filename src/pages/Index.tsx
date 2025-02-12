@@ -1,7 +1,8 @@
+
 import { useState } from 'react';
 import { YearSection } from '@/components/YearSection';
-import { YEAR_1_COURSES, YEAR_2_COURSES } from '@/data/courseData';
-import { Course, Grade } from '@/types';
+import { YEAR_1_COURSES, YEAR_2_COURSES, SPECIALIZATION_COURSES } from '@/data/courseData';
+import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { calculateGPA } from '@/utils/calculations';
 import { Badge } from '@/components/ui/badge';
 import { Year3Section } from '@/components/Year3Section';

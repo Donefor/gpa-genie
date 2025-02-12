@@ -77,26 +77,11 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
   // Update semesters when options change
   useEffect(() => {
-    setSemesters(prev => {
+    setSemesters(() => {
+      // Start with completely empty semesters
       const updatedSemesters = Array(4).fill(null).map(() => ({ courses: [] }));
 
-      // Helper function to filter out special courses
-      const filterSpecialCourses = (courses: Course[]) =>
-        courses.filter(course => 
-          !['Exchange', 'Thesis', 'Internship'].includes(course.name)
-        );
-
-      // Start with existing courses minus special courses
-      prev.forEach((semester, index) => {
-        updatedSemesters[index].courses = filterSpecialCourses(semester.courses);
-      });
-
-      // Clear all exchange and thesis courses before adding new ones
-      if (exchangeOption === 'none' && thesisOption === 'none' && !hasInternship) {
-        return updatedSemesters;
-      }
-
-      // Add Exchange courses
+      // Add Exchange courses first
       if (exchangeOption === 'fall') {
         updatedSemesters[0].courses = [
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
@@ -117,28 +102,16 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         ];
       }
 
-      // Add Thesis
-      if (thesisOption === 'fall') {
-        updatedSemesters[0].courses = [
-          ...updatedSemesters[0].courses,
-          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
-        ];
-        updatedSemesters[1].courses = [
-          ...updatedSemesters[1].courses,
-          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
-        ];
-      } else if (thesisOption === 'spring') {
-        updatedSemesters[2].courses = [
-          ...updatedSemesters[2].courses,
-          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
-        ];
-        updatedSemesters[3].courses = [
-          ...updatedSemesters[3].courses,
-          { name: 'Thesis', credits: 7.5, grade: 'Not finished' }
-        ];
+      // Then add Thesis if not during exchange semester
+      if (thesisOption === 'fall' && exchangeOption !== 'fall') {
+        updatedSemesters[0].courses.push({ name: 'Thesis', credits: 7.5, grade: 'Not finished' });
+        updatedSemesters[1].courses.push({ name: 'Thesis', credits: 7.5, grade: 'Not finished' });
+      } else if (thesisOption === 'spring' && exchangeOption !== 'spring') {
+        updatedSemesters[2].courses.push({ name: 'Thesis', credits: 7.5, grade: 'Not finished' });
+        updatedSemesters[3].courses.push({ name: 'Thesis', credits: 7.5, grade: 'Not finished' });
       }
 
-      // Add Internship (overrides everything)
+      // Override with Internship if selected
       if (hasInternship) {
         updatedSemesters[0].courses = [
           { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true },
