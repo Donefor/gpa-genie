@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { YearSection } from '@/components/YearSection';
-import { YEAR_1_COURSES, YEAR_2_COURSES, SPECIALIZATION_COURSES } from '@/data/courseData';
-import { Course, Grade, Specialization, ElectiveType } from '@/types';
+import { YEAR_1_COURSES, YEAR_2_COURSES } from '@/data/courseData';
+import { Course, Grade } from '@/types';
 import { calculateGPA } from '@/utils/calculations';
 import { Badge } from '@/components/ui/badge';
 import { Year3Section } from '@/components/Year3Section';
@@ -246,7 +246,7 @@ const Index = () => {
               onElectiveSemester3Change={(type) => handleElectiveTypeChange(type, 3)}
               onElectiveSemester4Change={(type) => handleElectiveTypeChange(type, 4)}
             />
-            <Year3Section previousYearCourses={previousYearCourses} />
+            <Year3Section previousYearCourses={[...year1Courses, ...year2Courses]} />
           </div>
         </div>
       </div>
@@ -255,7 +255,7 @@ const Index = () => {
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center">
             <p className="text-lg mb-4">Have feedback or ideas? Don't hesitate to reach out!</p>
-            <div className="space-y-2">
+            <div className="flex justify-center items-center space-x-8">
               <p>Email: <a href="mailto:25841@s.hhs.se" className="text-blue-400 hover:text-blue-300">25841@s.hhs.se</a></p>
               <p>Instagram: <a href="https://instagram.com/jonaspeetersen" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">@jonaspeetersen</a></p>
             </div>

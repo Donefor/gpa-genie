@@ -91,6 +91,11 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         updatedSemesters[index].courses = filterSpecialCourses(semester.courses);
       });
 
+      // Clear all exchange and thesis courses before adding new ones
+      if (exchangeOption === 'none' && thesisOption === 'none' && !hasInternship) {
+        return updatedSemesters;
+      }
+
       // Add Exchange courses
       if (exchangeOption === 'fall') {
         updatedSemesters[0].courses = [
