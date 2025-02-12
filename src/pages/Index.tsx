@@ -212,42 +212,56 @@ const Index = () => {
   const previousYearCourses = [...year1Courses, ...year2Courses];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">SSE GPA Calculator</h1>
-          <p className="text-lg text-gray-600 mb-6">
-            Calculate your GPA based on course performance
-          </p>
-          <Badge variant="secondary" className="text-xl px-6 py-2">
-            Cumulative GPA: {calculateCumulativeGPA().toFixed(2)}
-          </Badge>
-        </div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">SSE GPA Calculator</h1>
+            <p className="text-lg text-gray-600 mb-6">
+              Calculate your GPA based on course performance
+            </p>
+            <Badge variant="secondary" className="text-xl px-6 py-2">
+              Cumulative GPA: {calculateCumulativeGPA().toFixed(2)}
+            </Badge>
+          </div>
 
-        <div className="space-y-8">
-          <YearSection
-            yearNumber={1}
-            semesters={year1Data.semesters}
-            onGradeChange={handleYear1GradeChange}
-          />
-          <YearSection
-            yearNumber={2}
-            semesters={year2Data.semesters}
-            onGradeChange={handleYear2GradeChange}
-            isThirdYear={true}
-            specialization={specialization}
-            secondSpecialization={secondSpecialization}
-            onSpecializationChange={handleSpecializationChange}
-            onSecondSpecializationChange={handleSecondSpecializationChange}
-            previousYearCourses={year1Courses}
-            electiveSemester3={electiveSemester3}
-            electiveSemester4={electiveSemester4}
-            onElectiveSemester3Change={(type) => handleElectiveTypeChange(type, 3)}
-            onElectiveSemester4Change={(type) => handleElectiveTypeChange(type, 4)}
-          />
-          <Year3Section previousYearCourses={previousYearCourses} />
+          <div className="space-y-8">
+            <YearSection
+              yearNumber={1}
+              semesters={year1Data.semesters}
+              onGradeChange={handleYear1GradeChange}
+            />
+            <YearSection
+              yearNumber={2}
+              semesters={year2Data.semesters}
+              onGradeChange={handleYear2GradeChange}
+              isThirdYear={true}
+              specialization={specialization}
+              secondSpecialization={secondSpecialization}
+              onSpecializationChange={handleSpecializationChange}
+              onSecondSpecializationChange={handleSecondSpecializationChange}
+              previousYearCourses={year1Courses}
+              electiveSemester3={electiveSemester3}
+              electiveSemester4={electiveSemester4}
+              onElectiveSemester3Change={(type) => handleElectiveTypeChange(type, 3)}
+              onElectiveSemester4Change={(type) => handleElectiveTypeChange(type, 4)}
+            />
+            <Year3Section previousYearCourses={previousYearCourses} />
+          </div>
         </div>
       </div>
+      
+      <footer className="bg-[#1A1F2C] text-white py-8 mt-16">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center">
+            <p className="text-lg mb-4">Have feedback or ideas? Don't hesitate to reach out!</p>
+            <div className="space-y-2">
+              <p>Email: <a href="mailto:25841@s.hhs.se" className="text-blue-400 hover:text-blue-300">25841@s.hhs.se</a></p>
+              <p>Instagram: <a href="https://instagram.com/jonaspeetersen" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">@jonaspeetersen</a></p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

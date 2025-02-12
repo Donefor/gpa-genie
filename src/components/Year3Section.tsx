@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -166,9 +165,6 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         <CardTitle className="text-2xl font-semibold">
           Third year
         </CardTitle>
-        <Badge variant="secondary" className="text-xl px-6 py-2">
-          Year 3 GPA: {gpa.toFixed(2)}
-        </Badge>
       </CardHeader>
       <CardContent className="pt-6">
         <Card className="mb-6 bg-gradient-to-r from-[#D3E4FD]/50 to-[#E5DEFF]/50 w-full">
@@ -190,7 +186,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
             <h3 className="text-xl font-semibold mb-6 text-[#1A1F2C]">Fall Semester</h3>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-4">
-                <h4 className="text-lg font-medium text-[#403E43]">Semester 1</h4>
+                <h4 className="text-lg font-medium text-[#403E43]">Period 1</h4>
                 <div className="space-y-4">
                   <div>
                     <span className="block text-sm font-medium mb-2">Elective 1</span>
@@ -220,7 +216,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-lg font-medium text-[#403E43]">Semester 2</h4>
+                <h4 className="text-lg font-medium text-[#403E43]">Period 2</h4>
                 <div className="space-y-4">
                   <div>
                     <span className="block text-sm font-medium mb-2">Elective 1</span>
@@ -271,7 +267,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
             <h3 className="text-xl font-semibold mb-6 text-[#1A1F2C]">Spring Semester</h3>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="space-y-4">
-                <h4 className="text-lg font-medium text-[#403E43]">Semester 3</h4>
+                <h4 className="text-lg font-medium text-[#403E43]">Period 3</h4>
                 <div className="space-y-4">
                   <div>
                     <span className="block text-sm font-medium mb-2">Elective 1</span>
@@ -301,7 +297,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-lg font-medium text-[#403E43]">Semester 4</h4>
+                <h4 className="text-lg font-medium text-[#403E43]">Period 4</h4>
                 <div className="space-y-4">
                   <div>
                     <span className="block text-sm font-medium mb-2">Elective 1</span>
@@ -366,6 +362,19 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
             isThirdYear={true}
             semester={4}
           />
+        </div>
+
+        <div className="mt-8">
+          <Card className="bg-gradient-to-r from-[#D3E4FD]/50 to-[#E5DEFF]/50">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-semibold">Year 3 GPA</h3>
+                <Badge variant="secondary" className="text-xl px-6 py-2">
+                  {gpa.toFixed(2)}
+                </Badge>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </CardContent>
     </Card>
