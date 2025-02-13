@@ -79,11 +79,9 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
       if (hasInternship) {
         updatedSemesters[0].courses = [
-          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true },
           { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
         ];
         updatedSemesters[1].courses = [
-          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true },
           { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
         ];
       }
