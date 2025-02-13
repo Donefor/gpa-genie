@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Course, Grade, Specialization, ElectiveType } from '@/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -80,12 +79,10 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
       if (hasInternship) {
         updatedSemesters[0].courses = [
-          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
+          { name: 'Internship', credits: 15, grade: 'Not finished', isPassFail: true }
         ];
         updatedSemesters[1].courses = [
-          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
+          { name: 'Internship', credits: 15, grade: 'Not finished', isPassFail: true }
         ];
       }
 
