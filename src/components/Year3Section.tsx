@@ -189,33 +189,38 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
           />
         </Card>
 
-        {!hasInternship && exchangeOption !== 'fall' && (
-          <Card className={`mb-8 ${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4`}>
-            <div className={`space-y-6 ${isMobile ? "flex flex-col" : ""}`}>
-              <div className={`${isMobile ? "flex flex-col space-y-4" : "flex items-start space-x-8"}`}>
-                <div className={`${isMobile ? "w-full" : "flex-1"}`}>
-                  <span className="block text-sm font-medium mb-2">Semester 1 - First Elective</span>
-                  <ElectiveSelect
-                    value={electiveSemester1A}
-                    onChange={setElectiveSemester1A}
-                  />
-                </div>
-                <div className={`${isMobile ? "w-full" : "flex-1"}`}>
-                  <span className="block text-sm font-medium mb-2">Semester 1 - Second Elective</span>
-                  <ElectiveSelect
-                    value={electiveSemester1B}
-                    onChange={setElectiveSemester1B}
-                  />
-                </div>
-              </div>
-            </div>
-          </Card>
-        )}
-
+        {/* Semester 1 */}
         <div className="mb-8">
           <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
             Semester 1
           </h3>
+          
+          {/* Elective selection for Semester 1 */}
+          {!hasInternship && (
+            <Card className={`mb-4 ${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4`}>
+              <div className={`space-y-6 ${isMobile ? "flex flex-col" : ""}`}>
+                <div className={`${isMobile ? "flex flex-col space-y-4" : "flex items-start space-x-8"}`}>
+                  <div className={`${isMobile ? "w-full" : "flex-1"}`}>
+                    <span className="block text-sm font-medium mb-2">First Elective</span>
+                    <ElectiveSelect
+                      value={electiveSemester1A}
+                      onChange={setElectiveSemester1A}
+                      disabled={exchangeOption === 'fall'}
+                    />
+                  </div>
+                  <div className={`${isMobile ? "w-full" : "flex-1"}`}>
+                    <span className="block text-sm font-medium mb-2">Second Elective</span>
+                    <ElectiveSelect
+                      value={electiveSemester1B}
+                      onChange={setElectiveSemester1B}
+                      disabled={exchangeOption === 'fall'}
+                    />
+                  </div>
+                </div>
+              </div>
+            </Card>
+          )}
+
           <SemesterTable
             courses={semesters[0].courses}
             onGradeChange={(courseIndex, grade) => handleGradeChange(0, courseIndex, grade)}
@@ -224,39 +229,57 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
           />
         </div>
 
-        {!hasInternship && exchangeOption !== 'fall' && (
-          <Card className={`mb-8 ${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4`}>
-            <div className={`space-y-6 ${isMobile ? "flex flex-col" : ""}`}>
-              <div className={`${isMobile ? "flex flex-col space-y-4" : "flex items-start space-x-8"}`}>
-                <div className={`${isMobile ? "w-full" : "flex-1"}`}>
-                  <span className="block text-sm font-medium mb-2">Semester 2 - First Elective</span>
-                  <ElectiveSelect
-                    value={electiveSemester2A}
-                    onChange={setElectiveSemester2A}
-                  />
-                </div>
-                <div className={`${isMobile ? "w-full" : "flex-1"}`}>
-                  <span className="block text-sm font-medium mb-2">Semester 2 - Second Elective</span>
-                  <ElectiveSelect
-                    value={electiveSemester2B}
-                    onChange={setElectiveSemester2B}
-                  />
+        {/* Semester 2 */}
+        <div className="mb-8">
+          <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
+            Semester 2
+          </h3>
+
+          {/* Elective selection for Semester 2 */}
+          {!hasInternship && (
+            <Card className={`mb-4 ${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4`}>
+              <div className={`space-y-6 ${isMobile ? "flex flex-col" : ""}`}>
+                <div className={`${isMobile ? "flex flex-col space-y-4" : "flex items-start space-x-8"}`}>
+                  <div className={`${isMobile ? "w-full" : "flex-1"}`}>
+                    <span className="block text-sm font-medium mb-2">First Elective</span>
+                    <ElectiveSelect
+                      value={electiveSemester2A}
+                      onChange={setElectiveSemester2A}
+                      disabled={exchangeOption === 'fall'}
+                    />
+                  </div>
+                  <div className={`${isMobile ? "w-full" : "flex-1"}`}>
+                    <span className="block text-sm font-medium mb-2">Second Elective</span>
+                    <ElectiveSelect
+                      value={electiveSemester2B}
+                      onChange={setElectiveSemester2B}
+                      disabled={exchangeOption === 'fall'}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </Card>
-        )}
+            </Card>
+          )}
 
-        {semesters.slice(1).map((semester, index) => (
-          <div key={index + 1} className="mb-8">
+          <SemesterTable
+            courses={semesters[1].courses}
+            onGradeChange={(courseIndex, grade) => handleGradeChange(1, courseIndex, grade)}
+            isThirdYear={true}
+            semester={2}
+          />
+        </div>
+
+        {/* Remaining semesters */}
+        {semesters.slice(2).map((semester, index) => (
+          <div key={index + 2} className="mb-8">
             <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
-              Semester {index + 2}
+              Semester {index + 3}
             </h3>
             <SemesterTable
               courses={semester.courses}
-              onGradeChange={(courseIndex, grade) => handleGradeChange(index + 1, courseIndex, grade)}
+              onGradeChange={(courseIndex, grade) => handleGradeChange(index + 2, courseIndex, grade)}
               isThirdYear={true}
-              semester={index + 2}
+              semester={index + 3}
             />
           </div>
         ))}
