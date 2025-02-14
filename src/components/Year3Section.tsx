@@ -93,74 +93,91 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         ];
       }
 
-      if (electiveSemester1A && !exchangeOption === 'fall') {
-        updatedSemesters[0].courses.push({
-          name: `Elective (${electiveSemester1A})`,
-          credits: 7.5,
-          grade: 'Not finished',
-          isPassFail: electiveSemester1A === 'Pass/Fail'
-        });
+      if (!hasInternship && exchangeOption !== 'fall') {
+        if (electiveSemester1A) {
+          updatedSemesters[0].courses.push({
+            name: `Elective (${electiveSemester1A})`,
+            credits: 7.5,
+            grade: 'Not finished',
+            isPassFail: electiveSemester1A === 'Pass/Fail'
+          });
+        }
+        if (electiveSemester1B) {
+          updatedSemesters[0].courses.push({
+            name: `Elective (${electiveSemester1B})`,
+            credits: 7.5,
+            grade: 'Not finished',
+            isPassFail: electiveSemester1B === 'Pass/Fail'
+          });
+        }
+        if (electiveSemester2A) {
+          updatedSemesters[1].courses.push({
+            name: `Elective (${electiveSemester2A})`,
+            credits: 7.5,
+            grade: 'Not finished',
+            isPassFail: electiveSemester2A === 'Pass/Fail'
+          });
+        }
+        if (electiveSemester2B) {
+          updatedSemesters[1].courses.push({
+            name: `Elective (${electiveSemester2B})`,
+            credits: 7.5,
+            grade: 'Not finished',
+            isPassFail: electiveSemester2B === 'Pass/Fail'
+          });
+        }
       }
-      if (electiveSemester1B && !exchangeOption === 'fall') {
-        updatedSemesters[0].courses.push({
-          name: `Elective (${electiveSemester1B})`,
-          credits: 7.5,
-          grade: 'Not finished',
-          isPassFail: electiveSemester1B === 'Pass/Fail'
-        });
-      }
-      if (electiveSemester2A && !exchangeOption === 'fall') {
-        updatedSemesters[1].courses.push({
-          name: `Elective (${electiveSemester2A})`,
-          credits: 7.5,
-          grade: 'Not finished',
-          isPassFail: electiveSemester2A === 'Pass/Fail'
-        });
-      }
-      if (electiveSemester2B && !exchangeOption === 'fall') {
-        updatedSemesters[1].courses.push({
-          name: `Elective (${electiveSemester2B})`,
-          credits: 7.5,
-          grade: 'Not finished',
-          isPassFail: electiveSemester2B === 'Pass/Fail'
-        });
-      }
-      if (electiveSemester3A && !exchangeOption === 'spring') {
-        updatedSemesters[2].courses.push({
-          name: `Elective (${electiveSemester3A})`,
-          credits: 7.5,
-          grade: 'Not finished',
-          isPassFail: electiveSemester3A === 'Pass/Fail'
-        });
-      }
-      if (electiveSemester3B && !exchangeOption === 'spring') {
-        updatedSemesters[2].courses.push({
-          name: `Elective (${electiveSemester3B})`,
-          credits: 7.5,
-          grade: 'Not finished',
-          isPassFail: electiveSemester3B === 'Pass/Fail'
-        });
-      }
-      if (electiveSemester4A && !exchangeOption === 'spring') {
-        updatedSemesters[3].courses.push({
-          name: `Elective (${electiveSemester4A})`,
-          credits: 7.5,
-          grade: 'Not finished',
-          isPassFail: electiveSemester4A === 'Pass/Fail'
-        });
-      }
-      if (electiveSemester4B && !exchangeOption === 'spring') {
-        updatedSemesters[3].courses.push({
-          name: `Elective (${electiveSemester4B})`,
-          credits: 7.5,
-          grade: 'Not finished',
-          isPassFail: electiveSemester4B === 'Pass/Fail'
-        });
+
+      if (exchangeOption !== 'spring') {
+        if (electiveSemester3A) {
+          updatedSemesters[2].courses.push({
+            name: `Elective (${electiveSemester3A})`,
+            credits: 7.5,
+            grade: 'Not finished',
+            isPassFail: electiveSemester3A === 'Pass/Fail'
+          });
+        }
+        if (electiveSemester3B) {
+          updatedSemesters[2].courses.push({
+            name: `Elective (${electiveSemester3B})`,
+            credits: 7.5,
+            grade: 'Not finished',
+            isPassFail: electiveSemester3B === 'Pass/Fail'
+          });
+        }
+        if (electiveSemester4A) {
+          updatedSemesters[3].courses.push({
+            name: `Elective (${electiveSemester4A})`,
+            credits: 7.5,
+            grade: 'Not finished',
+            isPassFail: electiveSemester4A === 'Pass/Fail'
+          });
+        }
+        if (electiveSemester4B) {
+          updatedSemesters[3].courses.push({
+            name: `Elective (${electiveSemester4B})`,
+            credits: 7.5,
+            grade: 'Not finished',
+            isPassFail: electiveSemester4B === 'Pass/Fail'
+          });
+        }
       }
 
       return updatedSemesters;
     });
-  }, [exchangeOption, hasInternship, thesisOption, electiveSemester1A, electiveSemester1B, electiveSemester2A, electiveSemester2B, electiveSemester3A, electiveSemester3B, electiveSemester4A, electiveSemester4B]);
+  }, [
+    exchangeOption, 
+    hasInternship, 
+    thesisOption, 
+    electiveSemester1A, 
+    electiveSemester1B, 
+    electiveSemester2A, 
+    electiveSemester2B,
+    electiveSemester3A,
+    electiveSemester3B,
+    electiveSemester4A,
+    electiveSemester4B
+  ]);
 
   useEffect(() => {
     const allCourses = [
@@ -291,10 +308,10 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         </div>
 
         {/* Semesters 3 and 4 */}
-        {semesters.slice(2).map((semester, index) => (
-          <div key={index + 2} className="mb-8">
+        {[2, 3].map((semesterIndex) => (
+          <div key={semesterIndex} className="mb-8">
             <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
-              Semester {index + 3}
+              Semester {semesterIndex + 1}
             </h3>
             <Card className={`mb-4 ${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4`}>
               <div className={`space-y-6 ${isMobile ? "flex flex-col" : ""}`}>
@@ -302,16 +319,16 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
                   <div className={`${isMobile ? "w-full" : "flex-1"}`}>
                     <span className="block text-sm font-medium mb-2">First Elective</span>
                     <ElectiveSelect
-                      value={index === 0 ? electiveSemester3A : electiveSemester4A}
-                      onChange={index === 0 ? setElectiveSemester3A : setElectiveSemester4A}
+                      value={semesterIndex === 2 ? electiveSemester3A : electiveSemester4A}
+                      onChange={semesterIndex === 2 ? setElectiveSemester3A : setElectiveSemester4A}
                       disabled={exchangeOption === 'spring'}
                     />
                   </div>
                   <div className={`${isMobile ? "w-full" : "flex-1"}`}>
                     <span className="block text-sm font-medium mb-2">Second Elective</span>
                     <ElectiveSelect
-                      value={index === 0 ? electiveSemester3B : electiveSemester4B}
-                      onChange={index === 0 ? setElectiveSemester3B : setElectiveSemester4B}
+                      value={semesterIndex === 2 ? electiveSemester3B : electiveSemester4B}
+                      onChange={semesterIndex === 2 ? setElectiveSemester3B : setElectiveSemester4B}
                       disabled={exchangeOption === 'spring'}
                     />
                   </div>
@@ -319,10 +336,10 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
               </div>
             </Card>
             <SemesterTable
-              courses={semester.courses}
-              onGradeChange={(courseIndex, grade) => handleGradeChange(index + 2, courseIndex, grade)}
+              courses={semesters[semesterIndex].courses}
+              onGradeChange={(courseIndex, grade) => handleGradeChange(semesterIndex, courseIndex, grade)}
               isThirdYear={true}
-              semester={index + 3}
+              semester={semesterIndex + 1}
             />
           </div>
         ))}
