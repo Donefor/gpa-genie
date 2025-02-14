@@ -96,7 +96,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       if (!hasInternship && exchangeOption !== 'fall') {
         if (electiveSemester1A) {
           updatedSemesters[0].courses.push({
-            name: `Elective Course (${electiveSemester1A})`,
+            name: 'Elective Course',
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester1A === 'Pass/Fail'
@@ -104,7 +104,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester1B) {
           updatedSemesters[0].courses.push({
-            name: `Elective Course (${electiveSemester1B})`,
+            name: 'Elective Course',
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester1B === 'Pass/Fail'
@@ -112,7 +112,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester2A) {
           updatedSemesters[1].courses.push({
-            name: `Elective Course (${electiveSemester2A})`,
+            name: 'Elective Course',
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester2A === 'Pass/Fail'
@@ -120,7 +120,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester2B) {
           updatedSemesters[1].courses.push({
-            name: `Elective Course (${electiveSemester2B})`,
+            name: 'Elective Course',
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester2B === 'Pass/Fail'
@@ -131,7 +131,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       if (exchangeOption !== 'spring') {
         if (electiveSemester3A) {
           updatedSemesters[2].courses.push({
-            name: `Elective Course (${electiveSemester3A})`,
+            name: 'Elective Course',
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester3A === 'Pass/Fail'
@@ -139,7 +139,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester3B) {
           updatedSemesters[2].courses.push({
-            name: `Elective Course (${electiveSemester3B})`,
+            name: 'Elective Course',
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester3B === 'Pass/Fail'
@@ -147,7 +147,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester4A) {
           updatedSemesters[3].courses.push({
-            name: `Elective Course (${electiveSemester4A})`,
+            name: 'Elective Course',
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester4A === 'Pass/Fail'
@@ -155,7 +155,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester4B) {
           updatedSemesters[3].courses.push({
-            name: `Elective Course (${electiveSemester4B})`,
+            name: 'Elective Course',
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester4B === 'Pass/Fail'
@@ -250,7 +250,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
                   <ElectiveSelect
                     value={electiveSemester1A}
                     onChange={setElectiveSemester1A}
-                    disabled={exchangeOption === 'fall' || hasInternship}
+                    disabled={exchangeOption === 'fall'}
                   />
                 </div>
                 <div className={`${isMobile ? "w-full" : "flex-1"}`}>
@@ -258,7 +258,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
                   <ElectiveSelect
                     value={electiveSemester1B}
                     onChange={setElectiveSemester1B}
-                    disabled={exchangeOption === 'fall' || hasInternship}
+                    disabled={exchangeOption === 'fall'}
                   />
                 </div>
               </div>
@@ -285,7 +285,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
                   <ElectiveSelect
                     value={electiveSemester2A}
                     onChange={setElectiveSemester2A}
-                    disabled={exchangeOption === 'fall' || hasInternship}
+                    disabled={exchangeOption === 'fall'}
                   />
                 </div>
                 <div className={`${isMobile ? "w-full" : "flex-1"}`}>
@@ -293,7 +293,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
                   <ElectiveSelect
                     value={electiveSemester2B}
                     onChange={setElectiveSemester2B}
-                    disabled={exchangeOption === 'fall' || hasInternship}
+                    disabled={exchangeOption === 'fall'}
                   />
                 </div>
               </div>
@@ -346,7 +346,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
 
         <div className={`mt-6 w-full bg-muted ${isMobile ? 'p-2' : 'p-4'} rounded-lg shadow-sm`}>
           <Badge variant="secondary" className="text-lg px-4 py-1">
-            Third Year: {gpa.toFixed(2)}
+            Third Year GPA: {gpa.toFixed(2)}
           </Badge>
         </div>
       </CardContent>
