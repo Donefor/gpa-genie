@@ -96,7 +96,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       if (!hasInternship && exchangeOption !== 'fall') {
         if (electiveSemester1A) {
           updatedSemesters[0].courses.push({
-            name: `Elective (${electiveSemester1A})`,
+            name: `Elective Course (${electiveSemester1A})`,
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester1A === 'Pass/Fail'
@@ -104,7 +104,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester1B) {
           updatedSemesters[0].courses.push({
-            name: `Elective (${electiveSemester1B})`,
+            name: `Elective Course (${electiveSemester1B})`,
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester1B === 'Pass/Fail'
@@ -112,7 +112,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester2A) {
           updatedSemesters[1].courses.push({
-            name: `Elective (${electiveSemester2A})`,
+            name: `Elective Course (${electiveSemester2A})`,
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester2A === 'Pass/Fail'
@@ -120,7 +120,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester2B) {
           updatedSemesters[1].courses.push({
-            name: `Elective (${electiveSemester2B})`,
+            name: `Elective Course (${electiveSemester2B})`,
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester2B === 'Pass/Fail'
@@ -131,7 +131,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       if (exchangeOption !== 'spring') {
         if (electiveSemester3A) {
           updatedSemesters[2].courses.push({
-            name: `Elective (${electiveSemester3A})`,
+            name: `Elective Course (${electiveSemester3A})`,
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester3A === 'Pass/Fail'
@@ -139,7 +139,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester3B) {
           updatedSemesters[2].courses.push({
-            name: `Elective (${electiveSemester3B})`,
+            name: `Elective Course (${electiveSemester3B})`,
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester3B === 'Pass/Fail'
@@ -147,7 +147,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester4A) {
           updatedSemesters[3].courses.push({
-            name: `Elective (${electiveSemester4A})`,
+            name: `Elective Course (${electiveSemester4A})`,
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester4A === 'Pass/Fail'
@@ -155,7 +155,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         }
         if (electiveSemester4B) {
           updatedSemesters[3].courses.push({
-            name: `Elective (${electiveSemester4B})`,
+            name: `Elective Course (${electiveSemester4B})`,
             credits: 7.5,
             grade: 'Not finished',
             isPassFail: electiveSemester4B === 'Pass/Fail'

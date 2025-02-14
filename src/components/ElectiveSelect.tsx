@@ -18,7 +18,7 @@ export const ElectiveSelect = ({ value, onChange, disabled }: ElectiveSelectProp
   return (
     <Select 
       value={value || ""} 
-      onValueChange={(val) => onChange(val as ElectiveType)}
+      onValueChange={(val) => onChange(val === "remove" ? null : val as ElectiveType)}
       disabled={disabled}
     >
       <SelectTrigger className="w-[200px]">
@@ -27,6 +27,7 @@ export const ElectiveSelect = ({ value, onChange, disabled }: ElectiveSelectProp
       <SelectContent>
         <SelectItem value="Graded">Graded Elective</SelectItem>
         <SelectItem value="Pass/Fail">Pass/Fail Elective</SelectItem>
+        {value && <SelectItem value="remove">Remove Elective</SelectItem>}
       </SelectContent>
     </Select>
   );
