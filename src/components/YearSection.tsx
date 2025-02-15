@@ -90,11 +90,11 @@ export const YearSection = ({
   const getYearLabel = (year: number) => {
     switch (year) {
       case 1:
-        return "First year GPA";
+        return "First Year GPA";
       case 2:
-        return "Second year GPA";
+        return "Second Year GPA";
       case 3:
-        return "Third year GPA";
+        return "Third Year GPA";
       default:
         return `Year ${year} GPA`;
     }
@@ -106,7 +106,7 @@ export const YearSection = ({
     <Card className="mb-8">
       <CardHeader className={`${yearNumber === 2 ? 'bg-secondary w-full' : 'bg-secondary'} ${isMobile ? 'px-2' : ''}`}>
         <CardTitle className="text-2xl font-semibold">
-          {yearNumber === 1 ? "First year" : yearNumber === 2 ? "Second year" : `Year ${yearNumber}`}
+          {yearNumber === 1 ? "First Year" : yearNumber === 2 ? "Second Year" : `Year ${yearNumber}`}
         </CardTitle>
       </CardHeader>
       <CardContent className={`pt-6 ${isMobile ? 'px-1' : ''}`}>
@@ -117,7 +117,15 @@ export const YearSection = ({
             <div key={semesterIndex}>
               <div className="mb-8">
                 <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
-                  Semester {semesterIndex + 1}
+                {semesterIndex === 0
+                ? "First Period"
+                : semesterIndex === 1
+                ? "Second Period"
+                : semesterIndex === 2
+                ? "Third Period"
+                : semesterIndex === 3
+                ? "Fourth Period"
+                : `Semester ${semesterIndex}`}
                 </h3>
                 <SemesterTable
                   courses={semester.courses}

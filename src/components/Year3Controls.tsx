@@ -1,5 +1,5 @@
-
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useIsMobile } from '@/hooks/use-mobile'; // Assuming you have a hook to detect mobile devices
 
 export type ExchangeOption = 'none' | 'fall' | 'spring';
 export type ThesisOption = 'none' | 'fall' | 'spring';
@@ -19,8 +19,10 @@ export const Year3Controls = ({
   onThesisChange,
   exchangeOption = 'none',
   hasInternship,
-  thesisOption
+  thesisOption,
 }: Year3ControlsProps) => {
+  const isMobile = useIsMobile(); // Use the hook to detect mobile devices
+
   const handleExchangeChange = (value: ExchangeOption) => {
     if (value === 'none') {
       onExchangeChange('none');
@@ -50,7 +52,7 @@ export const Year3Controls = ({
   };
 
   return (
-    <div className="flex gap-4 items-center">
+    <div className={`flex ${isMobile ? 'flex-col space-y-4' : 'flex-row gap-4'} items-left`}>
       <Select value={exchangeOption} onValueChange={handleExchangeChange}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Exchange Program" />
@@ -62,8 +64,8 @@ export const Year3Controls = ({
         </SelectContent>
       </Select>
 
-      <Select 
-        value={hasInternship ? 'true' : 'false'} 
+      <Select
+        value={hasInternship ? 'true' : 'false'}
         onValueChange={(value) => handleInternshipChange(value === 'true')}
       >
         <SelectTrigger className="w-[180px]">
@@ -75,8 +77,8 @@ export const Year3Controls = ({
         </SelectContent>
       </Select>
 
-      <Select 
-        value={thesisOption} 
+      <Select
+        value={thesisOption}
         onValueChange={onThesisChange}
         disabled={exchangeOption !== 'none'}
       >
@@ -84,7 +86,7 @@ export const Year3Controls = ({
           <SelectValue placeholder="Thesis Period" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="none">No Thesis</SelectItem>
+          <SelectItem value="none">Remove Thesis</SelectItem>
           <SelectItem value="fall">Fall Thesis</SelectItem>
           <SelectItem value="spring">Spring Thesis</SelectItem>
         </SelectContent>
@@ -92,4 +94,3 @@ export const Year3Controls = ({
     </div>
   );
 };
-
