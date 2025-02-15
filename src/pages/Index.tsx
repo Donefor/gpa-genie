@@ -213,18 +213,20 @@ const Index = () => {
   const previousYearCourses = [...year1Courses, ...year2Courses];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">SSE GPA Calculator</h1>
-            <p className="text-lg text-gray-600 mb-6">
-              Calculate your GPA based on course performance
-            </p>
-            <Badge variant="secondary" className="text-xl px-6 py-2">
-              Cumulative GPA: {calculateCumulativeGPA().toFixed(2)}
-            </Badge>
-          </div>
+  <div className="min-h-screen bg-gray-50">
+    <div className="py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4"></h1>
+          <p className="text-1xl text-black-400 leading-relaxed mb-10 max-w-5xl mx-auto text-justify ">
+            Dedicated GPA calculator for students at the Stockholm School of Economics. 
+            Designed specifically for the <span className="font-semibold text-indigo-600">
+              Bachelor in Business and Economics</span> program. If there's enough demand, 
+            we’ll expand to include Retail Management and Master’s program. This tool is fully anonymous 
+            and does not collect or store any personal data.
+            <br /><br />
+          </p>
+        </div>
 
           <div className="space-y-8">
             <YearSection
@@ -249,20 +251,47 @@ const Index = () => {
             />
             <Year3Section previousYearCourses={[...year1Courses, ...year2Courses]} />
           </div>
+          
+          
         </div>
+
+        
       </div>
       
-      <footer className="bg-[#1A1F2C] text-white py-8 mt-16">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="text-center">
-            <p className="text-lg mb-4">Have feedback or ideas? Don't hesitate to reach out!</p>
-            <div className="flex justify-center items-center space-x-8">
-              <p>Email: <a href="mailto:25841@s.hhs.se" className="text-blue-400 hover:text-blue-300">25841@s.hhs.se</a></p>
-              <p>Instagram: <a href="https://instagram.com/jonaspeetersen" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">@jonaspeetersen</a></p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <footer className="bg-[#000000] text-white py-12 mt-16">
+  <div className="max-w-5xl mx-auto px-4">
+    <div className="text-center mb-8">
+      <p className="text-lg font-medium mb-4">If you have feedback, want to report a bug, or contribute, please do reach out! :)</p>
+      <div className="flex justify-center items-center space-x-8">
+        <p>
+          Mail:{" "}
+          <a
+            href="mailto:25841@s.hhs.se"
+            className="text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            25841@s.hhs.se
+          </a>
+        </p>
+        <p>
+          IG:{" "}
+          <a
+            href="https://instagram.com/jonaspeetersen"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            @jonaspeetersen
+          </a>
+        </p>
+      </div>
+    </div>
+    <div className="border-t border-gray-700 pt-6 text-justify">
+      <span className="text-sm text-gray-500 italic">
+        This tool is an independent project developed and maintained by a third party. It is not officially affiliated with, endorsed by, or supported by the Stockholm School of Economics (SSE) in any capacity. SSE assumes no responsibility for the accuracy, functionality, or use of this tool. The third-party developer also disclaims any liability for errors, inaccuracies, or outcomes resulting from the use of this tool. Users are advised to exercise their own judgment and verify all calculations independently, especially in cases of uncertainty.
+      </span>
+    </div>
+  </div>
+</footer>
     </div>
   );
 };

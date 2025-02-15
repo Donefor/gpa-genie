@@ -56,6 +56,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     setSemesters(() => {
       const updatedSemesters = [...emptySemesters];
 
+      // Add exchange courses if selected
       if (exchangeOption === 'fall') {
         updatedSemesters[0].courses = [
           { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
@@ -76,6 +77,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         ];
       }
 
+      // Add thesis courses if selected
       if (thesisOption === 'fall' && exchangeOption !== 'fall') {
         updatedSemesters[0].courses.push({ name: 'Thesis', credits: 7.5, grade: 'Not finished' });
         updatedSemesters[1].courses.push({ name: 'Thesis', credits: 7.5, grade: 'Not finished' });
@@ -84,16 +86,14 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         updatedSemesters[3].courses.push({ name: 'Thesis', credits: 7.5, grade: 'Not finished' });
       }
 
+      // Add internship courses if selected
       if (hasInternship) {
-        updatedSemesters[0].courses = [
-          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
-        updatedSemesters[1].courses = [
-          { name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
+        updatedSemesters[0].courses.push({ name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true });
+        updatedSemesters[1].courses.push({ name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true });
       }
 
-      if (!hasInternship && exchangeOption !== 'fall') {
+      // Add electives if not on exchange
+      if (exchangeOption !== 'fall') {
         if (electiveSemester1A) {
           updatedSemesters[0].courses.push({
             name: 'Elective Course',
@@ -206,11 +206,9 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
   };
 
   const handleInternshipSelect = (value: boolean) => {
-    setSemesters(Array(4).fill({ courses: [] }));
     setHasInternship(value);
     if (value) {
       setExchangeOption('none');
-      setThesisOption('none');
     }
   };
 
@@ -222,7 +220,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     <Card className="mb-8">
       <CardHeader className={`bg-secondary ${isMobile ? 'px-2' : ''}`}>
         <CardTitle className="text-2xl font-semibold">
-          Third year
+          Third Year
         </CardTitle>
       </CardHeader>
       <CardContent className={`pt-6 ${isMobile ? 'px-1' : ''}`}>
@@ -240,7 +238,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         {/* Semester 1 */}
         <div className="mb-8">
           <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
-            Semester 1
+            First Period
           </h3>
           <Card className={`mb-4 ${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4`}>
             <div className={`space-y-6 ${isMobile ? "flex flex-col" : ""}`}>
@@ -275,7 +273,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         {/* Semester 2 */}
         <div className="mb-8">
           <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
-            Semester 2
+            Second Period
           </h3>
           <Card className={`mb-4 ${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4`}>
             <div className={`space-y-6 ${isMobile ? "flex flex-col" : ""}`}>
@@ -311,7 +309,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         {[2, 3].map((semesterIndex) => (
           <div key={semesterIndex} className="mb-8">
             <h3 className={`text-lg font-medium mb-4 ${isMobile ? 'px-2' : 'px-4'}`}>
-              Semester {semesterIndex + 1}
+            {semesterIndex === 2 ? "Third Period" : semesterIndex === 3 ? "Fourth Period" : `Semester ${semesterIndex + 1}`}
             </h3>
             <Card className={`mb-4 ${isMobile ? 'mx-1' : 'mx-4'} bg-muted shadow-sm p-4`}>
               <div className={`space-y-6 ${isMobile ? "flex flex-col" : ""}`}>
@@ -345,7 +343,7 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
         ))}
 
         <div className={`mt-6 w-full bg-muted ${isMobile ? 'p-2' : 'p-4'} rounded-lg shadow-sm`}>
-          <Badge variant="secondary" className="text-lg px-4 py-1">
+        <Badge variant="secondary" className="text-lg px-4 py-1">
             Third Year GPA: {gpa.toFixed(2)}
           </Badge>
         </div>
@@ -353,3 +351,4 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
     </Card>
   );
 };
+

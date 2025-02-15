@@ -84,7 +84,7 @@ export const Year3Controls = ({
           <SelectValue placeholder="Thesis Period" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="none">No Thesis</SelectItem>
+          <SelectItem value="none">Remove Thesis</SelectItem>
           <SelectItem value="fall">Fall Thesis</SelectItem>
           <SelectItem value="spring">Spring Thesis</SelectItem>
         </SelectContent>
