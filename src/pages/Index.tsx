@@ -217,14 +217,13 @@ const Index = () => {
     <div className="py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4"></h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">SSE GPA Calculator</h1>
           <p className="text-1xl text-black-400 leading-relaxed mb-10 max-w-5xl mx-auto text-justify ">
             Dedicated GPA calculator for students at the Stockholm School of Economics. 
             Designed specifically for the <span className="font-semibold text-indigo-600">
               Bachelor in Business and Economics</span> program. If there's enough demand, 
             we’ll expand to include Retail Management and Master’s program. This tool is fully anonymous 
             and does not collect or store any personal data.
-            <br /><br />
           </p>
         </div>
 

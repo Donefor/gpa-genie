@@ -1,4 +1,3 @@
-
 import { Course, Grade } from '@/types';
 
 export const getGradeValue = (grade: Grade): number => {
@@ -13,7 +12,7 @@ export const getGradeValue = (grade: Grade): number => {
       return 5.0;
     default:
       return 0;
-  };
+  }
 };
 
 export const calculateGPA = (courses: Course[]): number => {
@@ -22,7 +21,7 @@ export const calculateGPA = (courses: Course[]): number => {
 
   courses.forEach(course => {
     if (!course) return; // Skip undefined courses
-    
+
     // Skip pass/fail courses in GPA calculation
     if (!course.isPassFail && course.grade && course.grade !== 'Not finished' && course.grade !== 'Pass/Fail') {
       totalPoints += course.credits * getGradeValue(course.grade);
@@ -30,7 +29,7 @@ export const calculateGPA = (courses: Course[]): number => {
     }
   });
 
-  return totalCredits === 0 ? 0 : Number((totalPoints / totalCredits).toFixed(2));
+  return totalCredits === 0 ? 0 : Number((totalPoints / totalCredits).toFixed(3)); // Updated to 3 decimal points
 };
 
 export const validateCredits = (courses: Course[]): boolean => {

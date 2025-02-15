@@ -38,6 +38,7 @@ const TableBody = React.forwardRef<
     ref={ref}
     className={cn(
       "[&_tr:last-child]:border-0 bg-white",
+      "[&>tr:hover]:bg-gray-100", // Apply hover effect to direct child rows
       className
     )}
     {...props}
@@ -68,8 +69,6 @@ const TableRow = React.forwardRef<
     ref={ref}
     className={cn(
       "border-b border-gray-200 transition-colors",
-      // Apply hover effect only to rows inside tbody
-      "hover:bg-gray-100 data-[state=selected]:bg-gray-100",
       className
     )}
     {...props}
