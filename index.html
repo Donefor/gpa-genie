@@ -7,6 +7,18 @@
     <meta name="description" content="SSE GPA Calculator" />
     <meta name="author" content="SSEGPA" />
     <meta property="og:image" content="/og-image.png" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BV0BS6QSRK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-BV0BS6QSRK");
+    </script>
+
     <style>
       /* Header styling */
       .header {
@@ -17,15 +29,15 @@
         top: 0;
         width: 100%;
         box-sizing: border-box;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         z-index: 1000;
       }
-      
+
       .nav {
         display: flex;
         justify-content: center;
       }
-      
+
       .nav a {
         color: white;
         text-decoration: none;
@@ -35,12 +47,12 @@
         border-radius: 4px;
         transition: background-color 0.3s;
       }
-      
+
       .nav a:hover {
         background-color: #333;
         text-decoration: none;
       }
-      
+
       /* Main content area */
       .content {
         margin-top: 60px; /* Space for fixed header */
@@ -57,12 +69,12 @@
         <a href="/stats.html">Grade Statistics</a>
       </div>
     </div>
-    
+
     <!-- Main Content -->
     <div class="content">
       <div id="root"></div>
     </div>
-    
+
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
