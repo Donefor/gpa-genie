@@ -263,16 +263,6 @@ const Index = () => {
       <p className="text-lg font-medium mb-4">If you have feedback, want to report a bug, or contribute, please do reach out! :)</p>
       <div className="flex justify-center items-center space-x-8">
         <p>
-          Mail:{" "}
-          <a
-            href="mailto:25841@s.hhs.se"
-            className="text-blue-400 hover:text-blue-300 transition-colors"
-          >
-            25841@s.hhs.se
-          </a>
-        </p>
-        <p>
-          IG:{" "}
           <a
             href="https://instagram.com/jonaspeetersen"
             target="_blank"
@@ -280,6 +270,15 @@ const Index = () => {
             className="text-blue-400 hover:text-blue-300 transition-colors"
           >
             @jonaspeetersen
+          </a>
+          &nbsp;&nbsp;
+          <a
+            href="https://www.linkedin.com/in/erik-m-%C3%A5str%C3%B6m-7b02a715b/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            @Erik M. Åström 
           </a>
         </p>
       </div>
