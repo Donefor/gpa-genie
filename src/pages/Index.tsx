@@ -222,8 +222,7 @@ const Index = () => {
             Dedicated GPA calculator for students at the Stockholm School of Economics. 
             Designed specifically for the <span className="font-semibold text-indigo-600">
               Bachelor in Business and Economics</span> program. If there's enough demand, 
-            we’ll expand to include Retail Management and Master’s program. This tool is fully anonymous 
-            and does not collect or store any personal data.
+            we’ll expand to include Retail Management and Master’s program.
           </p>
         </div>
 
@@ -285,7 +284,13 @@ const Index = () => {
     </div>
     <div className="border-t border-gray-700 pt-6 text-justify">
       <span className="text-sm text-gray-500 italic">
-        This tool is an independent project developed and maintained by a third party. It is not officially affiliated with, endorsed by, or supported by the Stockholm School of Economics (SSE) in any capacity. SSE assumes no responsibility for the accuracy, functionality, or use of this tool. The third-party developer also disclaims any liability for errors, inaccuracies, or outcomes resulting from the use of this tool. Users are advised to exercise their own judgment and verify all calculations independently, especially in cases of uncertainty.
+      This tool is an independent project developed and maintained by a third party. 
+      It is not officially affiliated with, endorsed by, or supported by the Stockholm School of Economics in any capacity. 
+      SSE assumes no responsibility for the accuracy, functionality, or use of this tool. 
+      The third-party developer also disclaims any liability for errors, inaccuracies, or outcomes resulting from the use of this tool. 
+      Users are advised to exercise their own judgment and verify all calculations independently, especially in cases of uncertainty.
+      To improve the user experience, we use Hotjar to record anonymous sessions and track interactions such as button clicks. 
+      This data helps us understand how users interact with the tool and make improvements. All data collected through Hotjar is anonymized and used solely for enhancing the functionality and usability of the Service
       </span>
     </div>
   </div>
