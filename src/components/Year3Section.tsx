@@ -49,120 +49,284 @@ export const Year3Section = ({ previousYearCourses = [] }: Year3SectionProps) =>
       return newSemesters;
     });
   };
-
   useEffect(() => {
-    const emptySemesters = Array(4).fill(null).map(() => ({ courses: [] }));
-    
-    setSemesters(() => {
+    setSemesters((prevSemesters) => {
+      // Create a deep copy of the existing semesters to preserve previous state
+      const emptySemesters = Array(4).fill(null).map(() => ({ courses: [] }));
       const updatedSemesters = [...emptySemesters];
-
+      
+      // Helper function to find an existing course in the previous state
+      const findExistingCourse = (semesterIndex, courseName, courseType, courseIndex = 0) => {
+        if (!prevSemesters || !prevSemesters[semesterIndex] || !prevSemesters[semesterIndex].courses) {
+          return null;
+        }
+        
+        // Filter courses by name and ensure we're only matching the same course type
+        // This ensures we don't accidentally convert internships to electives
+        const matchingCourses = prevSemesters[semesterIndex].courses.filter(
+          course => course.name === courseName && 
+                  // For electives, ensure we're not matching a former internship course
+                  (courseName !== 'Elective Course' || course.wasInternship !== true)
+        );
+        
+        // Return the course at the specific index among matching courses, if it exists
+        return matchingCourses.length > courseIndex ? matchingCourses[courseIndex] : null;
+      };
+  
       // Add exchange courses if selected
       if (exchangeOption === 'fall') {
-        updatedSemesters[0].courses = [
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
-        updatedSemesters[1].courses = [
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
+        // Add first exchange course for semester 1
+        const exchange1A = findExistingCourse(0, 'Exchange', 'exchange', 0);
+        updatedSemesters[0].courses.push({ 
+          name: 'Exchange', 
+          credits: 7.5, 
+          grade: exchange1A ? exchange1A.grade : 'Not finished', 
+          isPassFail: true 
+        });
+        
+        // Add second exchange course for semester 1
+        const exchange1B = findExistingCourse(0, 'Exchange', 'exchange', 1);
+        updatedSemesters[0].courses.push({ 
+          name: 'Exchange', 
+          credits: 7.5, 
+          grade: exchange1B ? exchange1B.grade : 'Not finished', 
+          isPassFail: true 
+        });
+        
+        // Add first exchange course for semester 2
+        const exchange2A = findExistingCourse(1, 'Exchange', 'exchange', 0);
+        updatedSemesters[1].courses.push({ 
+          name: 'Exchange', 
+          credits: 7.5, 
+          grade: exchange2A ? exchange2A.grade : 'Not finished', 
+          isPassFail: true 
+        });
+        
+        // Add second exchange course for semester 2
+        const exchange2B = findExistingCourse(1, 'Exchange', 'exchange', 1);
+        updatedSemesters[1].courses.push({ 
+          name: 'Exchange', 
+          credits: 7.5, 
+          grade: exchange2B ? exchange2B.grade : 'Not finished', 
+          isPassFail: true 
+        });
       } else if (exchangeOption === 'spring') {
-        updatedSemesters[2].courses = [
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
-        updatedSemesters[3].courses = [
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true },
-          { name: 'Exchange', credits: 7.5, grade: 'Not finished', isPassFail: true }
-        ];
+        // Add first exchange course for semester 3
+        const exchange3A = findExistingCourse(2, 'Exchange', 'exchange', 0);
+        updatedSemesters[2].courses.push({ 
+          name: 'Exchange', 
+          credits: 7.5, 
+          grade: exchange3A ? exchange3A.grade : 'Not finished', 
+          isPassFail: true 
+        });
+        
+        // Add second exchange course for semester 3
+        const exchange3B = findExistingCourse(2, 'Exchange', 'exchange', 1);
+        updatedSemesters[2].courses.push({ 
+          name: 'Exchange', 
+          credits: 7.5, 
+          grade: exchange3B ? exchange3B.grade : 'Not finished', 
+          isPassFail: true 
+        });
+        
+        // Add first exchange course for semester 4
+        const exchange4A = findExistingCourse(3, 'Exchange', 'exchange', 0);
+        updatedSemesters[3].courses.push({ 
+          name: 'Exchange', 
+          credits: 7.5, 
+          grade: exchange4A ? exchange4A.grade : 'Not finished', 
+          isPassFail: true 
+        });
+        
+        // Add second exchange course for semester 4
+        const exchange4B = findExistingCourse(3, 'Exchange', 'exchange', 1);
+        updatedSemesters[3].courses.push({ 
+          name: 'Exchange', 
+          credits: 7.5, 
+          grade: exchange4B ? exchange4B.grade : 'Not finished', 
+          isPassFail: true 
+        });
       }
-
+  
       // Add thesis courses if selected
       if (thesisOption === 'fall' && exchangeOption !== 'fall') {
-        updatedSemesters[0].courses.push({ name: 'Thesis', credits: 7.5, grade: 'Not finished' });
-        updatedSemesters[1].courses.push({ name: 'Thesis', credits: 7.5, grade: 'Not finished' });
+        const thesis1 = findExistingCourse(0, 'Thesis', 'thesis');
+        updatedSemesters[0].courses.push({ 
+          name: 'Thesis', 
+          credits: 7.5, 
+          grade: thesis1 ? thesis1.grade : 'Not finished'
+        });
+        
+        const thesis2 = findExistingCourse(1, 'Thesis', 'thesis');
+        updatedSemesters[1].courses.push({ 
+          name: 'Thesis', 
+          credits: 7.5, 
+          grade: thesis2 ? thesis2.grade : 'Not finished'
+        });
       } else if (thesisOption === 'spring' && exchangeOption !== 'spring') {
-        updatedSemesters[2].courses.push({ name: 'Thesis', credits: 7.5, grade: 'Not finished' });
-        updatedSemesters[3].courses.push({ name: 'Thesis', credits: 7.5, grade: 'Not finished' });
+        const thesis3 = findExistingCourse(2, 'Thesis', 'thesis');
+        updatedSemesters[2].courses.push({ 
+          name: 'Thesis', 
+          credits: 7.5, 
+          grade: thesis3 ? thesis3.grade : 'Not finished'
+        });
+        
+        const thesis4 = findExistingCourse(3, 'Thesis', 'thesis');
+        updatedSemesters[3].courses.push({ 
+          name: 'Thesis', 
+          credits: 7.5, 
+          grade: thesis4 ? thesis4.grade : 'Not finished'
+        });
       }
-
+  
       // Add internship courses if selected
       if (hasInternship) {
-        updatedSemesters[0].courses.push({ name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true });
-        updatedSemesters[1].courses.push({ name: 'Internship', credits: 7.5, grade: 'Not finished', isPassFail: true });
+        const internship1 = findExistingCourse(0, 'Internship', 'internship');
+        updatedSemesters[0].courses.push({ 
+          name: 'Internship', 
+          credits: 7.5, 
+          grade: internship1 ? internship1.grade : 'Not finished', 
+          isPassFail: true,
+          courseType: 'internship' // Add a type identifier
+        });
+        
+        const internship2 = findExistingCourse(1, 'Internship', 'internship');
+        updatedSemesters[1].courses.push({ 
+          name: 'Internship', 
+          credits: 7.5, 
+          grade: internship2 ? internship2.grade : 'Not finished', 
+          isPassFail: true,
+          courseType: 'internship' // Add a type identifier
+        });
       }
-
+  
+      // Helper function to count only true electives (not former internships)
+      const getElectiveCount = (semesterIndex) => {
+        if (!prevSemesters || !prevSemesters[semesterIndex]) return 0;
+        return prevSemesters[semesterIndex].courses.filter(
+          course => course.name === 'Elective Course' && course.wasInternship !== true
+        ).length;
+      };
+  
+      let electiveIndices = [0, 0, 0, 0]; // Track elective indices for each semester
+  
       // Add electives if not on exchange
       if (exchangeOption !== 'fall') {
         if (electiveSemester1A) {
+          const electiveIndex = electiveIndices[0]++;
+          const existingElective = electiveIndex < getElectiveCount(0) ? 
+            findExistingCourse(0, 'Elective Course', 'elective', electiveIndex) : null;
+            
           updatedSemesters[0].courses.push({
             name: 'Elective Course',
             credits: 7.5,
-            grade: 'Not finished',
-            isPassFail: electiveSemester1A === 'Pass/Fail'
+            grade: existingElective ? existingElective.grade : 'Not finished',
+            isPassFail: electiveSemester1A === 'Pass/Fail',
+            courseType: 'elective' // Add a type identifier
           });
         }
+        
         if (electiveSemester1B) {
+          const electiveIndex = electiveIndices[0]++;
+          const existingElective = electiveIndex < getElectiveCount(0) ? 
+            findExistingCourse(0, 'Elective Course', 'elective', electiveIndex) : null;
+            
           updatedSemesters[0].courses.push({
             name: 'Elective Course',
             credits: 7.5,
-            grade: 'Not finished',
-            isPassFail: electiveSemester1B === 'Pass/Fail'
+            grade: existingElective ? existingElective.grade : 'Not finished',
+            isPassFail: electiveSemester1B === 'Pass/Fail',
+            courseType: 'elective' // Add a type identifier
           });
         }
+        
         if (electiveSemester2A) {
+          const electiveIndex = electiveIndices[1]++;
+          const existingElective = electiveIndex < getElectiveCount(1) ? 
+            findExistingCourse(1, 'Elective Course', 'elective', electiveIndex) : null;
+            
           updatedSemesters[1].courses.push({
             name: 'Elective Course',
             credits: 7.5,
-            grade: 'Not finished',
-            isPassFail: electiveSemester2A === 'Pass/Fail'
+            grade: existingElective ? existingElective.grade : 'Not finished',
+            isPassFail: electiveSemester2A === 'Pass/Fail',
+            courseType: 'elective' // Add a type identifier
           });
         }
+        
         if (electiveSemester2B) {
+          const electiveIndex = electiveIndices[1]++;
+          const existingElective = electiveIndex < getElectiveCount(1) ? 
+            findExistingCourse(1, 'Elective Course', 'elective', electiveIndex) : null;
+            
           updatedSemesters[1].courses.push({
             name: 'Elective Course',
             credits: 7.5,
-            grade: 'Not finished',
-            isPassFail: electiveSemester2B === 'Pass/Fail'
+            grade: existingElective ? existingElective.grade : 'Not finished',
+            isPassFail: electiveSemester2B === 'Pass/Fail',
+            courseType: 'elective' // Add a type identifier
           });
         }
       }
-
+  
       if (exchangeOption !== 'spring') {
         if (electiveSemester3A) {
+          const electiveIndex = electiveIndices[2]++;
+          const existingElective = electiveIndex < getElectiveCount(2) ? 
+            findExistingCourse(2, 'Elective Course', 'elective', electiveIndex) : null;
+            
           updatedSemesters[2].courses.push({
             name: 'Elective Course',
             credits: 7.5,
-            grade: 'Not finished',
-            isPassFail: electiveSemester3A === 'Pass/Fail'
+            grade: existingElective ? existingElective.grade : 'Not finished',
+            isPassFail: electiveSemester3A === 'Pass/Fail',
+            courseType: 'elective' // Add a type identifier
           });
         }
+        
         if (electiveSemester3B) {
+          const electiveIndex = electiveIndices[2]++;
+          const existingElective = electiveIndex < getElectiveCount(2) ? 
+            findExistingCourse(2, 'Elective Course', 'elective', electiveIndex) : null;
+            
           updatedSemesters[2].courses.push({
             name: 'Elective Course',
             credits: 7.5,
-            grade: 'Not finished',
-            isPassFail: electiveSemester3B === 'Pass/Fail'
+            grade: existingElective ? existingElective.grade : 'Not finished',
+            isPassFail: electiveSemester3B === 'Pass/Fail',
+            courseType: 'elective' // Add a type identifier
           });
         }
+        
         if (electiveSemester4A) {
+          const electiveIndex = electiveIndices[3]++;
+          const existingElective = electiveIndex < getElectiveCount(3) ? 
+            findExistingCourse(3, 'Elective Course', 'elective', electiveIndex) : null;
+            
           updatedSemesters[3].courses.push({
             name: 'Elective Course',
             credits: 7.5,
-            grade: 'Not finished',
-            isPassFail: electiveSemester4A === 'Pass/Fail'
+            grade: existingElective ? existingElective.grade : 'Not finished',
+            isPassFail: electiveSemester4A === 'Pass/Fail',
+            courseType: 'elective' // Add a type identifier
           });
         }
+        
         if (electiveSemester4B) {
+          const electiveIndex = electiveIndices[3]++;
+          const existingElective = electiveIndex < getElectiveCount(3) ? 
+            findExistingCourse(3, 'Elective Course', 'elective', electiveIndex) : null;
+            
           updatedSemesters[3].courses.push({
             name: 'Elective Course',
             credits: 7.5,
-            grade: 'Not finished',
-            isPassFail: electiveSemester4B === 'Pass/Fail'
+            grade: existingElective ? existingElective.grade : 'Not finished',
+            isPassFail: electiveSemester4B === 'Pass/Fail',
+            courseType: 'elective' // Add a type identifier
           });
         }
       }
-
+  
       return updatedSemesters;
     });
   }, [
