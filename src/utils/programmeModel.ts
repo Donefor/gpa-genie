@@ -67,7 +67,9 @@ export const buildProgrammeTerms = (
 
     const electiveKeys: string[] = [];
     for (let slot = 0; slot < term.electiveSlots; slot += 1) {
-      const key = `${term.key}:${slot}`;
+      // Scoped to the programme: an unscoped key showed a course chosen in one
+      // programme in the same slot of another.
+      const key = `${programme.key}:${term.key}:${slot}`;
       electiveKeys.push(key);
       const type = config.programmeElectives[key];
       const pickedNo = config.programmeElectiveCourses[key] ?? null;
@@ -77,7 +79,7 @@ export const buildProgrammeTerms = (
           toCourse(
             // Keyed by the chosen course, so a grade follows the course rather
             // than the slot it happened to be put in.
-            picked ? `${programme.key}:${key}:${picked.courseNo}` : `${programme.key}:${key}`,
+            picked ? `${key}:${picked.courseNo}` : key,
             picked ? picked.name : 'Elective course',
             picked ? picked.credits : SLOT,
             'elective',
@@ -168,14 +170,14 @@ export const buildMasterYearTwo = (
     const electiveKeys: string[] = [];
     slots.forEach((occupant, index) => {
       if (occupant) return;
-      const key = `y2-p${period}-${index}`;
+      const key = `${programme.key}:y2-p${period}-${index}`;
       electiveKeys.push(key);
       const type = config.programmeElectives[key];
       const pickedNo = config.programmeElectiveCourses[key] ?? null;
       const picked = pickedNo ? catalogueCourse(pickedNo) : undefined;
       if (type || picked) {
         slots[index] = toCourse(
-          picked ? `${programme.key}:${key}:${picked.courseNo}` : `${programme.key}:${key}`,
+          picked ? `${key}:${picked.courseNo}` : key,
           picked ? picked.name : 'Elective course',
           picked ? picked.credits : SLOT,
           'elective',

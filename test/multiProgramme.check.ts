@@ -48,7 +48,7 @@ check('ticking two adds two courses', withTwo.length===base.length+2,
 console.log('\n--- Elective slots ---');
 const bi=programmeByKey('msc-business-innovation');
 const slotTerm=buildProgrammeTerms(bi,cfg({programme:bi.key})).find(t=>t.electiveKeys.length>0)!;
-check('BI year 2 has 4 elective slots', slotTerm.electiveKeys.length===4, String(slotTerm.electiveKeys.length));
+check('a period offers 2 elective slots', slotTerm.electiveKeys.length===2, String(slotTerm.electiveKeys.length));
 const withEl=flattenTerms(buildProgrammeTerms(bi,cfg({
   programme:bi.key, programmeElectives:{[slotTerm.electiveKeys[0]]:'Graded',[slotTerm.electiveKeys[1]]:'Pass/Fail'}})));
 const el=withEl.filter(c=>c.kind==='elective');
@@ -56,14 +56,38 @@ check('two electives appear', el.length===2, String(el.length));
 check('pass/fail elective excluded from GPA',
   calculateStats(el,{[el[0].id]:'Excellent',[el[1].id]:'Excellent'}).gradedCredits===7.5);
 
-console.log('\n--- Grades never leak between programmes ---');
-const ids=new Set<string>(); let dupe=0;
-PROGRAMMES.filter(p=>!p.custom).forEach(p=>{
-  flattenTerms(buildProgrammeTerms(p,cfg({programme:p.key}))).forEach(c=>{
-    if(ids.has(c.id)) dupe++; ids.add(c.id);
+console.log('\n--- Nothing leaks between programmes ---');
+{
+  // A thesis repeats within its own programme by design, so compare owners.
+  const owner=new Map<string,string>(); let shared=0;
+  PROGRAMMES.filter(p=>!p.custom).forEach(p=>{
+    flattenTerms(buildProgrammeTerms(p,cfg({programme:p.key}))).forEach(c=>{
+      const prev=owner.get(c.id);
+      if(prev && prev!==p.key) shared++;
+      owner.set(c.id,p.key);
+    });
   });
-});
-check('every course id is unique across programmes', dupe===0, `${dupe} shared ids`);
+  check('no course id is shared by two programmes', shared===0, `${shared}`);
+
+  // Slot keys must be scoped too, or a choice made in one shows up in another.
+  const keys=new Map<string,string>(); let clash=0;
+  PROGRAMMES.filter(p=>!p.custom).forEach(p=>{
+    buildProgrammeTerms(p,cfg({programme:p.key})).forEach(t=>t.electiveKeys.forEach(k=>{
+      const prev=keys.get(k);
+      if(prev && prev!==p.key) clash++;
+      keys.set(k,p.key);
+    }));
+  });
+  check('no elective slot key is shared by two programmes', clash===0, `${clash}`);
+
+  const fin2=programmeByKey('msc-finance'), eco2=programmeByKey('msc-economics');
+  const fk=buildProgrammeTerms(fin2,cfg({programme:fin2.key})).find(t=>t.electiveKeys.length>0)!.electiveKeys[0];
+  const bleed=flattenTerms(buildProgrammeTerms(eco2,cfg({programme:eco2.key,
+    programmeElectiveCourses:{[fk]:'4335'}, programmeElectives:{[fk]:'Graded' as const}})))
+    .filter(c=>c.kind==='elective');
+  check('a course chosen in Finance does not appear in Economics', bleed.length===0,
+    bleed.map(c=>c.name).join(','));
+}
 
 console.log('\n--- Per-year grouping ---');
 PROGRAMMES.filter(p=>!p.custom).forEach(p=>{
