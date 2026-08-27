@@ -1,0 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# The old statistics page was a static file at /stats.html. It is now a route
+# inside the app, so keep any existing links working.
+[[redirects]]
+  from = "/stats.html"
+  to = "/stats"
+  status = 301
+  force = true
+
+# Client-side routing: every unmatched path must serve the app shell, or a
+# direct visit or refresh on /stats or /privacy returns a 404 from the CDN.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
