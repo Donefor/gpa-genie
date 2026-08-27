@@ -58,9 +58,29 @@ export const SCHOOL_START_MESSAGES = [
   'Everyone around you is just as lost this week',
   'Nobody will ever ask you about your first exam',
   'Say yes to things this term, the grades will still be there',
+  'Learn where the library is before week five',
+  'Ask a second-year. They remember being lost too.',
+  'The first period sets your rhythm, not your degree',
+  'Buy your course books secondhand',
+  'Sign up for one thing that is not a course',
+  'The names and the rooms settle down by October',
+  'Nobody has read the whole reading list. Nobody.',
+  'Three years is longer than it sounds. Pace yourself.',
 ];
 
-export type MessageScope = 'school-start' | 'late-night' | 'general';
+/** Shown from mid-December into the new year. */
+export const CHRISTMAS_MESSAGES = [
+  'God jul och gott nytt år!',
+  'Whatever the second period did to you, it is over',
+  'Rest properly. January arrives soon enough.',
+  'Nobody revises on julafton. Put it down.',
+  'The library is closed. Take the hint.',
+  'Julbord beats the reading room tonight',
+  'New year, new period, clean slate',
+  'Glögg now. Retakes are a January problem.',
+];
+
+export type MessageScope = 'school-start' | 'christmas' | 'late-night' | 'general';
 
 /** Local calendar and clock in Stockholm, wherever the reader happens to be. */
 export const stockholmNow = (now: Date = new Date()) => {
@@ -81,19 +101,25 @@ export const stockholmNow = (now: Date = new Date()) => {
 export const isSchoolStart = ({ month, day }: { month: number; day: number }) =>
   (month === 8 && day >= 20) || (month === 9 && day <= 15);
 
+/** 15 December through 6 January, so it spans julafton and trettondedagen. */
+export const isChristmas = ({ month, day }: { month: number; day: number }) =>
+  (month === 12 && day >= 15) || (month === 1 && day <= 6);
+
 /** 22:00 up to but not including 05:00. */
 export const isLateNight = ({ hour }: { hour: number }) => hour >= 22 || hour < 5;
 
-/** School start wins outright; otherwise late night takes over. */
+/** The calendar wins over the clock: term start, then Christmas, then night. */
 export const scopeFor = (now: Date = new Date()): MessageScope => {
   const clock = stockholmNow(now);
   if (isSchoolStart(clock)) return 'school-start';
+  if (isChristmas(clock)) return 'christmas';
   if (isLateNight(clock)) return 'late-night';
   return 'general';
 };
 
 export const poolFor = (scope: MessageScope): string[] => {
   if (scope === 'school-start') return SCHOOL_START_MESSAGES;
+  if (scope === 'christmas') return CHRISTMAS_MESSAGES;
   if (scope === 'late-night') return LATE_NIGHT_MESSAGES;
   return MESSAGES;
 };
