@@ -4,6 +4,11 @@ import { catalogueCourse } from '@/data/courseCatalogue';
 
 const SLOT = 7.5;
 
+/** A master's year 2 is four periods of 15 ECTS, two slots each. */
+export const PERIODS_PER_YEAR = 4;
+export const SLOTS_PER_PERIOD = 2;
+export const PERIOD_CREDITS = 15;
+
 export interface BuiltTerm {
   key: string;
   year: string;
@@ -34,8 +39,13 @@ const toCourse = (
 export const buildProgrammeTerms = (
   programme: Programme,
   config: ProgramConfig,
-): BuiltTerm[] =>
-  programme.terms.map((term: ProgrammeTerm) => {
+): BuiltTerm[] => {
+  // A master's second year is driven by the thesis and exchange choices, so it
+  // is built by period rather than taken from the programme page.
+  const fixed = programme.terms.filter(
+    (term) => !(programme.level === 'Master' && term.year === 'Year 2'),
+  );
+  const built = fixed.map((term: ProgrammeTerm) => {
     const courses: Course[] = [];
     const choices: BuiltTerm['choices'] = [];
     let choose: BuiltTerm['choose'];
@@ -90,6 +100,11 @@ export const buildProgrammeTerms = (
     };
   });
 
+  return programme.level === 'Master'
+    ? [...built, ...buildMasterYearTwo(programme, config)]
+    : built;
+};
+
 /** Terms grouped under their year heading, in page order. */
 export const groupByYear = (terms: BuiltTerm[]) => {
   const years = new Map<string, BuiltTerm[]>();
@@ -112,3 +127,93 @@ export const groupProgrammeYears = (
   const terms = buildProgrammeTerms(programme, config);
   return groupByYear(terms).map((group) => flattenTerms(group.terms));
 };
+
+
+/**
+ * Year 2 of a master's, laid out by period rather than semester.
+ *
+ * The thesis is required and takes a whole half-year; an exchange, if taken,
+ * takes the other. Whatever periods are left are elective slots. This mirrors
+ * how the bachelor's third year is built, for the same reason: a period can
+ * then never hold more than its 15 ECTS.
+ */
+export const buildMasterYearTwo = (
+  programme: Programme,
+  config: ProgramConfig,
+): BuiltTerm[] => {
+  const thesisPeriods = config.mscThesis === 'fall' ? [1, 2] : [3, 4];
+  const exchangePeriods =
+    config.mscExchange === 'fall' ? [1, 2] : config.mscExchange === 'spring' ? [3, 4] : [];
+
+  return [1, 2, 3, 4].map((period) => {
+    const slots: (Course | null)[] = new Array(SLOTS_PER_PERIOD).fill(null);
+    const label = `Period ${period}`;
+
+    if (thesisPeriods.includes(period)) {
+      // 30 ECTS across two periods, one shared id so both halves hold one grade.
+      slots[0] = toCourse(`${programme.key}:thesis`, "Master's thesis", PERIOD_CREDITS, 'thesis');
+      slots[1] = slots[0];
+    } else if (exchangePeriods.includes(period)) {
+      for (let i = 0; i < SLOTS_PER_PERIOD; i += 1) {
+        slots[i] = toCourse(
+          `${programme.key}:y2-p${period}-exchange-${i}`,
+          'Exchange',
+          SLOT,
+          'exchange',
+          true,
+        );
+      }
+    }
+
+    const electiveKeys: string[] = [];
+    slots.forEach((occupant, index) => {
+      if (occupant) return;
+      const key = `y2-p${period}-${index}`;
+      electiveKeys.push(key);
+      const type = config.programmeElectives[key];
+      const pickedNo = config.programmeElectiveCourses[key] ?? null;
+      const picked = pickedNo ? catalogueCourse(pickedNo) : undefined;
+      if (type || picked) {
+        slots[index] = toCourse(
+          picked ? `${programme.key}:${key}:${picked.courseNo}` : `${programme.key}:${key}`,
+          picked ? picked.name : 'Elective course',
+          picked ? picked.credits : SLOT,
+          'elective',
+          type === 'Pass/Fail',
+          picked ? picked.courseNo : null,
+        );
+      }
+    });
+
+    // The thesis fills both slots of its periods but is a single course.
+    const courses: Course[] = [];
+    slots.forEach((slot, index) => {
+      if (!slot) return;
+      if (index > 0 && slots[index - 1] === slot) return;
+      courses.push(slot);
+    });
+
+    return {
+      key: `y2-p${period}`,
+      year: 'Year 2',
+      label,
+      credits: PERIOD_CREDITS,
+      courses,
+      electiveKeys,
+      choices: [],
+    };
+  });
+};
+
+/** How many of the chosen electives come from the programme's own department. */
+export const departmentElectiveCount = (
+  programme: Programme,
+  config: ProgramConfig,
+): number =>
+  Object.values(config.programmeElectiveCourses).filter(
+    (courseNo): courseNo is string =>
+      !!courseNo && programme.departmentPrefixes.some((prefix) => courseNo.startsWith(prefix)),
+  ).length;
+
+/** Electives from your own department that a master's requires. */
+export const REQUIRED_DEPARTMENT_ELECTIVES = 4;

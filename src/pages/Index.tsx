@@ -38,6 +38,8 @@ const Index = () => {
     setProgrammeElective,
     setProgrammeElectiveCourse,
     toggleProgrammeChoice,
+    setMscThesis,
+    setMscExchange,
     reset,
     hasProgress,
   } = useProgramState();
@@ -212,6 +214,8 @@ const Index = () => {
             onElectiveChange={setProgrammeElective}
             onChoiceToggle={toggleProgrammeChoice}
             onElectiveCourseChange={setProgrammeElectiveCourse}
+            onThesisChange={setMscThesis}
+            onExchangeChange={setMscExchange}
           />
         )}
       </main>

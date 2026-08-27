@@ -5,6 +5,7 @@ import { buildProgrammeTerms, flattenTerms, groupByYear } from '@/utils/programm
 import { calculateStats, formatGpa } from '@/utils/calculations';
 import { cn } from '@/lib/utils';
 import { TermCard } from './TermCard';
+import { MasterYearTwoOptions } from './MasterYearTwoOptions';
 
 interface ProgrammeViewProps {
   programme: Programme;
@@ -14,6 +15,8 @@ interface ProgrammeViewProps {
   onElectiveChange: (key: string, type: ElectiveType | null) => void;
   onChoiceToggle: (key: string, taken: boolean) => void;
   onElectiveCourseChange: (key: string, courseNo: string | null) => void;
+  onThesisChange: (half: 'fall' | 'spring') => void;
+  onExchangeChange: (half: 'none' | 'fall' | 'spring') => void;
 }
 
 export const ProgrammeView = ({
@@ -24,6 +27,8 @@ export const ProgrammeView = ({
   onElectiveChange,
   onChoiceToggle,
   onElectiveCourseChange,
+  onThesisChange,
+  onExchangeChange,
 }: ProgrammeViewProps) => {
   const terms = useMemo(
     () => buildProgrammeTerms(programme, config),
@@ -71,6 +76,14 @@ export const ProgrammeView = ({
             </header>
 
             <div className="space-y-4 p-3 sm:p-5">
+              {programme.level === 'Master' && year === 'Year 2' && (
+                <MasterYearTwoOptions
+                  programme={programme}
+                  config={config}
+                  onThesisChange={onThesisChange}
+                  onExchangeChange={onExchangeChange}
+                />
+              )}
               {yearTerms.map((term) => (
                 <TermCard
                   key={term.key}

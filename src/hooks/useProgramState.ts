@@ -15,6 +15,8 @@ export const emptyConfig: ProgramConfig = {
   programme: 'bsc-business-economics',
   programmeElectives: {},
   programmeElectiveCourses: {},
+  mscThesis: 'spring',
+  mscExchange: 'none',
   programmeChoices: {},
   specialization: null,
   secondSpecialization: null,
@@ -40,6 +42,8 @@ type Action =
   | { type: 'setProgrammeElective'; key: string; elective: ElectiveType | null }
   | { type: 'setProgrammeElectiveCourse'; key: string; courseNo: string | null }
   | { type: 'toggleProgrammeChoice'; key: string; taken: boolean }
+  | { type: 'setMscThesis'; half: 'fall' | 'spring' }
+  | { type: 'setMscExchange'; half: 'none' | 'fall' | 'spring' }
   | { type: 'reset' }
   | { type: 'hydrate'; state: ProgramState };
 
@@ -89,6 +93,24 @@ const reducer = (state: ProgramState, action: Action): ProgramState => {
           },
         },
       };
+
+    // The thesis is required, so choosing a half never clears it — it moves,
+    // and an exchange in the way is pushed to the other half.
+    case 'setMscThesis': {
+      const next: ProgramConfig = { ...config, mscThesis: action.half };
+      if (config.mscExchange === action.half) {
+        next.mscExchange = action.half === 'fall' ? 'spring' : 'fall';
+      }
+      return { ...state, config: next };
+    }
+
+    case 'setMscExchange': {
+      const next: ProgramConfig = { ...config, mscExchange: action.half };
+      if (action.half !== 'none' && config.mscThesis === action.half) {
+        next.mscThesis = action.half === 'fall' ? 'spring' : 'fall';
+      }
+      return { ...state, config: next };
+    }
 
     case 'toggleProgrammeChoice':
       return {
@@ -204,6 +226,9 @@ export const useProgramState = () => {
         dispatch({ type: 'setProgrammeElectiveCourse', key, courseNo }),
       toggleProgrammeChoice: (key: string, taken: boolean) =>
         dispatch({ type: 'toggleProgrammeChoice', key, taken }),
+      setMscThesis: (half: 'fall' | 'spring') => dispatch({ type: 'setMscThesis', half }),
+      setMscExchange: (half: 'none' | 'fall' | 'spring') =>
+        dispatch({ type: 'setMscExchange', half }),
       setSpecialization: (spec: Specialization | null) =>
         dispatch({ type: 'setSpecialization', spec }),
       setSecondSpecialization: (spec: Specialization | null) =>
