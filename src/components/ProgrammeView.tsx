@@ -41,6 +41,9 @@ export const ProgrammeView = ({
         const courses = flattenTerms(yearTerms);
         const stats = calculateStats(courses, grades);
         const hasGrades = stats.gradedCredits > 0;
+        // Against what the year is worth, not what has been filled in so far:
+        // empty elective slots would otherwise make a 60 ECTS year read as 30.
+        const capacity = yearTerms.reduce((sum, term) => sum + term.credits, 0);
 
         return (
           <section key={year} className="surface-card overflow-hidden">
@@ -48,7 +51,7 @@ export const ProgrammeView = ({
               <div>
                 <h2 className="text-base font-semibold tracking-tight">{year}</h2>
                 <p className="numeric mt-0.5 text-xs text-muted-foreground">
-                  {stats.completedCredits} of {stats.plannedCredits} ECTS completed
+                  {stats.completedCredits} of {capacity} ECTS completed
                   {stats.pendingCourses > 0 && ` · ${stats.pendingCourses} awaiting a grade`}
                 </p>
               </div>
