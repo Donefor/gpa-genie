@@ -39,6 +39,27 @@ const Privacy = () => (
         By using the Service you agree to the practices described below.
       </p>
 
+      <div className="mt-6 rounded-md border border-border bg-muted/50 p-4">
+        <h2 className="text-base tracking-tight">In plain terms</h2>
+        <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-muted-foreground">
+          <li>
+            <strong className="font-medium text-foreground">We cannot tell who you are.</strong>{' '}
+            There is no sign-up, and we never see your name, email address or student number.
+          </li>
+          <li>
+            <strong className="font-medium text-foreground">We can see how the site is
+            used</strong> — roughly where a visit came from, what device and browser, and a
+            replay of what happened on screen, which includes the grades entered.
+          </li>
+          <li>
+            <strong className="font-medium text-foreground">This still counts as personal
+            data.</strong> An IP address and the identifiers our providers set are treated as
+            personal data under the GDPR even without a name attached, so the data is
+            pseudonymous rather than anonymous.
+          </li>
+        </ul>
+      </div>
+
       <Section number={1} title="Information we collect">
         <p>
           <strong className="font-medium text-foreground">Information you enter.</strong> The
