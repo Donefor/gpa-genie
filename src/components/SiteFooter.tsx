@@ -32,7 +32,7 @@ export const SiteFooter = () => (
           to="/privacy"
           className="text-sm font-medium text-primary underline-offset-4 hover:underline"
         >
-          Privacy
+          Privacy Notice
         </Link>
       </div>
 
@@ -44,7 +44,7 @@ export const SiteFooter = () => (
         errors, inaccuracies, or outcomes resulting from its use — please verify all
         calculations independently in cases of uncertainty. See the{' '}
         <Link to="/privacy" className="underline underline-offset-2 hover:text-foreground">
-          privacy page
+          privacy notice
         </Link>{' '}
         for what is recorded.
       </p>

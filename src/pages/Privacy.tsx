@@ -27,13 +27,13 @@ const Privacy = () => (
     <AppHeader />
 
     <main className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Privacy Policy</h1>
+      <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Privacy Notice</h1>
       <p className="numeric mt-2 text-xs text-muted-foreground">
         Last updated: {LAST_UPDATED}
       </p>
 
       <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-        This Privacy Policy explains how the SSE GPA Calculator (the “Service”) collects, uses
+        This Privacy Notice explains how the SSE GPA Calculator (the “Service”) collects, uses
         and safeguards information when you use it. The Service is an independent project and
         is not affiliated with, endorsed by or operated by the Stockholm School of Economics.
         By using the Service you agree to the practices described below.
@@ -85,32 +85,70 @@ const Privacy = () => (
         </p>
       </Section>
 
-      <Section number={2} title="Session recording">
+      <Section number={2} title="Session recording (Hotjar)">
         <p>
-          We use <strong className="font-medium text-foreground">Hotjar Ltd.</strong> to
-          understand how visitors interact with the Service. Hotjar records sessions and
-          aggregates interactions into heatmaps and session replays.
+          We use <strong className="font-medium text-foreground">Hotjar Ltd.</strong> (Level 2,
+          St Julian’s Business Centre, 3, Elia Zammit Street, St Julian’s STJ 1000, Malta) to
+          understand how visitors use the Service. Hotjar records sessions and aggregates
+          interactions into heatmaps and session replays. Hotjar acts as a processor on our
+          behalf under a data processing agreement.
+        </p>
+
+        <p className="text-foreground">
+          <strong className="font-medium">What Hotjar collects</strong>
+        </p>
+        <ul className="ml-4 list-disc space-y-1">
+          <li>Your IP address, which Hotjar anonymises, and the country derived from it</li>
+          <li>Device type, operating system, browser and version, screen size and language</li>
+          <li>Referring page, the pages you visit, and the dates and times of your visit</li>
+          <li>Mouse movement, clicks and taps, scrolling and other interactions</li>
+          <li>
+            A replay of what was rendered on your screen. Because the grades and programme
+            choices you select are displayed on the page, they appear in the replay along with
+            the grade point average calculated from them.
+          </li>
+          <li>
+            Cookies that identify your browser between visits, including{' '}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">_hjSessionUser_*</code> and{' '}
+            <code className="rounded bg-muted px-1 py-0.5 text-xs">_hjSession_*</code>
+          </li>
+        </ul>
+
+        <p>
+          Hotjar suppresses the contents of text input fields by default, so anything typed
+          into a text box is not recorded. The Service does not ask you to type anything.
+        </p>
+
+        <p>
+          <strong className="font-medium text-foreground">Why.</strong> To see where the
+          interface causes difficulty and to fix it, and to diagnose faults.
         </p>
         <p>
-          <strong className="font-medium text-foreground">
-            These recordings capture what is displayed on your screen while you use the
-            Service, which includes the grades and programme choices you enter and the grade
-            point average calculated from them.
-          </strong>{' '}
-          Recordings also capture mouse movement, clicks, scrolling, and the pages and
-          elements you interact with.
+          <strong className="font-medium text-foreground">Legal basis.</strong> Your consent
+          for the storage of and access to information on your device, and our legitimate
+          interest in improving and securing the Service for the subsequent analysis. You may
+          withdraw consent at any time, as described in section 10.
         </p>
         <p>
-          Recordings are pseudonymous: they are not linked to your name, email address or any
-          other identifier that would allow us to identify you personally, and we make no
-          attempt to do so. Because the information you enter is self-reported and not
-          verified, it does not constitute an official academic record.
+          <strong className="font-medium text-foreground">Where it is processed.</strong>{' '}
+          Hotjar is established in the European Union and hosts data on servers within the
+          European Economic Area.
         </p>
         <p>
-          Hotjar acts as a data processor on our behalf and processes the data in accordance
-          with its own privacy policy and retention schedule. For further information, and to
-          opt out of Hotjar across all sites that use it, see Hotjar’s privacy policy and
-          opt-out page at hotjar.com.
+          <strong className="font-medium text-foreground">How long it is kept.</strong>{' '}
+          Recordings and the associated data are retained by Hotjar in line with the retention
+          period configured for our account, after which they are deleted.
+        </p>
+        <p>
+          <strong className="font-medium text-foreground">Identifiability.</strong> This data
+          is pseudonymous: it is not linked to your name, email address or student number, and
+          we make no attempt to identify you. The grades shown in a recording are self-reported
+          and unverified, and are not an official academic record.
+        </p>
+        <p>
+          <strong className="font-medium text-foreground">Opting out.</strong> Hotjar honours
+          the browser <em>Do Not Track</em> setting, and offers an opt-out that applies across
+          every site using Hotjar. See Hotjar’s privacy policy and opt-out page at hotjar.com.
         </p>
       </Section>
 
@@ -216,12 +254,12 @@ const Privacy = () => (
 
       <Section number={12} title="Changes and contact">
         <p>
-          We may update this policy from time to time. Material changes will be reflected in
+          We may update this notice from time to time. Material changes will be reflected in
           the “Last updated” date at the top of this page, and continued use of the Service
-          after a change constitutes acceptance of the revised policy.
+          after a change constitutes acceptance of the revised notice.
         </p>
         <p>
-          For questions about this policy, or to request removal of a session recording,
+          For questions about this notice, or to request removal of a session recording,
           contact us through the links in the{' '}
           <Link to="/" className="underline underline-offset-2 hover:text-foreground">
             site footer
@@ -231,7 +269,7 @@ const Privacy = () => (
       </Section>
 
       <p className="mt-10 border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
-        This policy is provided for information only and does not constitute legal advice. The
+        This notice is provided for information only and does not constitute legal advice. The
         Service is an independent project and is not affiliated with, endorsed by, or
         supported by the Stockholm School of Economics.
       </p>
