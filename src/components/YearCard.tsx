@@ -15,6 +15,8 @@ interface YearCardProps {
   periodControls?: Record<number, ReactNode>;
   /** Controls rendered directly under the year header. */
   headerControls?: ReactNode;
+  /** Controls rendered immediately before a given period, 1-indexed. */
+  beforePeriod?: Record<number, ReactNode>;
   emptyMessages?: Record<number, string>;
 }
 
@@ -25,6 +27,7 @@ export const YearCard = ({
   onGradeChange,
   periodControls = {},
   headerControls,
+  beforePeriod = {},
   emptyMessages = {},
 }: YearCardProps) => {
   const stats = calculateStats(flattenPeriods(periods), grades);
@@ -56,15 +59,17 @@ export const YearCard = ({
       <div className="space-y-4 p-3 sm:p-5">
         {headerControls}
         {periods.map((period) => (
-          <PeriodCard
-            key={period.index}
-            title={PERIOD_LABELS[period.index - 1]}
-            courses={period.courses}
-            grades={grades}
-            onGradeChange={onGradeChange}
-            controls={periodControls[period.index]}
-            emptyMessage={emptyMessages[period.index]}
-          />
+          <div key={period.index} className="space-y-4">
+            {beforePeriod[period.index]}
+            <PeriodCard
+              title={PERIOD_LABELS[period.index - 1]}
+              courses={period.courses}
+              grades={grades}
+              onGradeChange={onGradeChange}
+              controls={periodControls[period.index]}
+              emptyMessage={emptyMessages[period.index]}
+            />
+          </div>
         ))}
       </div>
     </section>

@@ -172,13 +172,17 @@ const Index = () => {
               periods={year2}
               grades={grades}
               onGradeChange={setGrade}
-              headerControls={
-                <Year2Options
-                  config={config}
-                  onSpecializationChange={setSpecialization}
-                  onSecondSpecializationChange={setSecondSpecialization}
-                />
-              }
+              beforePeriod={{
+                // Sits with the periods it fills, rather than at the top of the
+                // year where you would have to scroll to see the effect.
+                3: (
+                  <Year2Options
+                    config={config}
+                    onSpecializationChange={setSpecialization}
+                    onSecondSpecializationChange={setSecondSpecialization}
+                  />
+                ),
+              }}
               periodControls={year2ElectiveControls}
               emptyMessages={{ 3: year2Empty, 4: year2Empty }}
             />

@@ -41,6 +41,12 @@ export interface Programme {
   note?: string;
   terms: ProgrammeTerm[];
   suggested: SuggestedElective[];
+  /**
+   * Course-number prefixes belonging to this programme's own department,
+   * taken from the numbers its core courses carry. Finance courses run 43xx,
+   * Economics 53xx, and so on.
+   */
+  departmentPrefixes: string[];
 }
 
 const SLOT = 7.5;
@@ -134,7 +140,25 @@ const build = (key: string, raw: RawProgramme): Programme => {
     suggested: raw.courses
       .filter((row) => row.kind === 'electiveOption')
       .map((row) => ({ courseNo: row.courseNo, name: row.course })),
+    departmentPrefixes: departmentPrefixesOf(raw),
   };
+};
+
+/** Prefixes that appear on at least two of the programme's own core courses. */
+const departmentPrefixesOf = (raw: RawProgramme): string[] => {
+  const counts = new Map<string, number>();
+  raw.courses.forEach((row) => {
+    if (row.kind !== 'core' && row.kind !== 'choice') return;
+    const no = row.courseNo;
+    if (!no) return;
+    const prefix = no.startsWith('NDH') ? 'NDH' : /^\d{4}$/.test(no) ? no.slice(0, 2) : null;
+    if (!prefix) return;
+    counts.set(prefix, (counts.get(prefix) ?? 0) + 1);
+  });
+  return [...counts.entries()]
+    .filter(([, n]) => n >= 2)
+    .sort((a, b) => b[1] - a[1])
+    .map(([prefix]) => prefix);
 };
 
 /** Business and Economics is modelled by hand in courseData.ts. */
@@ -147,6 +171,7 @@ export const BUSINESS_ECONOMICS: Programme = {
   custom: true,
   terms: [],
   suggested: [],
+  departmentPrefixes: [],
 };
 
 export const PROGRAMMES: Programme[] = [

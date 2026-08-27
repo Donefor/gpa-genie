@@ -3,10 +3,9 @@ import { BuiltTerm } from '@/utils/programmeModel';
 import { gradeOf, sumCredits } from '@/utils/calculations';
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
-import { SuggestedElective } from '@/data/programmes';
+import { Programme } from '@/data/programmes';
 import { GradeSelect } from './GradeSelect';
-import { ElectiveSelect } from './ElectiveSelect';
-import { CoursePicker } from './CoursePicker';
+import { ElectiveSlotSelect, ElectiveSlotValue } from './ElectiveSlotSelect';
 
 const KIND_LABEL: Record<string, string> = {
   core: 'Course',
@@ -23,7 +22,7 @@ interface TermCardProps {
   onElectiveCourseChange: (key: string, courseNo: string | null) => void;
   electives: Record<string, ElectiveType | null>;
   electiveCourses: Record<string, string | null>;
-  suggested: SuggestedElective[];
+  programme: Programme;
 }
 
 export const TermCard = ({
@@ -35,7 +34,7 @@ export const TermCard = ({
   onElectiveCourseChange,
   electives,
   electiveCourses,
-  suggested,
+  programme,
 }: TermCardProps) => {
   const credits = sumCredits(term.courses);
   const isFull = Math.abs(credits - term.credits) < 0.01;
@@ -82,29 +81,25 @@ export const TermCard = ({
         <div className="mb-3 rounded-md bg-muted/50 p-3">
           <p className="mb-2 text-xs text-muted-foreground">
             {term.electiveKeys.length} elective{term.electiveKeys.length > 1 ? 's' : ''} to fill.
-            Name the course to use its real credits, or leave it unnamed.
+            Pick from your department, or leave a course unnamed.
           </p>
-          <ul className="flex flex-col gap-2">
+          <div className="grid gap-2 sm:grid-cols-2">
             {term.electiveKeys.map((key, index) => (
-              <li key={key} className="flex flex-wrap items-center gap-2">
-                <div className="min-w-0 flex-1">
-                  <CoursePicker
-                    label={`Elective ${index + 1} in ${term.label}`}
-                    value={electiveCourses[key] ?? null}
-                    onChange={(courseNo) => onElectiveCourseChange(key, courseNo)}
-                    suggested={suggested}
-                  />
-                </div>
-                <div className="w-full sm:w-[150px]">
-                  <ElectiveSelect
-                    label={`Type of elective ${index + 1} in ${term.label}`}
-                    value={electives[key] ?? null}
-                    onChange={(type) => onElectiveChange(key, type)}
-                  />
-                </div>
-              </li>
+              <ElectiveSlotSelect
+                key={key}
+                programme={programme}
+                label={`Elective ${index + 1} in ${term.label}`}
+                value={{
+                  courseNo: electiveCourses[key] ?? null,
+                  type: electives[key] ?? null,
+                }}
+                onChange={(next: ElectiveSlotValue) => {
+                  onElectiveCourseChange(key, next.courseNo);
+                  onElectiveChange(key, next.type);
+                }}
+              />
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
