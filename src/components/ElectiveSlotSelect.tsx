@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { coursesInPeriods } from '@/data/courseCatalogue';
+import { CatalogueCourse, coursesInPeriods } from '@/data/courseCatalogue';
 import { Programme } from '@/data/programmes';
 import {
   Select,
@@ -41,6 +41,10 @@ interface ElectiveSlotSelectProps {
   label: string;
   /** Only courses that run in these periods are offered. */
   periods: number[];
+  /** Course number -> where it is already spent. */
+  taken: Map<string, string>;
+  /** This slot's own key, so its own choice stays selectable. */
+  slotKey: string;
 }
 
 /**
@@ -54,6 +58,8 @@ export const ElectiveSlotSelect = ({
   onChange,
   label,
   periods,
+  taken,
+  slotKey,
 }: ElectiveSlotSelectProps) => {
   // A course only runs when it runs: offering it in a period it is not given
   // in would let someone build a plan they cannot actually take.
@@ -83,6 +89,19 @@ export const ElectiveSlotSelect = ({
     [available, suggestedNos, programme],
   );
 
+  const renderCourse = (course: CatalogueCourse) => {
+    const where = taken.get(course.courseNo);
+    // Its own choice must stay selectable, or the slot could not show it.
+    const spent = !!where && where !== slotKey;
+    return (
+      <SelectItem key={course.courseNo} value={course.courseNo} disabled={spent}>
+        {course.name} · {course.credits}
+        {!course.creditsKnown && '*'} ECTS
+        {spent && (where === 'mandatory' ? ' · already required' : ' · already chosen')}
+      </SelectItem>
+    );
+  };
+
   return (
     <Select value={toToken(value)} onValueChange={(token) => onChange(fromToken(token))}>
       <SelectTrigger aria-label={label} className="h-9 w-full">
@@ -102,24 +121,14 @@ export const ElectiveSlotSelect = ({
         {department.length > 0 && (
           <SelectGroup>
             <SelectLabel>Courses in your department</SelectLabel>
-            {department.map((course) => (
-              <SelectItem key={course.courseNo} value={course.courseNo}>
-                {course.name} · {course.credits}
-                {!course.creditsKnown && '*'} ECTS
-              </SelectItem>
-            ))}
+            {department.map(renderCourse)}
           </SelectGroup>
         )}
 
         {alsoNamed.length > 0 && (
           <SelectGroup>
             <SelectLabel>Also suggested for this programme</SelectLabel>
-            {alsoNamed.map((course) => (
-              <SelectItem key={course.courseNo} value={course.courseNo}>
-                {course.name} · {course.credits}
-                {!course.creditsKnown && '*'} ECTS
-              </SelectItem>
-            ))}
+            {alsoNamed.map(renderCourse)}
           </SelectGroup>
         )}
       </SelectContent>

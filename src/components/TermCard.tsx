@@ -24,6 +24,8 @@ interface TermCardProps {
   electives: Record<string, ElectiveType | null>;
   electiveCourses: Record<string, string | null>;
   programme: Programme;
+  /** Course number -> where it is already spent in this programme. */
+  taken: Map<string, string>;
 }
 
 export const TermCard = ({
@@ -36,6 +38,7 @@ export const TermCard = ({
   electives,
   electiveCourses,
   programme,
+  taken,
 }: TermCardProps) => {
   const credits = sumCredits(term.courses);
   const isFull = Math.abs(credits - term.credits) < 0.01;
@@ -92,6 +95,8 @@ export const TermCard = ({
                 programme={programme}
                 label={`Elective ${index + 1} in ${term.label}`}
                 periods={term.periods}
+                taken={taken}
+                slotKey={key}
                 value={{
                   courseNo: electiveCourses[key] ?? null,
                   type: electives[key] ?? null,

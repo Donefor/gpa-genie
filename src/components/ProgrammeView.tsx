@@ -1,7 +1,12 @@
 import { useMemo } from 'react';
 import { ElectiveType, Grade, GradeMap, ProgramConfig } from '@/types';
 import { Programme } from '@/data/programmes';
-import { buildProgrammeTerms, flattenTerms, groupByYear } from '@/utils/programmeModel';
+import {
+  buildProgrammeTerms,
+  flattenTerms,
+  groupByYear,
+  takenCourseNumbers,
+} from '@/utils/programmeModel';
 import { calculateStats, formatGpa } from '@/utils/calculations';
 import { cn } from '@/lib/utils';
 import { TermCard } from './TermCard';
@@ -35,6 +40,7 @@ export const ProgrammeView = ({
     [programme, config],
   );
   const years = useMemo(() => groupByYear(terms), [terms]);
+  const taken = useMemo(() => takenCourseNumbers(programme, config), [programme, config]);
 
   return (
     <div className="space-y-8">
@@ -92,6 +98,7 @@ export const ProgrammeView = ({
                   electives={config.programmeElectives}
                   electiveCourses={config.programmeElectiveCourses}
                   programme={programme}
+                  taken={taken}
                   onElectiveCourseChange={onElectiveCourseChange}
                   onGradeChange={onGradeChange}
                   onElectiveChange={onElectiveChange}

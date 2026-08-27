@@ -238,3 +238,36 @@ export const departmentElectiveCount = (
 
 /** Electives from your own department that a master's requires. */
 export const REQUIRED_DEPARTMENT_ELECTIVES = 4;
+
+
+/**
+ * Course numbers a programme already spends elsewhere: its own fixed courses,
+ * and anything chosen in another elective slot. Offering these again would let
+ * the same course be counted twice.
+ */
+export const takenCourseNumbers = (
+  programme: Programme,
+  config: ProgramConfig,
+): Map<string, string> => {
+  const taken = new Map<string, string>();
+
+  programme.terms.forEach((term) => {
+    term.courses.forEach((course) => {
+      if (!course.courseNo) return;
+      // A choose-group member only counts once the student ticks it.
+      if (course.kind === 'choice') {
+        const key = `${term.key}:choice:${course.id}`;
+        if (!config.programmeChoices[key]) return;
+      }
+      taken.set(course.courseNo, 'mandatory');
+    });
+  });
+
+  Object.entries(config.programmeElectiveCourses).forEach(([slotKey, courseNo]) => {
+    if (!courseNo) return;
+    if (!slotKey.startsWith(`${programme.key}:`)) return;
+    taken.set(courseNo, slotKey);
+  });
+
+  return taken;
+};
