@@ -10,7 +10,7 @@ import {
 import { calculateStats, formatGpa } from '@/utils/calculations';
 import { cn } from '@/lib/utils';
 import { TermCard } from './TermCard';
-import { MasterYearTwoOptions } from './MasterYearTwoOptions';
+import { MasterYearTwo } from './MasterYearTwo';
 
 interface ProgrammeViewProps {
   programme: Programme;
@@ -82,29 +82,36 @@ export const ProgrammeView = ({
             </header>
 
             <div className="space-y-4 p-3 sm:p-5">
-              {programme.level === 'Master' && year === 'Year 2' && (
-                <MasterYearTwoOptions
+              {programme.level === 'Master' && year === 'Year 2' ? (
+                <MasterYearTwo
                   programme={programme}
                   config={config}
+                  terms={yearTerms}
+                  grades={grades}
+                  taken={taken}
+                  onGradeChange={onGradeChange}
+                  onElectiveChange={onElectiveChange}
+                  onElectiveCourseChange={onElectiveCourseChange}
                   onThesisChange={onThesisChange}
                   onExchangeChange={onExchangeChange}
                 />
+              ) : (
+                yearTerms.map((term) => (
+                  <TermCard
+                    key={term.key}
+                    term={term}
+                    grades={grades}
+                    electives={config.programmeElectives}
+                    electiveCourses={config.programmeElectiveCourses}
+                    programme={programme}
+                    taken={taken}
+                    onGradeChange={onGradeChange}
+                    onElectiveChange={onElectiveChange}
+                    onElectiveCourseChange={onElectiveCourseChange}
+                    onChoiceToggle={onChoiceToggle}
+                  />
+                ))
               )}
-              {yearTerms.map((term) => (
-                <TermCard
-                  key={term.key}
-                  term={term}
-                  grades={grades}
-                  electives={config.programmeElectives}
-                  electiveCourses={config.programmeElectiveCourses}
-                  programme={programme}
-                  taken={taken}
-                  onElectiveCourseChange={onElectiveCourseChange}
-                  onGradeChange={onGradeChange}
-                  onElectiveChange={onElectiveChange}
-                  onChoiceToggle={onChoiceToggle}
-                />
-              ))}
             </div>
           </section>
         );

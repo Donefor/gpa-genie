@@ -112,9 +112,12 @@ export const TermCard = ({
       )}
 
       {term.courses.length === 0 ? (
-        <p className="rounded-lg border border-dashed border-border px-3 py-6 text-center text-sm text-muted-foreground">
-          Nothing selected for this term yet.
-        </p>
+        // With slots on screen there is nothing to explain: they are the content.
+        term.electiveKeys.length === 0 && (
+          <p className="rounded-lg border border-dashed border-border px-3 py-6 text-center text-sm text-muted-foreground">
+            Nothing selected for this term yet.
+          </p>
+        )
       ) : (
         <ul className="flex flex-col">
           {term.courses.map((course, index) => {
