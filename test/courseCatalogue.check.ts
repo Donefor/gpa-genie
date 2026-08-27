@@ -65,25 +65,29 @@ console.log(`\n${fail===0?'ALL CATALOGUE CHECKS PASSED':fail+' FAILED'}`);
 import { semesterOfPeriod } from '@/data/courseCatalogue';
 console.log('\n--- Periods ---');
 {
-  const withPeriod = ALL_CATALOGUE.filter(c => c.period !== null);
-  check('248 courses carry a period', withPeriod.length === 248, String(withPeriod.length));
-  check('periods are 1-4', withPeriod.every(c => c.period! >= 1 && c.period! <= 4));
-  check('1-2 map to Autumn, 3-4 to Spring',
-    withPeriod.every(c => c.semester === (c.period! <= 2 ? 'Autumn' : 'Spring')));
-  check('helper agrees', semesterOfPeriod(1)==='Autumn' && semesterOfPeriod(4)==='Spring'
+  check('every course knows at least one period', ALL_CATALOGUE.every(c => c.periods.length > 0));
+  check('periods are 1-4', ALL_CATALOGUE.every(c => c.periods.every(p => p >= 1 && p <= 4)));
+  check('periods are sorted and distinct', ALL_CATALOGUE.every(c =>
+    c.periods.every((p, i) => i === 0 || p > c.periods[i - 1])));
+  check('221 rows run in exactly one period',
+    ALL_CATALOGUE.filter(c => c.periods.length === 1).length === 221,
+    String(ALL_CATALOGUE.filter(c => c.periods.length === 1).length));
+  check('helper maps halves', semesterOfPeriod(1)==='Autumn' && semesterOfPeriod(4)==='Spring'
     && semesterOfPeriod(null)===null);
 
   // A master's semester is half a year, so it holds two periods of 15 ECTS.
   const bi = programmeByKey('msc-business-innovation');
   const s1 = bi.terms.find(t => /Semester 1/.test(t.label))!;
-  const periods = s1.courses.map(c => catalogueCourse(c.courseNo!)?.period);
-  check('MSc semester 1 sits in the autumn', periods.every(p => p === 1 || p === 2),
-    periods.join(','));
-  const p1 = s1.courses.filter(c => catalogueCourse(c.courseNo!)?.period === 1)
-    .reduce((s, c) => s + c.credits, 0);
-  const p2 = s1.courses.filter(c => catalogueCourse(c.courseNo!)?.period === 2)
-    .reduce((s, c) => s + c.credits, 0);
-  check(`and splits 15 + 15 across its two periods`, p1 === 15 && p2 === 15, `${p1} + ${p2}`);
+  const inAutumn = s1.courses.every(c => {
+    const cat = catalogueCourse(c.courseNo!);
+    return !!cat && cat.periods.some(p => p === 1 || p === 2);
+  });
+  check('MSc semester 1 sits in the autumn', inAutumn);
+  const credits = (p: number) => s1.courses
+    .filter(c => catalogueCourse(c.courseNo!)?.periods.includes(p))
+    .reduce((sum, c) => sum + c.credits, 0);
+  check('and splits 15 + 15 across its two periods',
+    credits(1) === 15 && credits(2) === 15, `${credits(1)} + ${credits(2)}`);
 
   check('the bad NDH203 join on International Business is gone',
     !programmeByKey('msc-international-business').terms

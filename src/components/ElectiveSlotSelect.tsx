@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { CATALOGUE } from '@/data/courseCatalogue';
+import { coursesInPeriods } from '@/data/courseCatalogue';
 import { Programme } from '@/data/programmes';
 import {
   Select,
@@ -39,6 +39,8 @@ interface ElectiveSlotSelectProps {
   value: ElectiveSlotValue;
   onChange: (value: ElectiveSlotValue) => void;
   label: string;
+  /** Only courses that run in these periods are offered. */
+  periods: number[];
 }
 
 /**
@@ -51,13 +53,18 @@ export const ElectiveSlotSelect = ({
   value,
   onChange,
   label,
+  periods,
 }: ElectiveSlotSelectProps) => {
+  // A course only runs when it runs: offering it in a period it is not given
+  // in would let someone build a plan they cannot actually take.
+  const available = useMemo(() => coursesInPeriods(periods), [periods]);
+
   const department = useMemo(
     () =>
-      CATALOGUE.filter((course) =>
+      available.filter((course) =>
         programme.departmentPrefixes.some((prefix) => course.courseNo.startsWith(prefix)),
       ),
-    [programme],
+    [available, programme],
   );
 
   const suggestedNos = useMemo(
@@ -68,12 +75,12 @@ export const ElectiveSlotSelect = ({
   // Courses the programme page names but that sit outside its own department.
   const alsoNamed = useMemo(
     () =>
-      CATALOGUE.filter(
+      available.filter(
         (course) =>
           suggestedNos.has(course.courseNo) &&
           !programme.departmentPrefixes.some((prefix) => course.courseNo.startsWith(prefix)),
       ),
-    [suggestedNos, programme],
+    [available, suggestedNos, programme],
   );
 
   return (
@@ -91,7 +98,7 @@ export const ElectiveSlotSelect = ({
               <SelectItem key={course.courseNo} value={course.courseNo}>
                 {course.name} · {course.credits}
                 {!course.creditsKnown && '*'} ECTS
-                {course.period ? ` · P${course.period}` : ''}
+                {course.periods.length ? ` · P${course.periods.join('/')}` : ''}
               </SelectItem>
             ))}
           </SelectGroup>
@@ -104,7 +111,7 @@ export const ElectiveSlotSelect = ({
               <SelectItem key={course.courseNo} value={course.courseNo}>
                 {course.name} · {course.credits}
                 {!course.creditsKnown && '*'} ECTS
-                {course.period ? ` · P${course.period}` : ''}
+                {course.periods.length ? ` · P${course.periods.join('/')}` : ''}
               </SelectItem>
             ))}
           </SelectGroup>

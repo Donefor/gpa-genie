@@ -90,6 +90,7 @@ export const TermCard = ({
                 key={key}
                 programme={programme}
                 label={`Elective ${index + 1} in ${term.label}`}
+                periods={term.periods}
                 value={{
                   courseNo: electiveCourses[key] ?? null,
                   type: electives[key] ?? null,
@@ -111,7 +112,7 @@ export const TermCard = ({
       ) : (
         <ul className="flex flex-col">
           {term.courses.map((course, index) => {
-            const period = course.courseNo ? catalogueCourse(course.courseNo)?.period : null;
+            const runs = course.courseNo ? catalogueCourse(course.courseNo)?.periods : undefined;
             return (
             <li
               key={`${course.id}-${index}`}
@@ -121,7 +122,7 @@ export const TermCard = ({
                 <p className="text-sm font-medium leading-snug">{course.name}</p>
                 <p className="numeric mt-0.5 text-xs text-muted-foreground">
                   {KIND_LABEL[course.kind] ?? 'Course'} · {course.credits} ECTS
-                  {period ? ` · period ${period}` : ''}
+                  {runs?.length ? ` · period ${runs.join('/')}` : ''}
                 </p>
               </div>
               <div className="w-full sm:w-[176px]">

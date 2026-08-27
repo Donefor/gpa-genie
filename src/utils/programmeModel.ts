@@ -4,6 +4,19 @@ import { catalogueCourse } from '@/data/courseCatalogue';
 
 const SLOT = 7.5;
 
+/**
+ * Which periods a term covers. A named period is itself; a semester is the two
+ * periods of its half-year; a merged "semester 3 and 4" is all four.
+ */
+export const periodsOfTerm = (label: string): number[] => {
+  const period = /Period\s+(\d)/.exec(label);
+  if (period) return [Number(period[1])];
+  if (/and \d/.test(label)) return [1, 2, 3, 4];
+  const semester = /Semester\s+(\d)/.exec(label);
+  if (semester) return Number(semester[1]) % 2 === 1 ? [1, 2] : [3, 4];
+  return [];
+};
+
 /** A master's year 2 is four periods of 15 ECTS, two slots each. */
 export const PERIODS_PER_YEAR = 4;
 export const SLOTS_PER_PERIOD = 2;
@@ -14,6 +27,8 @@ export interface BuiltTerm {
   year: string;
   label: string;
   credits: number;
+  /** Which of the four periods this term covers. */
+  periods: number[];
   courses: Course[];
   /** Config keys for the free elective slots in this term. */
   electiveKeys: string[];
@@ -95,6 +110,7 @@ export const buildProgrammeTerms = (
       year: term.year,
       label: term.label,
       credits: term.credits,
+      periods: periodsOfTerm(term.label),
       courses,
       electiveKeys,
       choices,
@@ -200,6 +216,7 @@ export const buildMasterYearTwo = (
       year: 'Year 2',
       label,
       credits: PERIOD_CREDITS,
+      periods: [period],
       courses,
       electiveKeys,
       choices: [],
