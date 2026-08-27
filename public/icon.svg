@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-  <!-- The top grade. Set in the sans, as the GPA figure is in the app itself.
-       Sized to leave clearance: at 16px anything larger clips the nought. -->
-  <rect width="100" height="100" fill="#8fad8a"/>
+  <!-- The top grade. On the olive step rather than the sage: white on sage
+       measures 2.47:1 and disappears, white on olive 5.52:1. -->
+  <rect width="100" height="100" fill="#5c6e52"/>
   <text x="50" y="69" text-anchor="middle" fill="#ffffff"
         font-family="Helvetica,Arial,sans-serif" font-weight="800"
         font-size="54" letter-spacing="-2">5.0</text>
