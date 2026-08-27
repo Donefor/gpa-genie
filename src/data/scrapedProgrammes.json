@@ -1227,9 +1227,10 @@
     "year": "Year 1",
     "semester": "Semester 1",
     "course": "Supply Chain Management",
-    "courseNo": "NDH203",
+    "courseNo": null,
     "ects": 7.5,
-    "kind": "core"
+    "kind": "core",
+    "note": "The programme page names this course but publishes no number; the only Supply Chain Management in the grade data is the Retail Management course, which runs in a different semester, so no number is claimed here."
    },
    {
     "year": "Year 1",

@@ -4,6 +4,7 @@ import { gradeOf, sumCredits } from '@/utils/calculations';
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Programme } from '@/data/programmes';
+import { catalogueCourse } from '@/data/courseCatalogue';
 import { GradeSelect } from './GradeSelect';
 import { ElectiveSlotSelect, ElectiveSlotValue } from './ElectiveSlotSelect';
 
@@ -109,7 +110,9 @@ export const TermCard = ({
         </p>
       ) : (
         <ul className="flex flex-col">
-          {term.courses.map((course, index) => (
+          {term.courses.map((course, index) => {
+            const period = course.courseNo ? catalogueCourse(course.courseNo)?.period : null;
+            return (
             <li
               key={`${course.id}-${index}`}
               className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border px-1 py-2 first:border-t-0"
@@ -118,6 +121,7 @@ export const TermCard = ({
                 <p className="text-sm font-medium leading-snug">{course.name}</p>
                 <p className="numeric mt-0.5 text-xs text-muted-foreground">
                   {KIND_LABEL[course.kind] ?? 'Course'} · {course.credits} ECTS
+                  {period ? ` · period ${period}` : ''}
                 </p>
               </div>
               <div className="w-full sm:w-[176px]">
@@ -134,7 +138,8 @@ export const TermCard = ({
                 )}
               </div>
             </li>
-          ))}
+            );
+          })}
         </ul>
       )}
     </section>

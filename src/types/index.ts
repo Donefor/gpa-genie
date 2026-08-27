@@ -24,6 +24,8 @@ export type Course = {
   name: string;
   credits: number;
   kind: CourseKind;
+  /** SSE course number, where the course has one. */
+  courseNo?: string | null;
   /** Pass/Fail courses carry credits but are excluded from the GPA. */
   isPassFail: boolean;
 };

@@ -23,7 +23,8 @@ const toCourse = (
   credits: number,
   kind: Course['kind'],
   isPassFail = false,
-): Course => ({ id, name, credits, kind, isPassFail });
+  courseNo: string | null = null,
+): Course => ({ id, name, credits, kind, isPassFail, courseNo });
 
 /**
  * Turns a programme plus the student's choices into the course list to render.
@@ -41,7 +42,7 @@ export const buildProgrammeTerms = (
 
     term.courses.forEach((entry) => {
       const kind: Course['kind'] = entry.kind === 'thesis' ? 'thesis' : 'core';
-      const course = toCourse(entry.id, entry.name, entry.credits, kind);
+      const course = toCourse(entry.id, entry.name, entry.credits, kind, false, entry.courseNo);
 
       if (entry.kind === 'choice') {
         choose = entry.choose;
@@ -71,6 +72,7 @@ export const buildProgrammeTerms = (
             picked ? picked.credits : SLOT,
             'elective',
             type === 'Pass/Fail',
+            picked ? picked.courseNo : null,
           ),
         );
       }

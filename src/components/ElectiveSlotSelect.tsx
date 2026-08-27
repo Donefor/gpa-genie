@@ -91,6 +91,7 @@ export const ElectiveSlotSelect = ({
               <SelectItem key={course.courseNo} value={course.courseNo}>
                 {course.name} · {course.credits}
                 {!course.creditsKnown && '*'} ECTS
+                {course.period ? ` · P${course.period}` : ''}
               </SelectItem>
             ))}
           </SelectGroup>
@@ -103,6 +104,7 @@ export const ElectiveSlotSelect = ({
               <SelectItem key={course.courseNo} value={course.courseNo}>
                 {course.name} · {course.credits}
                 {!course.creditsKnown && '*'} ECTS
+                {course.period ? ` · P${course.period}` : ''}
               </SelectItem>
             ))}
           </SelectGroup>
