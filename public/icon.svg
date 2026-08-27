@@ -1,10 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-  <!-- Rising grade bars, echoing the distribution charts. Three heavy shapes
-       with wide gaps: anything finer closes up at 16px. -->
+  <!-- The top grade. Set in the sans, as the GPA figure is in the app itself.
+       Sized to leave clearance: at 16px anything larger clips the nought. -->
   <rect width="100" height="100" fill="#8fad8a"/>
-  <g fill="#3e3a35">
-    <rect x="12" y="56" width="18" height="26" rx="4"/>
-    <rect x="41" y="42" width="18" height="40" rx="4"/>
-    <rect x="70" y="26" width="18" height="56" rx="4"/>
-  </g>
+  <text x="50" y="69" text-anchor="middle" fill="#ffffff"
+        font-family="Helvetica,Arial,sans-serif" font-weight="800"
+        font-size="54" letter-spacing="-2">5.0</text>
 </svg>
