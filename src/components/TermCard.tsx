@@ -44,7 +44,7 @@ export const TermCard = ({
   return (
     <section className="rounded-md border border-border p-3 sm:p-4">
       <header className="mb-3 flex flex-wrap items-center justify-between gap-2">
-        <h4 className="text-sm font-semibold tracking-tight">{term.label}</h4>
+        <h4 className="text-base font-semibold tracking-tight">{term.label}</h4>
         <span
           className={cn(
             'numeric text-xs',
@@ -57,7 +57,7 @@ export const TermCard = ({
 
       {term.choose && term.choices.length > 0 && (
         <div className="mb-3 rounded-md bg-muted/50 p-3">
-          <p className="mb-2 text-xs text-muted-foreground">
+          <p className="mb-2 text-sm text-foreground/80">
             Choose {term.choose.pick} of these {term.choose.outOf}. Tick the ones you took.
           </p>
           <ul className="grid gap-1.5 sm:grid-cols-2">
@@ -80,7 +80,7 @@ export const TermCard = ({
 
       {term.electiveKeys.length > 0 && (
         <div className="mb-3 rounded-md bg-muted/50 p-3">
-          <p className="mb-2 text-xs text-muted-foreground">
+          <p className="mb-2 text-sm text-foreground/80">
             {term.electiveKeys.length} elective{term.electiveKeys.length > 1 ? 's' : ''} to fill.
             A generic elective is enough for the average; name the course to use
             its real credits.
@@ -121,7 +121,7 @@ export const TermCard = ({
             >
               <div className="min-w-0 flex-1 basis-full sm:basis-0">
                 <p className="text-sm font-medium leading-snug">{course.name}</p>
-                <p className="numeric mt-0.5 text-xs text-muted-foreground">
+                <p className="numeric mt-0.5 text-xs text-foreground/60">
                   {KIND_LABEL[course.kind] ?? 'Course'} · {course.credits} ECTS
                   {runs?.length ? ` · period ${runs.join('/')}` : ''}
                 </p>

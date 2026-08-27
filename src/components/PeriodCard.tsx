@@ -39,7 +39,7 @@ export const PeriodCard = ({
   return (
     <section className="rounded-md border border-border p-3 sm:p-4">
       <header className="mb-3 flex flex-wrap items-center justify-between gap-2">
-        <h4 className="text-sm font-semibold tracking-tight">{title}</h4>
+        <h4 className="text-base font-semibold tracking-tight">{title}</h4>
         <span
           className={cn(
             'numeric text-xs',
@@ -72,7 +72,7 @@ export const PeriodCard = ({
               >
                 <div className="min-w-0 flex-1 basis-full sm:basis-0">
                   <p className="text-sm font-medium leading-snug">{course.name}</p>
-                  <p className="numeric mt-0.5 text-xs text-muted-foreground">
+                  <p className="numeric mt-0.5 text-xs text-foreground/60">
                     {KIND_LABEL[course.kind]} · {course.credits} ECTS
                     {course.kind === 'thesis' && ' · spans both periods'}
                   </p>

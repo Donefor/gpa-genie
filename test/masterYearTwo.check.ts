@@ -12,9 +12,19 @@ const cfg=(p:string,o:Partial<ProgramConfig>={}):ProgramConfig=>({...emptyConfig
 
 const fin=programmeByKey('msc-finance');
 
-console.log('--- Year 2 is four periods of 15 ---');
+console.log('--- The thesis starts unchosen ---');
 {
+  check('nothing is pre-selected', emptyConfig.mscThesis===null, String(emptyConfig.mscThesis));
   const y2=buildProgrammeTerms(fin,cfg(fin.key)).filter(t=>t.year==='Year 2');
+  check('no thesis is placed until a half is chosen',
+    y2.every(t=>t.courses.every(c=>c.kind!=='thesis')));
+  check('so all four periods offer slots', y2.reduce((s,t)=>s+t.electiveKeys.length,0)===8,
+    String(y2.reduce((s,t)=>s+t.electiveKeys.length,0)));
+}
+
+console.log('\n--- Year 2 is four periods of 15 ---');
+{
+  const y2=buildProgrammeTerms(fin,cfg(fin.key,{mscThesis:'spring'})).filter(t=>t.year==='Year 2');
   check('four periods', y2.length===4, String(y2.length));
   check('each worth 15', y2.every(t=>t.credits===15));
   check('period labels', y2.map(t=>t.label).join(',')==='Period 1,Period 2,Period 3,Period 4',

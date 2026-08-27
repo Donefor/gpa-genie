@@ -83,7 +83,7 @@
   }
 
   .field-label {
-    @apply block text-xs font-medium text-muted-foreground mb-1.5;
+    @apply block text-sm font-semibold text-foreground mb-1.5;
   }
 
   /* Thin rule under a nav item, as on the school's own site. */

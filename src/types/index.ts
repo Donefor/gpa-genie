@@ -69,8 +69,11 @@ export interface ProgramConfig {
   programmeElectives: Record<string, ElectiveType | null>;
   /** The real course chosen for a slot, if the student named one. */
   programmeElectiveCourses: Record<string, string | null>;
-  /** Master's thesis half-year. It is required, so there is no "none". */
-  mscThesis: 'fall' | 'spring';
+  /**
+   * Master's thesis half-year. Null until chosen: the thesis is required, but
+   * pre-selecting a half would look like an answer the student had given.
+   */
+  mscThesis: 'fall' | 'spring' | null;
   /** Optional exchange semester in year 2. */
   mscExchange: 'none' | 'fall' | 'spring';
   /** Which members of a "choose N of M" group the student actually took. */

@@ -18,6 +18,6 @@ export const OptionField = ({
   <div>
     <span className="field-label">{label}</span>
     {children}
-    {hint && <p className="mt-1.5 text-xs text-muted-foreground">{hint}</p>}
+    {hint && <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-foreground/70">{hint}</p>}
   </div>
 );

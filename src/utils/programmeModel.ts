@@ -159,7 +159,9 @@ export const buildMasterYearTwo = (
   programme: Programme,
   config: ProgramConfig,
 ): BuiltTerm[] => {
-  const thesisPeriods = config.mscThesis === 'fall' ? [1, 2] : [3, 4];
+  // Nothing is placed until the student says which half they write in.
+  const thesisPeriods =
+    config.mscThesis === 'fall' ? [1, 2] : config.mscThesis === 'spring' ? [3, 4] : [];
   const exchangePeriods =
     config.mscExchange === 'fall' ? [1, 2] : config.mscExchange === 'spring' ? [3, 4] : [];
 

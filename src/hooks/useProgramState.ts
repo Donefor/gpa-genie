@@ -15,7 +15,7 @@ export const emptyConfig: ProgramConfig = {
   programme: 'bsc-business-economics',
   programmeElectives: {},
   programmeElectiveCourses: {},
-  mscThesis: 'spring',
+  mscThesis: null,
   mscExchange: 'none',
   programmeChoices: {},
   specialization: null,
@@ -42,7 +42,7 @@ type Action =
   | { type: 'setProgrammeElective'; key: string; elective: ElectiveType | null }
   | { type: 'setProgrammeElectiveCourse'; key: string; courseNo: string | null }
   | { type: 'toggleProgrammeChoice'; key: string; taken: boolean }
-  | { type: 'setMscThesis'; half: 'fall' | 'spring' }
+  | { type: 'setMscThesis'; half: 'fall' | 'spring' | null }
   | { type: 'setMscExchange'; half: 'none' | 'fall' | 'spring' }
   | { type: 'reset' }
   | { type: 'hydrate'; state: ProgramState };
@@ -226,7 +226,8 @@ export const useProgramState = () => {
         dispatch({ type: 'setProgrammeElectiveCourse', key, courseNo }),
       toggleProgrammeChoice: (key: string, taken: boolean) =>
         dispatch({ type: 'toggleProgrammeChoice', key, taken }),
-      setMscThesis: (half: 'fall' | 'spring') => dispatch({ type: 'setMscThesis', half }),
+      setMscThesis: (half: 'fall' | 'spring' | null) =>
+        dispatch({ type: 'setMscThesis', half }),
       setMscExchange: (half: 'none' | 'fall' | 'spring') =>
         dispatch({ type: 'setMscExchange', half }),
       setSpecialization: (spec: Specialization | null) =>
