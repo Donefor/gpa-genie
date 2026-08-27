@@ -31,8 +31,10 @@ export const Hero = () => {
   return (
     <section className="relative bg-[var(--sage)]">
       <div className="mx-auto max-w-5xl px-4">
-        <div className="grid items-center gap-6 sm:grid-cols-[1.15fr_1fr]">
-          <div className="pb-28 pt-14 sm:pb-36 sm:pt-24">
+        {/* Padding lives on the row, so both columns share one box and
+            items-center actually lines the title up with the mark. */}
+        <div className="grid items-center gap-6 pb-24 pt-14 sm:grid-cols-[1.15fr_1fr] sm:pb-28 sm:pt-20">
+          <div>
             <h1 className="font-display text-3xl leading-[1.15] text-[var(--bronze)] sm:text-[2.6rem]">
               {message}
             </h1>
@@ -42,7 +44,7 @@ export const Hero = () => {
             </p>
           </div>
 
-          <div className="hidden justify-center pb-28 pt-4 text-[var(--bronze)] sm:flex">
+          <div className="hidden justify-center text-[var(--bronze)] sm:flex">
             <PapersMark className="h-60 w-60" />
           </div>
         </div>

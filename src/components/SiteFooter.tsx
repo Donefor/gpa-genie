@@ -1,60 +1,72 @@
 import { Link } from 'react-router-dom';
 import { openConsentSettings } from '@/lib/consent';
 
+const linkClass =
+  'text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline';
+
+const Heading = ({ children }: { children: React.ReactNode }) => (
+  <h2 className="text-xs font-semibold uppercase tracking-wide text-foreground">{children}</h2>
+);
+
 export const SiteFooter = () => (
   <footer className="mt-16 border-t border-border bg-secondary/40">
-    <div className="mx-auto max-w-5xl px-4 py-10">
-      <div className="mb-8 text-center">
-        <p className="text-base font-medium">
-          Feedback, bug reports and contributions are all very welcome.
-        </p>
-        <div className="mt-3 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-          <a
-            href="https://www.linkedin.com/in/jonas-hoffmann-petersen-405914127/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-medium text-primary underline-offset-4 hover:underline"
-          >
-            Jonas Hoffmann Petersen
-          </a>
-          <a
-            href="https://www.linkedin.com/in/erik-m-%C3%A5str%C3%B6m-7b02a715b/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-medium text-primary underline-offset-4 hover:underline"
-          >
-            Erik M. Åström
-          </a>
+    <div className="mx-auto max-w-5xl px-4 py-12">
+      <div className="grid gap-10 sm:grid-cols-[1.5fr_1fr_1fr]">
+        <div>
+          <p className="font-display text-base">SSE GPA Calculator</p>
+          <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            An independent project, not affiliated with or endorsed by the Stockholm School of
+            Economics. Feedback, bugs and contributions are all welcome.
+          </p>
+        </div>
+
+        <div>
+          <Heading>Get in touch</Heading>
+          <ul className="mt-3 space-y-1.5">
+            <li>
+              <a
+                href="https://www.linkedin.com/in/jonas-hoffmann-petersen-405914127/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+              >
+                Jonas Hoffmann Petersen
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/erik-m-%C3%A5str%C3%B6m-7b02a715b/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+              >
+                Erik M. Åström
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <Heading>Legal</Heading>
+          <ul className="mt-3 space-y-1.5">
+            <li>
+              <Link to="/privacy" className={linkClass}>
+                Privacy notice
+              </Link>
+            </li>
+            <li>
+              <button type="button" onClick={openConsentSettings} className={linkClass}>
+                Cookie settings
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
 
-      <div className="mb-6 flex flex-wrap justify-center gap-x-6 gap-y-2">
-        <Link
-          to="/privacy"
-          className="text-sm font-medium text-primary underline-offset-4 hover:underline"
-        >
-          Privacy Notice
-        </Link>
-        <button
-          type="button"
-          onClick={openConsentSettings}
-          className="text-sm font-medium text-primary underline-offset-4 hover:underline"
-        >
-          Cookie settings
-        </button>
-      </div>
-
-      <p className="border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
-        This tool is an independent project developed and maintained by a third party. It is
-        not officially affiliated with, endorsed by, or supported by the Stockholm School of
-        Economics in any capacity. SSE assumes no responsibility for the accuracy,
-        functionality, or use of this tool. The developers likewise disclaim any liability for
-        errors, inaccuracies, or outcomes resulting from its use — please verify all
-        calculations independently in cases of uncertainty. See the{' '}
-        <Link to="/privacy" className="underline underline-offset-2 hover:text-foreground">
-          privacy notice
-        </Link>{' '}
-        for what is recorded.
+      <p className="mt-10 border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
+        Grades you enter are self-reported and unverified. Check anything that matters against
+        the official record — no liability is accepted for errors or for outcomes arising from
+        use of this tool.
       </p>
     </div>
   </footer>
