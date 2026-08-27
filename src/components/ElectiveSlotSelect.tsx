@@ -93,8 +93,11 @@ export const ElectiveSlotSelect = ({
 
         {/* First, because it is the answer most of the time: the course does
             not need naming for the average to be right. */}
-        <SelectItem value={OTHER_GRADED}>Standard elective · 7.5 ECTS</SelectItem>
-        <SelectItem value={OTHER_PASS_FAIL}>Standard elective · Pass/Fail</SelectItem>
+        <SelectGroup>
+          <SelectLabel>Generic elective</SelectLabel>
+          <SelectItem value={OTHER_GRADED}>Graded · 7.5 ECTS</SelectItem>
+          <SelectItem value={OTHER_PASS_FAIL}>Pass/Fail · 7.5 ECTS</SelectItem>
+        </SelectGroup>
 
         {department.length > 0 && (
           <SelectGroup>
