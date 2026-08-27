@@ -38,6 +38,21 @@ export const MESSAGES = [
   'Show up for your group. They are counting on you.',
   'A bad period is a period, not a pattern',
   'Your degree is three years long, not one exam',
+  'Consistency compounds. So does avoidance.',
+  'You have done harder things than this period',
+  'The average student also feels behind',
+  'Two hours today beats ten in exam week',
+  'You are allowed to be new at something',
+  'One period does not decide the next',
+  'Nobody has ever raised their GPA by checking it',
+  'The reading will not read itself',
+  'Half the room has not started either. Start anyway.',
+  'Open the past exam. Just the first question.',
+  'Rewriting notes in nicer handwriting is not studying',
+  'Grades open doors. They do not walk through them.',
+  'The people you study with matter more than the average',
+  'Rest is not something you have to earn',
+  'Ask for help before you need it',
 ];
 
 /** Shown late at night, whatever else would have been picked. */
