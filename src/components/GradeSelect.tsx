@@ -30,17 +30,15 @@ export const GradeSelect = ({ value, onChange, label }: GradeSelectProps) => (
         grade is currently ticked. */}
     <SelectContent data-hj-suppress>
       {GRADE_OPTIONS.map((option) => (
-        <SelectItem key={option.value} value={option.value}>
-          {/* The points sit at the far edge rather than jammed against the
-              name, which on a phone left most of the row empty. */}
-          <span className="flex w-full items-baseline justify-between gap-4">
-            <span>{option.label}</span>
-            {option.points !== null && (
-              <span className="numeric text-xs text-muted-foreground">
-                {option.points.toFixed(1)}
-              </span>
-            )}
-          </span>
+        <SelectItem
+          key={option.value}
+          value={option.value}
+          // A hint, not a child: children are what the closed trigger shows.
+          hint={option.points !== null ? (
+            <span className="numeric">{option.points.toFixed(1)}</span>
+          ) : null}
+        >
+          {option.label}
         </SelectItem>
       ))}
     </SelectContent>

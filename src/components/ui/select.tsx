@@ -111,15 +111,25 @@ SelectLabel.displayName = SelectPrimitive.Label.displayName
 
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> & {
+    /**
+     * Shown at the right edge of the row in the list only. Kept outside the
+     * item's children on purpose: the trigger reuses those to display the
+     * selection, so anything put there turns up in the closed control too.
+     */
+     hint?: React.ReactNode
+  }
+>(({ className, children, hint, ...props }, ref) => (
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
       // Radix wraps the label in its own span and drops any className passed
       // to it, so the only way to let that span fill the row — and so let an
       // item put something at the far edge — is to reach it from here.
-      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>span:last-child]:min-w-0 [&>span:last-child]:flex-1",
+      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      // Radix drops any className given to ItemText, so its span is reached
+      // from here and allowed to fill the row, which pushes the hint right.
+      hint && "gap-4 [&>span:nth-child(2)]:min-w-0 [&>span:nth-child(2)]:flex-1",
       className
     )}
     {...props}
@@ -131,6 +141,9 @@ const SelectItem = React.forwardRef<
     </span>
 
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    {hint ? (
+      <span className="shrink-0 text-xs text-muted-foreground">{hint}</span>
+    ) : null}
   </SelectPrimitive.Item>
 ))
 SelectItem.displayName = SelectPrimitive.Item.displayName
