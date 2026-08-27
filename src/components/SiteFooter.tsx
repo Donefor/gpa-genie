@@ -5,7 +5,7 @@ const linkClass =
   'text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline';
 
 const Heading = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="text-xs font-semibold uppercase tracking-wide text-foreground">{children}</h2>
+  <h2 className="text-sm font-medium text-foreground">{children}</h2>
 );
 
 export const SiteFooter = () => (
@@ -15,8 +15,9 @@ export const SiteFooter = () => (
         <div>
           <p className="font-display text-base">SSE GPA Calculator</p>
           <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            An independent project, not affiliated with or endorsed by the Stockholm School of
-            Economics. Feedback, bugs and contributions are all welcome.
+            A student side project, built for students at the Stockholm School of Economics
+            but not affiliated with or endorsed by it. Feedback, bugs and contributions are
+            all welcome.
           </p>
         </div>
 
@@ -47,7 +48,7 @@ export const SiteFooter = () => (
         </div>
 
         <div>
-          <Heading>Legal</Heading>
+          <Heading>The small print</Heading>
           <ul className="mt-3 space-y-1.5">
             <li>
               <Link to="/privacy" className={linkClass}>
@@ -64,9 +65,9 @@ export const SiteFooter = () => (
       </div>
 
       <p className="mt-10 border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
-        Grades you enter are self-reported and unverified. Check anything that matters against
-        the official record — no liability is accepted for errors or for outcomes arising from
-        use of this tool.
+        Everything you enter here is self-reported and unverified, so check anything that
+        matters against the official record. We made this in our spare time and cannot take
+        responsibility for errors or for decisions made using it.
       </p>
     </div>
   </footer>

@@ -25,7 +25,10 @@ export const GradeSelect = ({ value, onChange, label }: GradeSelectProps) => (
     >
       <SelectValue placeholder="Not finished" />
     </SelectTrigger>
-    <SelectContent>
+    {/* The dropdown renders in a portal, outside the trigger, so it needs
+        suppressing in its own right — otherwise the open panel shows which
+        grade is currently ticked. */}
+    <SelectContent data-hj-suppress>
       {GRADE_OPTIONS.map((option) => (
         <SelectItem key={option.value} value={option.value}>
           <span className="flex items-baseline gap-2">
