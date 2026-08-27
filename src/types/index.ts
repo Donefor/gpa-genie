@@ -65,6 +65,8 @@ export interface ProgramConfig {
   programme: string;
   /** Elective type per slot, keyed "<termKey>:<slot>". */
   programmeElectives: Record<string, ElectiveType | null>;
+  /** The real course chosen for a slot, if the student named one. */
+  programmeElectiveCourses: Record<string, string | null>;
   /** Which members of a "choose N of M" group the student actually took. */
   programmeChoices: Record<string, boolean>;
   specialization: Specialization | null;

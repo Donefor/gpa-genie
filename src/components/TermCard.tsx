@@ -3,9 +3,10 @@ import { BuiltTerm } from '@/utils/programmeModel';
 import { gradeOf, sumCredits } from '@/utils/calculations';
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
+import { SuggestedElective } from '@/data/programmes';
 import { GradeSelect } from './GradeSelect';
 import { ElectiveSelect } from './ElectiveSelect';
-import { OptionField, OptionGroup } from './OptionGroup';
+import { CoursePicker } from './CoursePicker';
 
 const KIND_LABEL: Record<string, string> = {
   core: 'Course',
@@ -19,7 +20,10 @@ interface TermCardProps {
   onGradeChange: (id: string, grade: Grade) => void;
   onElectiveChange: (key: string, type: ElectiveType | null) => void;
   onChoiceToggle: (key: string, taken: boolean) => void;
+  onElectiveCourseChange: (key: string, courseNo: string | null) => void;
   electives: Record<string, ElectiveType | null>;
+  electiveCourses: Record<string, string | null>;
+  suggested: SuggestedElective[];
 }
 
 export const TermCard = ({
@@ -28,7 +32,10 @@ export const TermCard = ({
   onGradeChange,
   onElectiveChange,
   onChoiceToggle,
+  onElectiveCourseChange,
   electives,
+  electiveCourses,
+  suggested,
 }: TermCardProps) => {
   const credits = sumCredits(term.courses);
   const isFull = Math.abs(credits - term.credits) < 0.01;
@@ -72,18 +79,32 @@ export const TermCard = ({
       )}
 
       {term.electiveKeys.length > 0 && (
-        <div className="mb-3">
-          <OptionGroup>
+        <div className="mb-3 rounded-md bg-muted/50 p-3">
+          <p className="mb-2 text-xs text-muted-foreground">
+            {term.electiveKeys.length} elective{term.electiveKeys.length > 1 ? 's' : ''} to fill.
+            Name the course to use its real credits, or leave it unnamed.
+          </p>
+          <ul className="flex flex-col gap-2">
             {term.electiveKeys.map((key, index) => (
-              <OptionField key={key} label={`Elective ${index + 1}`}>
-                <ElectiveSelect
-                  label={`Elective ${index + 1} in ${term.label}`}
-                  value={electives[key] ?? null}
-                  onChange={(type) => onElectiveChange(key, type)}
-                />
-              </OptionField>
+              <li key={key} className="flex flex-wrap items-center gap-2">
+                <div className="min-w-0 flex-1">
+                  <CoursePicker
+                    label={`Elective ${index + 1} in ${term.label}`}
+                    value={electiveCourses[key] ?? null}
+                    onChange={(courseNo) => onElectiveCourseChange(key, courseNo)}
+                    suggested={suggested}
+                  />
+                </div>
+                <div className="w-full sm:w-[150px]">
+                  <ElectiveSelect
+                    label={`Type of elective ${index + 1} in ${term.label}`}
+                    value={electives[key] ?? null}
+                    onChange={(type) => onElectiveChange(key, type)}
+                  />
+                </div>
+              </li>
             ))}
-          </OptionGroup>
+          </ul>
         </div>
       )}
 

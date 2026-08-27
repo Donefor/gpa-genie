@@ -1,5 +1,6 @@
 import { Course, ProgramConfig } from '@/types';
 import { Programme, ProgrammeTerm } from '@/data/programmes';
+import { catalogueCourse } from '@/data/courseCatalogue';
 
 const SLOT = 7.5;
 
@@ -58,12 +59,16 @@ export const buildProgrammeTerms = (
       const key = `${term.key}:${slot}`;
       electiveKeys.push(key);
       const type = config.programmeElectives[key];
-      if (type) {
+      const pickedNo = config.programmeElectiveCourses[key] ?? null;
+      const picked = pickedNo ? catalogueCourse(pickedNo) : undefined;
+      if (type || picked) {
         courses.push(
           toCourse(
-            `${programme.key}:${key}`,
-            'Elective course',
-            SLOT,
+            // Keyed by the chosen course, so a grade follows the course rather
+            // than the slot it happened to be put in.
+            picked ? `${programme.key}:${key}:${picked.courseNo}` : `${programme.key}:${key}`,
+            picked ? picked.name : 'Elective course',
+            picked ? picked.credits : SLOT,
             'elective',
             type === 'Pass/Fail',
           ),

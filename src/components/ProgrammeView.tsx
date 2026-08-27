@@ -13,6 +13,7 @@ interface ProgrammeViewProps {
   onGradeChange: (id: string, grade: Grade) => void;
   onElectiveChange: (key: string, type: ElectiveType | null) => void;
   onChoiceToggle: (key: string, taken: boolean) => void;
+  onElectiveCourseChange: (key: string, courseNo: string | null) => void;
 }
 
 export const ProgrammeView = ({
@@ -22,6 +23,7 @@ export const ProgrammeView = ({
   onGradeChange,
   onElectiveChange,
   onChoiceToggle,
+  onElectiveCourseChange,
 }: ProgrammeViewProps) => {
   const terms = useMemo(
     () => buildProgrammeTerms(programme, config),
@@ -75,6 +77,9 @@ export const ProgrammeView = ({
                   term={term}
                   grades={grades}
                   electives={config.programmeElectives}
+                  electiveCourses={config.programmeElectiveCourses}
+                  suggested={programme.suggested}
+                  onElectiveCourseChange={onElectiveCourseChange}
                   onGradeChange={onGradeChange}
                   onElectiveChange={onElectiveChange}
                   onChoiceToggle={onChoiceToggle}
@@ -86,7 +91,7 @@ export const ProgrammeView = ({
       })}
 
       {programme.source && (
-        <p className="text-xs text-muted-foreground">
+        <p className="text-center text-xs text-muted-foreground">
           Structure from{' '}
           <a
             href={programme.source}

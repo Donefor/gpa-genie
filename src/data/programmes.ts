@@ -23,6 +23,12 @@ export interface ProgrammeTerm {
   electiveSlots: number;
 }
 
+/** Courses the programme page itself names as electives. */
+export interface SuggestedElective {
+  courseNo: string | null;
+  name: string;
+}
+
 export interface Programme {
   key: string;
   name: string;
@@ -34,6 +40,7 @@ export interface Programme {
   source?: string;
   note?: string;
   terms: ProgrammeTerm[];
+  suggested: SuggestedElective[];
 }
 
 const SLOT = 7.5;
@@ -124,6 +131,9 @@ const build = (key: string, raw: RawProgramme): Programme => {
     source: raw.source,
     note: raw.thesisNote,
     terms: [...terms.values()],
+    suggested: raw.courses
+      .filter((row) => row.kind === 'electiveOption')
+      .map((row) => ({ courseNo: row.courseNo, name: row.course })),
   };
 };
 
@@ -136,6 +146,7 @@ export const BUSINESS_ECONOMICS: Programme = {
   degreeCredits: 180,
   custom: true,
   terms: [],
+  suggested: [],
 };
 
 export const PROGRAMMES: Programme[] = [
