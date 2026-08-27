@@ -1,0 +1,236 @@
+import { useMemo } from 'react';
+import { COURSE_RECORDS } from '@/data/gradeStats';
+import { analyseCourses, byDepartment, bySemester, degreeProjects } from '@/utils/analysis';
+import { averageGradePoint, aggregate, formatPercent, weightedPassRate } from '@/utils/statsMath';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { RankList } from './RankList';
+
+/** A course needs this many graded rounds before it can be ranked. */
+const MIN_ROUNDS = 3;
+
+export const AnalysisPanel = ({ onSelect }: { onSelect: (course: string) => void }) => {
+  const analysis = useMemo(() => analyseCourses(COURSE_RECORDS), []);
+  const rankable = useMemo(
+    () => analysis.filter((item) => item.rounds >= MIN_ROUNDS),
+    [analysis],
+  );
+
+  const topExcellent = useMemo(
+    () => [...rankable].sort((a, b) => b.excellentShare - a.excellentShare).slice(0, 10),
+    [rankable],
+  );
+  const mostVolatile = useMemo(
+    () => [...rankable].sort((a, b) => b.volatility - a.volatility).slice(0, 10),
+    [rankable],
+  );
+  const mostStable = useMemo(
+    () => [...rankable].sort((a, b) => a.volatility - b.volatility).slice(0, 10),
+    [rankable],
+  );
+
+  const semesters = useMemo(() => bySemester(COURSE_RECORDS), []);
+  const departments = useMemo(() => byDepartment(COURSE_RECORDS), []);
+  const projects = useMemo(() => {
+    const records = degreeProjects(COURSE_RECORDS);
+    const grouped = new Map<string, typeof records>();
+    records.forEach((record) => {
+      const list = grouped.get(record.course) ?? [];
+      list.push(record);
+      grouped.set(record.course, list);
+    });
+    return [...grouped.entries()]
+      .map(([course, group]) => {
+        const combined = aggregate(group);
+        return {
+          course,
+          rounds: group.length,
+          registered: group.reduce((sum, r) => sum + r.registered, 0),
+          excellent: combined?.Excellent ?? null,
+          average: averageGradePoint(combined),
+          passRate: weightedPassRate(group),
+        };
+      })
+      .sort((a, b) => (b.average ?? 0) - (a.average ?? 0));
+  }, []);
+
+  return (
+    <div className="space-y-6">
+      <section className="surface-card p-4 sm:p-5">
+        <h2 className="text-lg tracking-tight">What the numbers say</h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Rankings cover the {rankable.length} courses with at least {MIN_ROUNDS} graded
+          rounds, out of {analysis.length} graded courses in the export. Courses graded
+          Pass/Fail publish no distribution and are excluded throughout.
+        </p>
+      </section>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <RankList
+          title="Most Excellent grades"
+          description={`Share of passing students graded Excellent, pooled across rounds. Courses with ${MIN_ROUNDS}+ rounds.`}
+          items={topExcellent}
+          valueOf={(item) => item.excellentShare}
+          format={(value) => `${value.toFixed(1)}%`}
+          onSelect={onSelect}
+        />
+
+        <RankList
+          title="Most volatile grading"
+          description="Standard deviation of the average grade point between rounds. Small cohorts swing more by nature, so read it alongside the registration counts."
+          items={mostVolatile}
+          valueOf={(item) => item.volatility}
+          format={(value) => `±${value.toFixed(2)}`}
+          onSelect={onSelect}
+        />
+      </div>
+
+      <RankList
+        title="Most consistent grading"
+        description="The same measure, lowest first: courses whose grade distribution barely moves between rounds. Shown to three decimals, since the spreads here are tiny."
+        items={mostStable}
+        valueOf={(item) => item.volatility}
+        format={(value) => `±${value.toFixed(3)}`}
+        onSelect={onSelect}
+      />
+
+      <section className="surface-card p-4 sm:p-5">
+        <h3 className="text-sm font-semibold tracking-tight">Autumn versus spring</h3>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Periods 1 and 2 run in the autumn, periods 3 and 4 in the spring. All graded
+          rounds pooled.
+        </p>
+        <div className="mt-4 w-full overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Semester</TableHead>
+                <TableHead className="text-right">Rounds</TableHead>
+                <TableHead className="text-right">Registered</TableHead>
+                <TableHead className="text-right">Pass rate</TableHead>
+                <TableHead className="text-right">Excellent</TableHead>
+                <TableHead className="text-right">Avg. grade</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {semesters.map((row) => (
+                <TableRow key={row.key}>
+                  <TableCell className="font-medium">{row.key}</TableCell>
+                  <TableCell className="numeric text-right">{row.rounds}</TableCell>
+                  <TableCell className="numeric text-right">
+                    {row.registered.toLocaleString()}
+                  </TableCell>
+                  <TableCell className="numeric text-right">
+                    {formatPercent(row.passRate)}
+                  </TableCell>
+                  <TableCell className="numeric text-right">
+                    {row.excellentShare.toFixed(1)}%
+                  </TableCell>
+                  <TableCell className="numeric text-right font-medium">
+                    {row.average === null ? '—' : row.average.toFixed(2)}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+
+      <section className="surface-card p-4 sm:p-5">
+        <h3 className="text-sm font-semibold tracking-tight">By department</h3>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Grouped by the department prefix of the course code.
+        </p>
+        <div className="mt-4 w-full overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Department</TableHead>
+                <TableHead className="text-right">Rounds</TableHead>
+                <TableHead className="text-right">Registered</TableHead>
+                <TableHead className="text-right">Pass rate</TableHead>
+                <TableHead className="text-right">Excellent</TableHead>
+                <TableHead className="text-right">Avg. grade</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {departments.map((row) => (
+                <TableRow key={row.key}>
+                  <TableCell className="font-medium">{row.key}</TableCell>
+                  <TableCell className="numeric text-right">{row.rounds}</TableCell>
+                  <TableCell className="numeric text-right">
+                    {row.registered.toLocaleString()}
+                  </TableCell>
+                  <TableCell className="numeric text-right">
+                    {formatPercent(row.passRate)}
+                  </TableCell>
+                  <TableCell className="numeric text-right">
+                    {row.excellentShare.toFixed(1)}%
+                  </TableCell>
+                  <TableCell className="numeric text-right font-medium">
+                    {row.average === null ? '—' : row.average.toFixed(2)}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+
+      <section className="surface-card p-4 sm:p-5">
+        <h3 className="text-sm font-semibold tracking-tight">Degree projects and theses</h3>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Every course whose title names a degree project, thesis or research project.
+        </p>
+        <div className="mt-4 w-full overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Course</TableHead>
+                <TableHead className="text-right">Rounds</TableHead>
+                <TableHead className="text-right">Registered</TableHead>
+                <TableHead className="text-right">Pass rate</TableHead>
+                <TableHead className="text-right">Excellent</TableHead>
+                <TableHead className="text-right">Avg. grade</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {projects.map((row) => (
+                <TableRow key={row.course}>
+                  <TableCell>
+                    <button
+                      type="button"
+                      onClick={() => onSelect(row.course)}
+                      className="text-left font-medium hover:underline"
+                    >
+                      {row.course}
+                    </button>
+                  </TableCell>
+                  <TableCell className="numeric text-right">{row.rounds}</TableCell>
+                  <TableCell className="numeric text-right">
+                    {row.registered.toLocaleString()}
+                  </TableCell>
+                  <TableCell className="numeric text-right">
+                    {formatPercent(row.passRate)}
+                  </TableCell>
+                  <TableCell className="numeric text-right">
+                    {row.excellent === null ? 'Pass/Fail' : `${row.excellent.toFixed(1)}%`}
+                  </TableCell>
+                  <TableCell className="numeric text-right font-medium">
+                    {row.average === null ? '—' : row.average.toFixed(2)}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+    </div>
+  );
+};

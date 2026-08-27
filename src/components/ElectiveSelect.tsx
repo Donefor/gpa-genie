@@ -1,4 +1,3 @@
-
 import { ElectiveType } from '@/types';
 import {
   Select,
@@ -6,29 +5,30 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
+
+const NONE = '__none__';
 
 interface ElectiveSelectProps {
-  value: ElectiveType;
-  onChange: (value: ElectiveType) => void;
+  value: ElectiveType | null;
+  onChange: (value: ElectiveType | null) => void;
   disabled?: boolean;
+  label: string;
 }
 
-export const ElectiveSelect = ({ value, onChange, disabled }: ElectiveSelectProps) => {
-  return (
-    <Select 
-      value={value || ""} 
-      onValueChange={(val) => onChange(val === "remove" ? null : val as ElectiveType)}
-      disabled={disabled}
-    >
-      <SelectTrigger className="w-[200px]">
-        <SelectValue placeholder="Select elective type" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="Graded">Graded Elective</SelectItem>
-        <SelectItem value="Pass/Fail">Pass/Fail Elective</SelectItem>
-        {value && <SelectItem value="remove">Remove Elective</SelectItem>}
-      </SelectContent>
-    </Select>
-  );
-};
+export const ElectiveSelect = ({ value, onChange, disabled, label }: ElectiveSelectProps) => (
+  <Select
+    value={value ?? NONE}
+    onValueChange={(next) => onChange(next === NONE ? null : (next as ElectiveType))}
+    disabled={disabled}
+  >
+    <SelectTrigger aria-label={label} className="h-10 w-full">
+      <SelectValue placeholder="Empty slot" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value={NONE}>Empty slot</SelectItem>
+      <SelectItem value="Graded">Graded elective</SelectItem>
+      <SelectItem value="Pass/Fail">Pass/Fail elective</SelectItem>
+    </SelectContent>
+  </Select>
+);

@@ -1,70 +1,103 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Palette taken from the school's own building: warm stucco and taupe trim,
+ * dark bronze molding for ink, and the copper dome's sage green as the single
+ * accent. White carries the page; the rest is used sparingly.
+ */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 45 25% 98%;
+    --foreground: 40 8% 22%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 40 8% 22%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221 83% 53%;
-    --radius: 0.5rem;
+    --popover-foreground: 40 8% 22%;
+    --primary: 100 15% 38%;
+    --primary-foreground: 45 30% 97%;
+    --secondary: 42 22% 94%;
+    --secondary-foreground: 40 8% 22%;
+    --muted: 42 22% 95%;
+    --muted-foreground: 38 8% 51%;
+    --accent: 104 18% 86%;
+    --accent-foreground: 100 15% 28%;
+    --destructive: 8 55% 44%;
+    --destructive-foreground: 45 30% 97%;
+    --border: 40 18% 88%;
+    --input: 40 16% 84%;
+    --ring: 104 16% 61%;
+    --radius: 0.375rem;
+
+    /* Building tones, kept verbatim for accents and washes. */
+    --stucco: #d6cfc0;
+    --taupe: #8c8577;
+    --bronze: #3e3a35;
+    --sage: #8fad8a;
+    --mint: #a8c29e;
+    --olive: #5c6e52;
+
+    /* Validated one-hue ordinal ramp for the grade bands (light surface). */
+    --band-pass: #9db893;
+    --band-good: #7c9b72;
+    --band-verygood: #5c6e52;
+    --band-excellent: #3a4634;
   }
 
   * {
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
-    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  }
+
+  /* Headings carry the institutional serif; UI chrome stays in the sans. */
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: 'Source Serif 4', ui-serif, Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  /* Tabular figures keep GPA and credit numbers from jittering as they update. */
+  .numeric {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
   }
 }
 
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
+@layer components {
+  .surface-card {
+    @apply rounded-md border border-border bg-card;
+  }
+
+  .field-label {
+    @apply block text-xs font-medium text-muted-foreground mb-1.5;
+  }
+
+  /* Thin rule under a nav item, as on the school's own site. */
+  .rule-link {
+    @apply border-b border-border pb-1;
+  }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.slide-in {
-  animation: slideIn 0.3s ease-out;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

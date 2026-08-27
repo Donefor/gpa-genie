@@ -1,34 +1,41 @@
-
 import { Grade } from '@/types';
+import { GRADE_OPTIONS } from '@/data/courseData';
+import { cn } from '@/lib/utils';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 interface GradeSelectProps {
   value: Grade;
   onChange: (value: Grade) => void;
-  isThirdYear?: boolean;
+  label: string;
 }
 
-export const GradeSelect = ({ value, onChange, isThirdYear }: GradeSelectProps) => {
-  return (
-    <div className="flex justify-end">
-      <Select value={value || "Not finished"} onValueChange={onChange}>
-        <SelectTrigger className="w-[140px]">
-          <SelectValue placeholder="Not finished" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="Not finished">Not finished</SelectItem>
-          <SelectItem value="Pass">Pass (3.0)</SelectItem>
-          <SelectItem value="Good">Good (3.5)</SelectItem>
-          <SelectItem value="Very good">Very good (4.0)</SelectItem>
-          <SelectItem value="Excellent">Excellent (5.0)</SelectItem>
-        </SelectContent>
-      </Select>
-    </div>
-  );
-};
+export const GradeSelect = ({ value, onChange, label }: GradeSelectProps) => (
+  <Select value={value} onValueChange={(next) => onChange(next as Grade)}>
+    <SelectTrigger
+      aria-label={label}
+      className={cn('h-9 w-full', value === 'Not finished' && 'text-muted-foreground')}
+    >
+      <SelectValue placeholder="Not finished" />
+    </SelectTrigger>
+    <SelectContent>
+      {GRADE_OPTIONS.map((option) => (
+        <SelectItem key={option.value} value={option.value}>
+          <span className="flex items-baseline gap-2">
+            <span>{option.label}</span>
+            {option.points !== null && (
+              <span className="numeric text-xs text-muted-foreground">
+                {option.points.toFixed(1)}
+              </span>
+            )}
+          </span>
+        </SelectItem>
+      ))}
+    </SelectContent>
+  </Select>
+);

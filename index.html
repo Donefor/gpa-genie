@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
   <head>
     <script>
       (function(h,o,t,j,a,r){
@@ -15,7 +15,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SSE GPA Calculator</title>
-    <meta name="description" content="SSE GPA Calculator" />
+    <meta name="description" content="GPA calculator and grade statistics for the Bachelor in Business and Economics at the Stockholm School of Economics." />
     <meta name="author" content="SSEGPA" />
     <meta property="og:image" content="/og-image.png" />
 
@@ -30,62 +30,10 @@
       gtag("config", "G-BV0BS6QSRK");
     </script>
 
-    <style>
-      /* Header styling */
-      .header {
-        background-color: #000000;
-        color: white;
-        padding: 15px 20px;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        box-sizing: border-box;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-      }
-
-      .nav {
-        display: flex;
-        justify-content: center;
-      }
-
-      .nav a {
-        color: white;
-        text-decoration: none;
-        margin: 0 15px;
-        font-weight: bold;
-        padding: 5px 10px;
-        border-radius: 4px;
-        transition: background-color 0.3s;
-      }
-
-      .nav a:hover {
-        background-color: #333;
-        text-decoration: none;
-      }
-
-      /* Main content area */
-      .content {
-        margin-top: 60px; /* Space for fixed header */
-        padding: 20px;
-      }
-    </style>
   </head>
 
   <body>
-    <!-- Fixed Header -->
-    <div class="header">
-      <div class="nav">
-        <a href="/">GPA Calculator</a>
-        <a href="/stats.html">Grade Statistics</a>
-      </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="content">
-      <div id="root"></div>
-    </div>
-
+    <div id="root"></div>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
