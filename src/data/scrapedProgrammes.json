@@ -9,13 +9,13 @@
     "semester": "Semester 1",
     "course": "Introductory Course in Happiness and Wellbeing",
     "courseNo": null,
-    "ects": null,
+    "ects": 0.0,
     "kind": "course"
    },
    {
     "year": "Year 1",
     "semester": "Semester 1",
-    "course": "NDH101 - Introduction to Retailing",
+    "course": "Introduction to Retailing",
     "courseNo": "NDH101",
     "ects": 7.5,
     "kind": "course"
@@ -23,7 +23,7 @@
    {
     "year": "Year 1",
     "semester": "Semester 1",
-    "course": "NDH401 - Economics I",
+    "course": "Economics I",
     "courseNo": "NDH401",
     "ects": 7.5,
     "kind": "course"
@@ -31,7 +31,7 @@
    {
     "year": "Year 1",
     "semester": "Semester 1",
-    "course": "NDH302 - Accounting",
+    "course": "Accounting",
     "courseNo": "NDH302",
     "ects": 7.5,
     "kind": "course"
@@ -39,7 +39,7 @@
    {
     "year": "Year 1",
     "semester": "Semester 1",
-    "course": "NDH201 - Marketing",
+    "course": "Marketing",
     "courseNo": "NDH201",
     "ects": 7.5,
     "kind": "course"
@@ -47,7 +47,7 @@
    {
     "year": "Year 1",
     "semester": "Semester 2",
-    "course": "NDH301 - Management Control",
+    "course": "Management Control",
     "courseNo": "NDH301",
     "ects": 7.5,
     "kind": "course"
@@ -55,7 +55,7 @@
    {
     "year": "Year 1",
     "semester": "Semester 2",
-    "course": "NDH203 - Supply Chain Management",
+    "course": "Supply Chain Management",
     "courseNo": "NDH203",
     "ects": 7.5,
     "kind": "course"
@@ -63,7 +63,7 @@
    {
     "year": "Year 1",
     "semester": "Semester 2",
-    "course": "NDH402 - Economics II",
+    "course": "Economics II",
     "courseNo": "NDH402",
     "ects": 7.5,
     "kind": "course"
@@ -71,15 +71,15 @@
    {
     "year": "Year 1",
     "semester": "Semester 2",
-    "course": "NDH214 - Marketing Research",
-    "courseNo": "NDH214",
-    "ects": 6.0,
+    "course": "Marketing Research",
+    "courseNo": "NDH204",
+    "ects": 7.5,
     "kind": "course"
    },
    {
     "year": "Year 2",
     "semester": "Semester 3",
-    "course": "NDH403 - Finance",
+    "course": "Finance",
     "courseNo": "NDH403",
     "ects": 7.5,
     "kind": "course"
@@ -87,7 +87,7 @@
    {
     "year": "Year 2",
     "semester": "Semester 3",
-    "course": "NDH303 - Management & Organization",
+    "course": "Management & Organization",
     "courseNo": "NDH303",
     "ects": 7.5,
     "kind": "course"
@@ -95,7 +95,7 @@
    {
     "year": "Year 2",
     "semester": "Semester 3",
-    "course": "NDH306 - Retail Accounting and Financial Management",
+    "course": "Retail Accounting and Financial Management",
     "courseNo": "NDH306",
     "ects": 7.5,
     "kind": "course"
@@ -103,7 +103,7 @@
    {
     "year": "Year 2",
     "semester": "Semester 3",
-    "course": "NDH801 - Business Law",
+    "course": "Business Law",
     "courseNo": "NDH801",
     "ects": 7.5,
     "kind": "course"
@@ -111,15 +111,15 @@
    {
     "year": "Year 2",
     "semester": "Semester 4",
-    "course": "Data Analytics: Statistics for Retail Management",
-    "courseNo": "NDH802",
-    "ects": null,
+    "course": "Data Analytics for Retail Management",
+    "courseNo": "NDH803",
+    "ects": 6.0,
     "kind": "course"
    },
    {
     "year": "Year 2",
     "semester": "Semester 4",
-    "course": "NDH307 - Principles of Happiness",
+    "course": "Principles of Happiness",
     "courseNo": "NDH307",
     "ects": 3.0,
     "kind": "course"
@@ -127,7 +127,7 @@
    {
     "year": "Year 2",
     "semester": "Semester 4",
-    "course": "NDH215 - Marketing Communications",
+    "course": "Marketing Communications",
     "courseNo": "NDH215",
     "ects": 6.0,
     "kind": "course"
@@ -135,7 +135,7 @@
    {
     "year": "Year 2",
     "semester": "Semester 4",
-    "course": "NDH216 - Customer Experience Management",
+    "course": "Customer Experience Management",
     "courseNo": "NDH216",
     "ects": 9.0,
     "kind": "course"
@@ -143,7 +143,7 @@
    {
     "year": "Year 2",
     "semester": "Semester 4",
-    "course": "NDH113 - Data Science for Retail Management",
+    "course": "Data Science for Retail Management",
     "courseNo": "NDH113",
     "ects": 6.0,
     "kind": "course"
@@ -151,7 +151,7 @@
    {
     "year": "Year 3",
     "semester": "Semester 5",
-    "course": "NDH108 - Current Issues in Retailing",
+    "course": "Current Issues in Retailing",
     "courseNo": "NDH108",
     "ects": 7.5,
     "kind": "course"
@@ -159,15 +159,15 @@
    {
     "year": "Year 3",
     "semester": "Semester 5",
-    "course": "Applied Retail Track and Company Project",
-    "courseNo": null,
-    "ects": null,
+    "course": "Applied Retail Track",
+    "courseNo": "NDH007",
+    "ects": 7.5,
     "kind": "option"
    },
    {
     "year": "Year 3",
     "semester": "Semester 5",
-    "course": "NDH305 - Retail Operations",
+    "course": "Retail Operations",
     "courseNo": "NDH305",
     "ects": 7.5,
     "kind": "course"
@@ -175,23 +175,15 @@
    {
     "year": "Year 3",
     "semester": "Semester 5",
-    "course": "NDH103 - Advanced Customer Management",
+    "course": "Advanced Customer Management",
     "courseNo": "NDH103",
     "ects": 7.5,
     "kind": "course"
    },
    {
     "year": "Year 3",
-    "semester": "Semester 5",
-    "course": "Applied Retail Track and Company Project",
-    "courseNo": null,
-    "ects": null,
-    "kind": "option"
-   },
-   {
-    "year": "Year 3",
     "semester": "Semester 6",
-    "course": "NDH105 - Brand and Category Management",
+    "course": "Brand and Category Management",
     "courseNo": "NDH105",
     "ects": 7.5,
     "kind": "course"
@@ -199,25 +191,17 @@
    {
     "year": "Year 3",
     "semester": "Semester 6",
-    "course": "Degree Project",
-    "courseNo": null,
-    "ects": null,
+    "course": "Degree Project in Retail Management",
+    "courseNo": "NDH900",
+    "ects": 15.0,
     "kind": "course"
    },
    {
     "year": "Year 3",
     "semester": "Semester 6",
-    "course": "NDH107 - Innovation Strategy",
+    "course": "Innovation Strategy",
     "courseNo": "NDH107",
     "ects": 7.5,
-    "kind": "course"
-   },
-   {
-    "year": "Year 3",
-    "semester": "Semester 6",
-    "course": "Degree Project",
-    "courseNo": null,
-    "ects": null,
     "kind": "course"
    }
   ]
@@ -764,7 +748,7 @@
    {
     "year": "Year 2",
     "semester": "Semester 3 and 4",
-    "course": "BE912 - Development Economics",
+    "course": "Development Economics",
     "courseNo": "BE912",
     "ects": 7.5,
     "kind": "course"
@@ -1107,7 +1091,7 @@
    {
     "year": "Year 2",
     "semester": "Semester 3 and 4",
-    "course": "BE923 - Climate Finance",
+    "course": "Climate Finance",
     "courseNo": "BE923",
     "ects": 7.5,
     "kind": "course"
@@ -1194,7 +1178,7 @@
    {
     "year": "Year 1",
     "semester": "Semester 1",
-    "course": "NDH203 - Supply Chain Management",
+    "course": "Supply Chain Management",
     "courseNo": "NDH203",
     "ects": 7.5,
     "kind": "course"
@@ -1286,149 +1270,6 @@
     "courseNo": "9476",
     "ects": 15.0,
     "kind": "course"
-   }
-  ]
- },
- "msc-public-policy": {
-  "name": "MSc Public Policy",
-  "level": "Master",
-  "source": "https://www.hhs.se/education/master/public-policy/program-structure/",
-  "courses": [
-   {
-    "year": "Year 1",
-    "semester": "Semester 1 and 2",
-    "course": "Contemporary Policy Challenges in a Global Context",
-    "courseNo": null,
-    "ects": null,
-    "kind": "course"
-   },
-   {
-    "year": "Year 1",
-    "semester": "Semester 1 and 2",
-    "course": "Economic Foundations for Public Policy",
-    "courseNo": null,
-    "ects": null,
-    "kind": "course"
-   },
-   {
-    "year": "Year 1",
-    "semester": "Semester 1 and 2",
-    "course": "Fiscal Policy, Budgeting, and Public Finance",
-    "courseNo": null,
-    "ects": null,
-    "kind": "course"
-   },
-   {
-    "year": "Year 1",
-    "semester": "Semester 1 and 2",
-    "course": "Quantitative Methods for Policy Evaluation",
-    "courseNo": null,
-    "ects": null,
-    "kind": "course"
-   },
-   {
-    "year": "Year 1",
-    "semester": "Semester 1 and 2",
-    "course": "Political Economy and EU Institutions",
-    "courseNo": null,
-    "ects": null,
-    "kind": "course"
-   },
-   {
-    "year": "Year 1",
-    "semester": "Semester 1 and 2",
-    "course": "Law and Regulation for Public Policy",
-    "courseNo": null,
-    "ects": null,
-    "kind": "course"
-   },
-   {
-    "year": "Year 1",
-    "semester": "Semester 1 and 2",
-    "course": "Public Management",
-    "courseNo": null,
-    "ects": null,
-    "kind": "course"
-   },
-   {
-    "year": "Year 1",
-    "semester": "Semester 1 and 2",
-    "course": "Implementation and Delivery",
-    "courseNo": null,
-    "ects": null,
-    "kind": "course"
-   },
-   {
-    "year": "Year 2",
-    "semester": "Semester 3 and 4",
-    "course": "Electives at SSE",
-    "courseNo": null,
-    "ects": null,
-    "kind": "option"
-   },
-   {
-    "year": "Year 2",
-    "semester": "Semester 3 and 4",
-    "course": "Electives at Stockholm School of Entrepreneurship",
-    "courseNo": null,
-    "ects": null,
-    "kind": "option"
-   },
-   {
-    "year": "Year 2",
-    "semester": "Semester 3 and 4",
-    "course": "Electives within the Global Network for Advanced Management",
-    "courseNo": null,
-    "ects": null,
-    "kind": "option"
-   },
-   {
-    "year": "Year 2",
-    "semester": "Semester 3 and 4",
-    "course": "Electives and seminars within CIVICA",
-    "courseNo": null,
-    "ects": null,
-    "kind": "option"
-   },
-   {
-    "year": "Year 2",
-    "semester": "Semester 3 and 4",
-    "course": "Data Analytics Track",
-    "courseNo": null,
-    "ects": null,
-    "kind": "option"
-   },
-   {
-    "year": "Year 2",
-    "semester": "Semester 3 and 4",
-    "course": "Sustainability Track",
-    "courseNo": null,
-    "ects": null,
-    "kind": "option"
-   },
-   {
-    "year": "Year 2",
-    "semester": "Semester 3 and 4",
-    "course": "Exchange Program",
-    "courseNo": null,
-    "ects": null,
-    "kind": "option"
-   },
-   {
-    "year": "Year 2",
-    "semester": "Semester 3 and 4",
-    "course": "Wallenberg International Fellows Program",
-    "courseNo": null,
-    "ects": null,
-    "kind": "option"
-   },
-   {
-    "year": "Year 2",
-    "semester": "Semester 3 and 4",
-    "course": "MSc-PhD Parallel Enrollment Track",
-    "courseNo": null,
-    "ects": null,
-    "kind": "option"
    }
   ]
  }
