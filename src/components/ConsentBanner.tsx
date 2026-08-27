@@ -65,13 +65,8 @@ export const ConsentBanner = () => {
       </h2>
 
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-        We use Hotjar and Google Analytics to see which parts of the site people struggle
-        with. They set cookies and record an anonymised replay of how you move around the
-        page.
-      </p>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-        The grades you enter are masked, so they never appear in a recording and stay in your
-        browser. Decline and neither one loads — everything works the same.
+        Hotjar and Google Analytics help us find what is confusing. They set cookies and
+        record an anonymised replay of your visit.
       </p>
 
       <div className="mt-4 flex flex-wrap gap-2">
