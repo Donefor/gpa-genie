@@ -61,7 +61,7 @@ const Privacy = () => (
         </ul>
       </div>
 
-      <Section number={1} title="Information we collect">
+      <Section number={1} title="What we collect">
         <p>
           <strong className="font-medium text-foreground">Information you enter.</strong> The
           Service lets you record grades, specialisations and other programme choices. This
@@ -177,6 +177,16 @@ const Privacy = () => (
           cookies, are readable only by this site, and are never transmitted to us.
         </p>
         <p>
+          <strong className="font-medium text-foreground">Your tracking choice</strong> is
+          saved the same way, in local storage under the key{' '}
+          <code className="rounded bg-muted px-1 py-0.5 text-xs">
+            sse-gpa-calculator:consent
+          </code>
+          , with the date you chose. It stays on your device — we keep no central record of
+          who agreed, which is also why the question is never asked again on the same browser
+          until you clear it.
+        </p>
+        <p>
           Our providers described in sections 2 and 3 set their own cookies and similar
           identifiers for the purposes stated there. You can clear or block cookies and site
           data through your browser settings. Clearing site data for this Service will also
@@ -184,37 +194,31 @@ const Privacy = () => (
         </p>
       </Section>
 
-      <Section number={5} title="How we use information">
+      <Section number={5} title="What we use it for">
         <p>
-          We use the information described above to operate, maintain and improve the Service;
-          to diagnose faults and investigate technical problems; to understand which features
-          are used and where the interface causes difficulty; and to compile aggregate
-          statistics about usage. We do not sell information, and we do not use it to make
-          decisions about any individual.
+          To keep the tool working, to fix faults, and to see which parts of it people find
+          hard. We do not sell anything, and we do not use it to make decisions about anyone.
         </p>
       </Section>
 
-      <Section number={6} title="Legal basis for processing">
+      <Section number={6} title="Why we are allowed to">
         <p>
-          Where the General Data Protection Regulation (EU) 2016/679 applies, we process
-          information on the basis of our legitimate interests in operating, securing and
-          improving the Service, and, where required by applicable law, on the basis of your
-          consent. Where we rely on consent, you may withdraw it at any time; withdrawal does
-          not affect processing carried out before withdrawal.
+          Nothing that sets a cookie runs until you agree to it. Once you have, we rely on
+          that consent, together with our interest in keeping the tool working and improving
+          it. You can withdraw consent at any time through “Cookie settings” in the footer.
+          Withdrawing does not undo anything already collected.
         </p>
       </Section>
 
-      <Section number={7} title="Data sharing and international transfers">
+      <Section number={7} title="Who else sees it">
         <p>
-          We share information only with the service providers named in this policy, acting as
-          processors on our behalf, and where we are required to do so by law. These providers
-          may process information outside the European Economic Area. Where they do, transfers
-          are made under the safeguards those providers have put in place, such as the European
-          Commission’s standard contractual clauses.
+          The only companies that see anything are the two named above, and only for the
+          purposes described. Hotjar keeps its data in the EU. Google may process data outside
+          the EU, under the safeguards it has in place for that.
         </p>
       </Section>
 
-      <Section number={8} title="Retention">
+      <Section number={8} title="How long it is kept">
         <p>
           Information you enter remains in your browser until you clear it, either through the
           reset control in the Service or through your browser’s settings. Session recordings
@@ -223,51 +227,57 @@ const Privacy = () => (
         </p>
       </Section>
 
-      <Section number={9} title="Your rights">
+      <Section number={9} title="What you can actually do">
         <p>
-          Subject to applicable law, you may have the right to request access to the personal
-          data we hold about you; to request its correction or erasure; to object to or
-          request restriction of processing; and to request a copy in a portable format. To
-          exercise these rights, contact us using the details in section 12.
+          <strong className="font-medium text-foreground">Turn it off.</strong> “Cookie
+          settings” in the footer switches tracking on or off whenever you like. Turn it off
+          and Hotjar and Google Analytics stop loading.
         </p>
         <p>
-          Because the Service collects no identifying information, we may be unable to locate
-          data relating to you without further details that would allow us to do so. If you
-          believe your data has been handled unlawfully, you have the right to lodge a
-          complaint with your local supervisory authority; in Sweden this is the Swedish
+          <strong className="font-medium text-foreground">Wipe what is on your device.</strong>{' '}
+          Clearing this site’s data in your browser erases the grades you entered and your
+          tracking choice, and there is a reset control in the header for the grades alone.
+        </p>
+        <p>
+          <strong className="font-medium text-foreground">Opt out everywhere.</strong> Hotjar
+          and Google both run opt-outs that cover every site using them, and Hotjar honours the
+          browser <em>Do Not Track</em> setting.
+        </p>
+        <p>
+          The GDPR also gives you the right to ask us for a copy of your personal data, or to
+          have it corrected or deleted.{' '}
+          <strong className="font-medium text-foreground">
+            We should be straight about what that is worth here: we hold nothing that
+            identifies you, so we have no way to tell which visit or which recording was
+            yours.
+          </strong>{' '}
+          We cannot hand over your data or delete it on request, because we cannot find it.
+          The three controls above are the ones that genuinely work, and they are all in your
+          hands rather than ours.
+        </p>
+        <p>
+          If you think something here has been handled wrongly, you can complain to the Swedish
           Authority for Privacy Protection (Integritetsskyddsmyndigheten, IMY).
         </p>
       </Section>
 
-      <Section number={10} title="Do Not Track and opting out">
-        <p>
-          Hotjar honours the browser <em>Do Not Track</em> setting. Enabling Do Not Track in
-          your browser, using the opt-out mechanisms referred to in sections 2 and 3, or
-          blocking these providers with a content blocker, will prevent the corresponding
-          collection. The Service remains fully functional if you do so.
-        </p>
-      </Section>
-
-      <Section number={11} title="Children">
+      <Section number={10} title="Children">
         <p>
           The Service is intended for university students and is not directed at children
           under 13. We do not knowingly collect information from children under 13.
         </p>
       </Section>
 
-      <Section number={12} title="Changes and contact">
+      <Section number={11} title="Changes, and getting hold of us">
         <p>
           We may update this notice from time to time. Material changes will be reflected in
           the “Last updated” date at the top of this page, and continued use of the Service
           after a change constitutes acceptance of the revised notice.
         </p>
         <p>
-          For questions about this notice, or to request removal of a session recording,
-          contact us through the links in the{' '}
-          <Link to="/" className="underline underline-offset-2 hover:text-foreground">
-            site footer
-          </Link>
-          .
+          Questions are welcome through the links in the site footer. We cannot promise to
+          find or remove a particular recording, for the reason given in section 9, but if
+          something here looks wrong we would rather hear about it.
         </p>
       </Section>
 
