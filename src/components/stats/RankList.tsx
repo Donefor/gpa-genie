@@ -22,7 +22,7 @@ export const RankList = ({
   const max = Math.max(...items.map(valueOf), 0);
 
   return (
-    <section className="surface-card p-4 sm:p-5">
+    <section className="surface-card min-w-0 p-4 sm:p-5">
       <span aria-hidden className="block h-1 w-10 rounded-full bg-[var(--sage)]" />
       <h3 className="mt-3 text-xl tracking-tight">{title}</h3>
       <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{description}</p>
@@ -35,7 +35,7 @@ export const RankList = ({
               onClick={() => onSelect(item.course)}
               className="group flex w-full flex-col gap-1.5 text-left"
             >
-              <span className="flex items-baseline justify-between gap-3">
+              <span className="flex w-full min-w-0 items-baseline justify-between gap-3">
                 <span className="flex min-w-0 items-baseline gap-2">
                   <span className="numeric w-4 shrink-0 text-xs text-muted-foreground">
                     {index + 1}
@@ -46,10 +46,10 @@ export const RankList = ({
                   {format(valueOf(item))}
                 </span>
               </span>
-              <span className="flex items-center gap-2 pl-6">
+              <span className="flex w-full min-w-0 items-center gap-2 pl-6">
                 <MetricBar value={valueOf(item)} max={max} />
               </span>
-              <span className="numeric pl-6 text-xs text-muted-foreground">
+              <span className="numeric w-full min-w-0 truncate pl-6 text-xs text-muted-foreground">
                 {item.rounds} rounds · {item.registered.toLocaleString()} reg. · avg{' '}
                 {item.meanAverage.toFixed(2)}
               </span>

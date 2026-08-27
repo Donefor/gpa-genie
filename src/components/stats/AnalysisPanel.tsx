@@ -99,7 +99,7 @@ export const AnalysisPanel = ({ onSelect }: { onSelect: (course: string) => void
 
   return (
     <div className="space-y-6">
-      <section className="surface-card p-4 sm:p-5">
+      <section className="surface-card min-w-0 p-4 sm:p-5">
         <span aria-hidden className="block h-1 w-10 rounded-full bg-[var(--sage)]" />
         <h2 className="mt-3 text-2xl tracking-tight">What the numbers say</h2>
         <p className="mt-2 text-sm text-muted-foreground">
@@ -109,7 +109,7 @@ export const AnalysisPanel = ({ onSelect }: { onSelect: (course: string) => void
         </p>
       </section>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid min-w-0 gap-6 lg:grid-cols-2">
         <RankList
           title="Most Excellent grades"
           description={`Share of passing students graded Excellent, pooled across rounds. Courses with ${MIN_ROUNDS}+ rounds.`}
@@ -138,7 +138,7 @@ export const AnalysisPanel = ({ onSelect }: { onSelect: (course: string) => void
         onSelect={onSelect}
       />
 
-      <section className="surface-card p-4 sm:p-5">
+      <section className="surface-card min-w-0 p-4 sm:p-5">
         <span aria-hidden className="block h-1 w-10 rounded-full bg-[var(--sage)]" />
         <h3 className="mt-3 text-xl tracking-tight">Autumn versus spring</h3>
         <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
@@ -181,7 +181,7 @@ export const AnalysisPanel = ({ onSelect }: { onSelect: (course: string) => void
         </div>
       </section>
 
-      <section className="surface-card p-4 sm:p-5">
+      <section className="surface-card min-w-0 p-4 sm:p-5">
         <span aria-hidden className="block h-1 w-10 rounded-full bg-[var(--sage)]" />
         <h3 className="mt-3 text-xl tracking-tight">By programme</h3>
         <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
@@ -224,7 +224,7 @@ export const AnalysisPanel = ({ onSelect }: { onSelect: (course: string) => void
         </div>
       </section>
 
-      <section className="surface-card p-4 sm:p-5">
+      <section className="surface-card min-w-0 p-4 sm:p-5">
         <span aria-hidden className="block h-1 w-10 rounded-full bg-[var(--sage)]" />
         <h3 className="mt-3 text-xl tracking-tight">By department</h3>
         <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
@@ -266,7 +266,7 @@ export const AnalysisPanel = ({ onSelect }: { onSelect: (course: string) => void
         </div>
       </section>
 
-      <section className="surface-card p-4 sm:p-5">
+      <section className="surface-card min-w-0 p-4 sm:p-5">
         <span aria-hidden className="block h-1 w-10 rounded-full bg-[var(--sage)]" />
         <h3 className="mt-3 text-xl tracking-tight">Degree projects and theses</h3>
         <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
