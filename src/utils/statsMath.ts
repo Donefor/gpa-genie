@@ -37,7 +37,8 @@ export const passingStudents = (record: CourseRecord): number => {
  * each by how many students it actually represents.
  */
 export const aggregate = (records: CourseRecord[]): Distribution | null => {
-  const graded = records.filter((record) => record.distribution !== null);
+  // Rounds with no published results carry no information and must not dilute.
+  const graded = records.filter((record) => record.reported && record.distribution !== null);
   if (graded.length === 0) return null;
 
   const totals = emptyDistribution();
@@ -62,6 +63,7 @@ export const weightedPassRate = (records: CourseRecord[]): number | null => {
   let passed = 0;
   let registered = 0;
   records.forEach((record) => {
+    if (!record.reported) return;
     const rate = record.passedAtPresent ?? record.passedMainExam;
     if (rate === null || rate === undefined) return;
     passed += (record.registered * rate) / 100;

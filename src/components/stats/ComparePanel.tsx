@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Search, X } from 'lucide-react';
 import { COURSE_RECORDS, StatGrade } from '@/data/gradeStats';
 import {
@@ -24,16 +25,54 @@ import { BandLegend } from './BandLegend';
 
 const MAX_COMPARE = 4;
 
-/** Best value in a column, so the leader can be marked without colour. */
-const bestOf = (values: (number | null)[], direction: 'high' | 'low') => {
-  const present = values.filter((v): v is number => v !== null);
-  if (present.length === 0) return null;
-  return direction === 'high' ? Math.max(...present) : Math.min(...present);
+/**
+ * Best value in a column, compared at the precision actually shown — otherwise
+ * two rows can display 4.14 and only one gets marked.
+ */
+const bestOf = (values: (number | null)[], decimals: number) => {
+  const present = values
+    .filter((v): v is number => v !== null)
+    .map((v) => Number(v.toFixed(decimals)));
+  return present.length === 0 ? null : Math.max(...present);
+};
+
+const isBest = (value: number | null, best: number | null, decimals: number) =>
+  value !== null && best !== null && Number(value.toFixed(decimals)) === best;
+
+/**
+ * Marks the leading value in a column. The "best" label carries the meaning,
+ * so the highlight never has to be read as colour alone.
+ */
+const BestValue = ({ text, best }: { text: string; best: boolean }) => {
+  if (!best) return <span className="text-muted-foreground">{text}</span>;
+  return (
+    <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-[var(--sage)]/35 px-2 py-0.5 font-semibold text-foreground ring-1 ring-inset ring-[var(--sage)]">
+      {text}
+      <span className="text-[10px] font-medium uppercase tracking-wide text-[var(--olive)]">
+        best
+      </span>
+    </span>
+  );
 };
 
 export const ComparePanel = () => {
   const [query, setQuery] = useState('');
-  const [picked, setPicked] = useState<string[]>([]);
+  // Kept in the URL so a comparison can be shared as a link.
+  const [params, setParams] = useSearchParams();
+  const picked = useMemo(() => {
+    const raw = params.get('compare');
+    return raw ? raw.split('~').filter(Boolean).slice(0, MAX_COMPARE) : [];
+  }, [params]);
+
+  const setPicked = useCallback(
+    (next: string[]) => {
+      const updated = new URLSearchParams(params);
+      if (next.length) updated.set('compare', next.join('~'));
+      else updated.delete('compare');
+      setParams(updated, { replace: true });
+    },
+    [params, setParams],
+  );
 
   const summaries = useMemo(() => summarise(COURSE_RECORDS), []);
   const matches = useMemo(() => {
@@ -45,12 +84,12 @@ export const ComparePanel = () => {
   }, [summaries, query]);
 
   const toggle = (course: string) =>
-    setPicked((current) =>
-      current.includes(course)
-        ? current.filter((name) => name !== course)
-        : current.length >= MAX_COMPARE
-          ? current
-          : [...current, course],
+    setPicked(
+      picked.includes(course)
+        ? picked.filter((name) => name !== course)
+        : picked.length >= MAX_COMPARE
+          ? picked
+          : [...picked, course],
     );
 
   const columns = useMemo(
@@ -71,12 +110,9 @@ export const ComparePanel = () => {
     [picked],
   );
 
-  const bestAverage = bestOf(columns.map((c) => c.average), 'high');
-  const bestPass = bestOf(columns.map((c) => c.passRate), 'high');
-  const bestExcellent = bestOf(
-    columns.map((c) => c.distribution?.Excellent ?? null),
-    'high',
-  );
+  const bestAverage = bestOf(columns.map((c) => c.average), 2);
+  const bestPass = bestOf(columns.map((c) => c.passRate), 1);
+  const bestExcellent = bestOf(columns.map((c) => c.distribution?.Excellent ?? null), 1);
 
   return (
     <div className="space-y-6">
@@ -195,8 +231,11 @@ export const ComparePanel = () => {
                         Pass/Fail — no distribution published
                       </div>
                     )}
-                    <span className="numeric w-20 shrink-0 text-right text-xs text-muted-foreground">
-                      {column.average === null ? '—' : `avg ${column.average.toFixed(2)}`}
+                    <span className="numeric w-28 shrink-0 whitespace-nowrap text-right text-xs">
+                      <BestValue
+                        text={column.average === null ? '—' : `avg ${column.average.toFixed(2)}`}
+                        best={columns.length > 1 && isBest(column.average, bestAverage, 2)}
+                      />
                     </span>
                   </div>
                 );
@@ -221,6 +260,7 @@ export const ComparePanel = () => {
                 <TableBody>
                   {columns.map((column) => {
                     const excellent = column.distribution?.Excellent ?? null;
+                    const many = columns.length > 1;
                     return (
                       <TableRow key={column.course}>
                         <TableCell className="font-medium">{column.course}</TableCell>
@@ -228,46 +268,23 @@ export const ComparePanel = () => {
                         <TableCell className="numeric text-right">
                           {column.registered.toLocaleString()}
                         </TableCell>
-                        <TableCell
-                          className={cn(
-                            'numeric text-right',
-                            column.passRate !== null &&
-                              column.passRate === bestPass &&
-                              'font-semibold',
-                          )}
-                        >
-                          {formatPercent(column.passRate)}
-                          {column.passRate === bestPass && columns.length > 1 && (
-                            <span className="ml-1 text-xs text-muted-foreground">best</span>
-                          )}
+                        <TableCell className="numeric text-right">
+                          <BestValue
+                            text={formatPercent(column.passRate)}
+                            best={many && isBest(column.passRate, bestPass, 1)}
+                          />
                         </TableCell>
-                        <TableCell
-                          className={cn(
-                            'numeric text-right',
-                            excellent !== null && excellent === bestExcellent && 'font-semibold',
-                          )}
-                        >
-                          {excellent === null ? '—' : `${excellent.toFixed(1)}%`}
-                          {excellent !== null &&
-                            excellent === bestExcellent &&
-                            columns.length > 1 && (
-                              <span className="ml-1 text-xs text-muted-foreground">best</span>
-                            )}
+                        <TableCell className="numeric text-right">
+                          <BestValue
+                            text={excellent === null ? '—' : `${excellent.toFixed(1)}%`}
+                            best={many && isBest(excellent, bestExcellent, 1)}
+                          />
                         </TableCell>
-                        <TableCell
-                          className={cn(
-                            'numeric text-right',
-                            column.average !== null &&
-                              column.average === bestAverage &&
-                              'font-semibold',
-                          )}
-                        >
-                          {column.average === null ? '—' : column.average.toFixed(2)}
-                          {column.average !== null &&
-                            column.average === bestAverage &&
-                            columns.length > 1 && (
-                              <span className="ml-1 text-xs text-muted-foreground">best</span>
-                            )}
+                        <TableCell className="numeric text-right">
+                          <BestValue
+                            text={column.average === null ? '—' : column.average.toFixed(2)}
+                            best={many && isBest(column.average, bestAverage, 2)}
+                          />
                         </TableCell>
                       </TableRow>
                     );

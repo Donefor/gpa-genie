@@ -2,30 +2,51 @@ import { CourseRecord, StatGrade } from '@/data/gradeStats';
 import { aggregate, averageGradePoint, passingStudents, weightedPassRate } from './statsMath';
 
 /**
- * SSE course codes are grouped by department. The prefix is the department;
- * anything unrecognised falls into "Other".
+ * SSE course codes carry the subject. BE### is the Bachelor catalogue and
+ * groups by the digit after the prefix; plain numeric codes are the Master and
+ * elective catalogue and group by their leading pair. Both are folded into the
+ * same subject names so a subject can be compared across the school.
  */
-const DEPARTMENT_BY_PREFIX: { prefix: string; name: string }[] = [
+const BACHELOR_SUBJECTS: Record<string, string> = {
+  '0': 'Bachelor core & electives',
+  '1': 'Management',
+  '2': 'Marketing & Strategy',
+  '3': 'Accounting & Financial Management',
+  '4': 'Finance',
+  '5': 'Economics',
+  '6': 'Data Analytics & Law',
+  '7': 'Innovation & Entrepreneurship',
+  '8': 'Global Challenges',
+  '9': 'Bachelor core & electives',
+};
+
+const NUMERIC_SUBJECTS: { prefix: string; name: string }[] = [
   { prefix: '33', name: 'Accounting & Financial Management' },
   { prefix: '43', name: 'Finance' },
   { prefix: '53', name: 'Economics' },
   { prefix: '13', name: 'Marketing & Strategy' },
-  { prefix: '23', name: 'Management & Organisation' },
+  { prefix: '23', name: 'Management' },
   { prefix: '61', name: 'International Business & CEMS' },
   { prefix: '94', name: 'International Business & CEMS' },
-  { prefix: '73', name: 'Data Science & Economic History' },
-  { prefix: '80', name: 'Entrepreneurship' },
-  { prefix: '81', name: 'Entrepreneurship' },
+  { prefix: '73', name: 'Data Analytics & Law' },
+  { prefix: '80', name: 'Innovation & Entrepreneurship' },
+  { prefix: '81', name: 'Innovation & Entrepreneurship' },
   { prefix: '10', name: 'Languages' },
 ];
 
 export const departmentOf = (record: CourseRecord): string => {
   const no = record.courseNo;
+
+  if (no.startsWith('BE')) {
+    return BACHELOR_SUBJECTS[no.charAt(2)] ?? 'Bachelor core & electives';
+  }
+  if (no.startsWith('NDH')) return 'Retail Management';
+
   if (no.length >= 4) {
-    const match = DEPARTMENT_BY_PREFIX.find((entry) => no.startsWith(entry.prefix));
+    const match = NUMERIC_SUBJECTS.find((entry) => no.startsWith(entry.prefix));
     if (match) return match.name;
   }
-  if (no.length === 3 && no.startsWith('6')) return 'Bachelor specialisation & degree projects';
+  if (no.length === 3 && no.startsWith('6')) return 'Bachelor core & electives';
   if (no.length <= 3 && no.startsWith('1')) return 'Languages';
   return 'Other';
 };
@@ -138,6 +159,9 @@ export const bySemester = (records: CourseRecord[]) =>
 
 export const byDepartment = (records: CourseRecord[]) =>
   groupBy(records, departmentOf).sort((a, b) => b.registered - a.registered);
+
+export const byProgramme = (records: CourseRecord[]) =>
+  groupBy(records, (record) => record.programme).sort((a, b) => b.registered - a.registered);
 
 export const byPeriod = (records: CourseRecord[]) =>
   groupBy(records, (record) => `P${record.period}`).sort((a, b) => a.key.localeCompare(b.key));

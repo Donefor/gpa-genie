@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Search } from 'lucide-react';
-import { COURSE_RECORDS, STATS_GENERATED, StatGrade } from '@/data/gradeStats';
+import { ArrowLeft, Search } from 'lucide-react';
+import { ALL_RECORDS, StatGrade } from '@/data/gradeStats';
 import {
   aggregate,
   averageGradePoint,
@@ -17,6 +17,8 @@ import { BandLegend } from '@/components/stats/BandLegend';
 import { DistributionBars } from '@/components/stats/DistributionBars';
 import { BAND_COLOR, BAND_ORDER } from '@/components/stats/bands';
 import { Input } from '@/components/ui/input';
+import { SortableHead } from '@/components/stats/SortableHead';
+import { useSortedItems } from '@/components/stats/useTableSort';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AnalysisPanel } from '@/components/stats/AnalysisPanel';
 import { ComparePanel } from '@/components/stats/ComparePanel';
@@ -82,8 +84,8 @@ const Stats = () => {
   const scoped = useMemo(
     () =>
       period === 'all'
-        ? COURSE_RECORDS
-        : COURSE_RECORDS.filter((record) => String(record.period) === period),
+        ? ALL_RECORDS
+        : ALL_RECORDS.filter((record) => String(record.period) === period),
     [period],
   );
 
@@ -105,30 +107,17 @@ const Stats = () => {
   const slices = useMemo(() => byTerm(courseRecords), [courseRecords]);
   const courseDist = useMemo(() => aggregate(courseRecords), [courseRecords]);
 
-  const totals = useMemo(
-    () => ({
-      courses: summaries.length,
-      records: scoped.length,
-      registered: scoped.reduce((sum, record) => sum + record.registered, 0),
-      passRate: weightedPassRate(scoped),
-    }),
-    [summaries, scoped],
-  );
 
   return (
     <div className="min-h-screen bg-background">
       <AppHeader />
 
       <main className="mx-auto max-w-5xl px-4 py-10">
-        <header className="mb-8">
+        <header className="mb-6">
           <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
             Grade Statistics
           </h1>
-          <p className="numeric mt-2 text-sm text-muted-foreground">
-            {totals.courses} courses · {totals.records} course rounds ·{' '}
-            {totals.registered.toLocaleString()} registrations · overall pass rate{' '}
-            {formatPercent(totals.passRate)} · published {STATS_GENERATED}
-          </p>
+
         </header>
 
         <Tabs value={tab} onValueChange={setTab} className="w-full">
@@ -139,25 +128,46 @@ const Stats = () => {
           </TabsList>
 
           <TabsContent value="courses" className="mt-0">
-            <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
-              <aside>
-                <label className="relative block">
-                  <Search
-                    className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
-                    aria-hidden
-                  />
-                  <Input
-                    value={query}
-                    onChange={(event) => setQuery(event.target.value)}
-                    placeholder="Search courses"
-                    aria-label="Search courses"
-                    className="h-9 pl-9"
-                  />
-                </label>
+            {selected ? (
+              <div>
+                <button
+                  type="button"
+                  onClick={() => select(null)}
+                  className="mb-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <ArrowLeft className="h-4 w-4" aria-hidden />
+                  All courses
+                </button>
+                <CourseDetail
+                  course={selected}
+                  slices={slices}
+                  distribution={courseDist}
+                  registered={courseRecords.reduce((sum, r) => sum + r.registered, 0)}
+                  passRate={weightedPassRate(courseRecords)}
+                />
+              </div>
+            ) : (
+              <div>
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <label className="relative block flex-1">
+                    <Search
+                      className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+                      aria-hidden
+                    />
+                    <Input
+                      value={query}
+                      onChange={(event) => setQuery(event.target.value)}
+                      placeholder={`Search ${summaries.length} courses by name or code`}
+                      aria-label="Search courses"
+                      className="h-10 pl-9"
+                    />
+                  </label>
 
-                <div className="mt-3">
-                  <span className="field-label">Study period</span>
-                  <div className="flex flex-wrap gap-1">
+                  <div
+                    className="flex items-center gap-1"
+                    role="group"
+                    aria-label="Filter by study period"
+                  >
                     {PERIOD_FILTERS.map((option) => (
                       <button
                         key={option.value}
@@ -165,7 +175,7 @@ const Stats = () => {
                         onClick={() => setPeriod(option.value)}
                         aria-pressed={period === option.value}
                         className={cn(
-                          'rounded border px-2.5 py-1 text-xs transition-colors',
+                          'h-10 rounded-md border px-3 text-sm transition-colors',
                           period === option.value
                             ? 'border-transparent bg-primary text-primary-foreground'
                             : 'border-border text-muted-foreground hover:text-foreground',
@@ -178,52 +188,17 @@ const Stats = () => {
                 </div>
 
                 <p className="numeric mt-3 text-xs text-muted-foreground">
-                  {matches.length} of {summaries.length} courses
+                  {matches.length === summaries.length
+                    ? `${summaries.length} courses`
+                    : `${matches.length} of ${summaries.length} courses`}
+                  {period !== 'all' && ` · study period ${period} only`}
                 </p>
 
-                <ul className="mt-2 max-h-[560px] divide-y divide-border overflow-y-auto rounded-md border border-border">
-                  {matches.map((item) => (
-                    <li key={item.course}>
-                      <button
-                        type="button"
-                        onClick={() => select(selected === item.course ? null : item.course)}
-                        className={cn(
-                          'flex w-full flex-col gap-0.5 px-3 py-2 text-left transition-colors hover:bg-muted',
-                          selected === item.course && 'bg-muted',
-                        )}
-                        aria-pressed={selected === item.course}
-                      >
-                        <span className="text-sm leading-snug">{item.course}</span>
-                        <span className="numeric text-xs text-muted-foreground">
-                          {item.terms} {item.terms === 1 ? 'round' : 'rounds'} ·{' '}
-                          {item.registered.toLocaleString()} reg. ·{' '}
-                          {item.isPassFail ? 'Pass/Fail' : `avg ${item.average!.toFixed(2)}`}
-                        </span>
-                      </button>
-                    </li>
-                  ))}
-                  {matches.length === 0 && (
-                    <li className="px-3 py-8 text-center text-sm text-muted-foreground">
-                      No courses match this filter.
-                    </li>
-                  )}
-                </ul>
-              </aside>
-
-              <div className="min-w-0">
-                {selected ? (
-                  <CourseDetail
-                    course={selected}
-                    slices={slices}
-                    distribution={courseDist}
-                    registered={courseRecords.reduce((sum, r) => sum + r.registered, 0)}
-                    passRate={weightedPassRate(courseRecords)}
-                  />
-                ) : (
-                  <OverviewTable summaries={matches.slice(0, 40)} total={matches.length} />
-                )}
+                <div className="mt-3">
+                  <CourseTable summaries={matches} onSelect={select} />
+                </div>
               </div>
-            </div>
+            )}
           </TabsContent>
 
           <TabsContent value="analysis" className="mt-0">
@@ -349,46 +324,87 @@ const CourseDetail = ({
   );
 };
 
-const OverviewTable = ({
+type CourseSortKey = 'course' | 'code' | 'rounds' | 'registered' | 'passRate' | 'average';
+
+const COURSE_ACCESSORS: Record<
+  CourseSortKey,
+  (item: ReturnType<typeof summarise>[number]) => string | number | null
+> = {
+  course: (item) => item.course,
+  code: (item) => Number(item.courseNo),
+  rounds: (item) => item.terms,
+  registered: (item) => item.registered,
+  passRate: (item) => item.passRate,
+  average: (item) => (item.isPassFail ? null : item.average),
+};
+
+const CourseTable = ({
   summaries,
-  total,
+  onSelect,
 }: {
   summaries: ReturnType<typeof summarise>;
-  total: number;
-}) => (
-  <section className="surface-card p-4 sm:p-5">
-    <header className="mb-3">
-      <h2 className="text-sm font-semibold tracking-tight">All courses</h2>
-      <p className="mt-1 text-xs text-muted-foreground">
-        Select a course to see its distribution by round.
-        {total > summaries.length && ` Showing the first ${summaries.length} of ${total}.`}
+  onSelect: (course: string) => void;
+}) => {
+  const { key, direction, toggle, sorted } = useSortedItems(
+    summaries,
+    COURSE_ACCESSORS,
+    'course',
+  );
+
+  if (summaries.length === 0) {
+    return (
+      <p className="rounded-md border border-dashed border-border px-3 py-16 text-center text-sm text-muted-foreground">
+        No courses match this search.
       </p>
-    </header>
-    <div className="w-full overflow-x-auto">
+    );
+  }
+
+  const head = (column: CourseSortKey, label: string, align: 'left' | 'right' = 'right') => (
+    <SortableHead
+      column={column}
+      active={key}
+      direction={direction}
+      onSort={toggle}
+      align={align}
+    >
+      {label}
+    </SortableHead>
+  );
+
+  return (
+    <div className="surface-card w-full overflow-x-auto">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Course</TableHead>
-            <TableHead className="text-right">Rounds</TableHead>
-            <TableHead className="text-right">Reg.</TableHead>
-            <TableHead className="text-right">Pass rate</TableHead>
-            <TableHead className="text-right">Avg.</TableHead>
+            {head('course', 'Course', 'left')}
+            {head('code', 'Code')}
+            {head('rounds', 'Rounds')}
+            {head('registered', 'Registered')}
+            {head('passRate', 'Pass rate')}
+            {head('average', 'Avg. grade')}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {summaries.map((item) => (
-            <TableRow key={item.course}>
-              <TableCell className="max-w-[280px] truncate font-medium" title={item.course}>
-                {item.course}
+          {sorted.map((item) => (
+            <TableRow
+              key={item.course}
+              onClick={() => onSelect(item.course)}
+              className="cursor-pointer"
+            >
+              <TableCell className="font-medium">
+                <button type="button" className="text-left hover:underline">
+                  {item.course}
+                </button>
+              </TableCell>
+              <TableCell className="numeric text-right text-muted-foreground">
+                {item.courseNo}
               </TableCell>
               <TableCell className="numeric text-right">{item.terms}</TableCell>
               <TableCell className="numeric text-right">
                 {item.registered.toLocaleString()}
               </TableCell>
-              <TableCell className="numeric text-right">
-                {formatPercent(item.passRate)}
-              </TableCell>
-              <TableCell className="numeric text-right">
+              <TableCell className="numeric text-right">{formatPercent(item.passRate)}</TableCell>
+              <TableCell className="numeric text-right font-medium">
                 {item.isPassFail ? '—' : item.average!.toFixed(2)}
               </TableCell>
             </TableRow>
@@ -396,8 +412,8 @@ const OverviewTable = ({
         </TableBody>
       </Table>
     </div>
-  </section>
-);
+  );
+};
 
 const Stat = ({ label, value }: { label: string; value: string }) => (
   <div>

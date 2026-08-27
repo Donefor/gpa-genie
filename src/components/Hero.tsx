@@ -1,54 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { contextualMessage, randomMessage } from '@/data/messages';
 import { PapersMark } from './PapersMark';
 
-/** Rotating encouragement in place of a fixed headline. */
-const MESSAGES = [
-  'You are further along than you think',
-  'Every period counts',
-  'Steady work, real results',
-  'One grade at a time',
-  'Your best round is still ahead',
-  'Look how far you have come',
-  'Small steps, strong finish',
-  'Keep going, it adds up',
-];
+const SESSION_KEY = 'sse-gpa-calculator:message';
 
-const ROTATE_MS = 5000;
+/**
+ * The headline is drawn once per session and cached, so it holds steady while
+ * you move between the calculator and the statistics.
+ */
+const messageForSession = (): string => {
+  // Time-sensitive messages always win, so they are never read from the cache.
+  const contextual = contextualMessage();
+  if (contextual) return contextual;
 
-const prefersReducedMotion = () =>
-  typeof window !== 'undefined' &&
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  try {
+    const stored = window.sessionStorage.getItem(SESSION_KEY);
+    if (stored) return stored;
+    const fresh = randomMessage();
+    window.sessionStorage.setItem(SESSION_KEY, fresh);
+    return fresh;
+  } catch {
+    // Session storage can be unavailable; a fresh message each load is fine.
+    return randomMessage();
+  }
+};
 
 export const Hero = () => {
-  const [index, setIndex] = useState(() => Math.floor(Math.random() * MESSAGES.length));
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    if (prefersReducedMotion()) return;
-
-    const rotate = window.setInterval(() => {
-      setVisible(false);
-      window.setTimeout(() => {
-        setIndex((current) => (current + 1) % MESSAGES.length);
-        setVisible(true);
-      }, 400);
-    }, ROTATE_MS);
-
-    return () => window.clearInterval(rotate);
-  }, []);
+  const [message] = useState(messageForSession);
 
   return (
     <section className="relative bg-[var(--sage)]">
       <div className="mx-auto max-w-5xl px-4">
         <div className="grid items-center gap-6 sm:grid-cols-[1.15fr_1fr]">
           <div className="pb-28 pt-14 sm:pb-36 sm:pt-24">
-            <h1
-              className={`font-display text-3xl leading-[1.15] text-[var(--bronze)] transition-opacity duration-400 sm:text-[2.6rem] ${
-                visible ? 'opacity-100' : 'opacity-0'
-              }`}
-              aria-live="polite"
-            >
-              {MESSAGES[index]}
+            <h1 className="font-display text-3xl leading-[1.15] text-[var(--bronze)] sm:text-[2.6rem]">
+              {message}
             </h1>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-[var(--bronze)]/85">
               Plan and track your grade point average for the Bachelor in Business and

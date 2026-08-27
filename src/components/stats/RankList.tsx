@@ -23,8 +23,9 @@ export const RankList = ({
 
   return (
     <section className="surface-card p-4 sm:p-5">
-      <h3 className="text-sm font-semibold tracking-tight">{title}</h3>
-      <p className="mt-1 text-xs text-muted-foreground">{description}</p>
+      <span aria-hidden className="block h-1 w-10 rounded-full bg-[var(--sage)]" />
+      <h3 className="mt-3 text-xl tracking-tight">{title}</h3>
+      <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{description}</p>
 
       <ol className="mt-4 flex flex-col gap-3">
         {items.map((item, index) => (
