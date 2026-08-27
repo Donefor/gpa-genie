@@ -1,0 +1,1435 @@
+{
+ "bsc-retail-management": {
+  "name": "BSc Retail Management",
+  "level": "Bachelor",
+  "source": "https://www.hhs.se/education/bachelor/retail-management/program-structure/",
+  "courses": [
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Introductory Course in Happiness and Wellbeing",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "NDH101 - Introduction to Retailing",
+    "courseNo": "NDH101",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "NDH401 - Economics I",
+    "courseNo": "NDH401",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "NDH302 - Accounting",
+    "courseNo": "NDH302",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "NDH201 - Marketing",
+    "courseNo": "NDH201",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "NDH301 - Management Control",
+    "courseNo": "NDH301",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "NDH203 - Supply Chain Management",
+    "courseNo": "NDH203",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "NDH402 - Economics II",
+    "courseNo": "NDH402",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "NDH214 - Marketing Research",
+    "courseNo": "NDH214",
+    "ects": 6.0,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3",
+    "course": "NDH403 - Finance",
+    "courseNo": "NDH403",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3",
+    "course": "NDH303 - Management & Organization",
+    "courseNo": "NDH303",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3",
+    "course": "NDH306 - Retail Accounting and Financial Management",
+    "courseNo": "NDH306",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3",
+    "course": "NDH801 - Business Law",
+    "courseNo": "NDH801",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 4",
+    "course": "Data Analytics: Statistics for Retail Management",
+    "courseNo": "NDH802",
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 4",
+    "course": "NDH307 - Principles of Happiness",
+    "courseNo": "NDH307",
+    "ects": 3.0,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 4",
+    "course": "NDH215 - Marketing Communications",
+    "courseNo": "NDH215",
+    "ects": 6.0,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 4",
+    "course": "NDH216 - Customer Experience Management",
+    "courseNo": "NDH216",
+    "ects": 9.0,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 4",
+    "course": "NDH113 - Data Science for Retail Management",
+    "courseNo": "NDH113",
+    "ects": 6.0,
+    "kind": "course"
+   },
+   {
+    "year": "Year 3",
+    "semester": "Semester 5",
+    "course": "NDH108 - Current Issues in Retailing",
+    "courseNo": "NDH108",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 3",
+    "semester": "Semester 5",
+    "course": "Applied Retail Track and Company Project",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 3",
+    "semester": "Semester 5",
+    "course": "NDH305 - Retail Operations",
+    "courseNo": "NDH305",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 3",
+    "semester": "Semester 5",
+    "course": "NDH103 - Advanced Customer Management",
+    "courseNo": "NDH103",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 3",
+    "semester": "Semester 5",
+    "course": "Applied Retail Track and Company Project",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 3",
+    "semester": "Semester 6",
+    "course": "NDH105 - Brand and Category Management",
+    "courseNo": "NDH105",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 3",
+    "semester": "Semester 6",
+    "course": "Degree Project",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 3",
+    "semester": "Semester 6",
+    "course": "NDH107 - Innovation Strategy",
+    "courseNo": "NDH107",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 3",
+    "semester": "Semester 6",
+    "course": "Degree Project",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   }
+  ]
+ },
+ "msc-avfm": {
+  "name": "MSc Accounting, Valuation and Financial Management",
+  "level": "Master",
+  "source": "https://www.hhs.se/education/master/accounting-valuation-financial-management/program-structure/",
+  "courses": [
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Strategic Management Control",
+    "courseNo": "3302",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Financial Analysis",
+    "courseNo": "3303",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "International Financial Reporting",
+    "courseNo": "3301",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Corporate Valuation",
+    "courseNo": "3304",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2 (choose four out of six courses)",
+    "course": "Accounting for Grand Challenges",
+    "courseNo": "3315",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2 (choose four out of six courses)",
+    "course": "Auditing, Governance, and Investor Assurance",
+    "courseNo": "3309",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2 (choose four out of six courses)",
+    "course": "CFO Challenges in Multinational Corporations",
+    "courseNo": null,
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2 (choose four out of six courses)",
+    "course": "Current Issues in Financial Reporting",
+    "courseNo": "3305",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2 (choose four out of six courses)",
+    "course": "Financial Communication",
+    "courseNo": "3311",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2 (choose four out of six courses)",
+    "course": "Uncovering the Dark Side of Accounting with Python",
+    "courseNo": null,
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives at SSE",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives at Stockholm School of Entrepreneurship",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives within the Global Network for Advanced Management",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives and seminars within CIVICA",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Executive Trainee Module",
+    "courseNo": "9310",
+    "ects": 30.0,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Data Analytics Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Sustainability Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "CEMS Master in International Management",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Exchange Program",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Wallenberg International Fellows Program",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "MSc-PhD Parallel Enrollment Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Investments and Value Creation in Global Sports",
+    "courseNo": "3313",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Finance for Start-Ups",
+    "courseNo": "8088",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "International Financial Management",
+    "courseNo": "4306",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Corporate Finance",
+    "courseNo": "4319",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Private Equity",
+    "courseNo": "4310",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "AI in Finance",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   }
+  ]
+ },
+ "msc-business-innovation": {
+  "name": "MSc Business Innovation",
+  "level": "Master",
+  "source": "https://www.hhs.se/education/master/business-innovation/program-structure/",
+  "courses": [
+   {
+    "year": "Year 1",
+    "semester": "Semester 1: Getting up to speed",
+    "course": "Business Creation and Development",
+    "courseNo": "1313",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1: Getting up to speed",
+    "course": "Advanced Strategic Management",
+    "courseNo": "1329",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1: Getting up to speed",
+    "course": "Operations Strategy",
+    "courseNo": "1328",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1: Getting up to speed",
+    "course": "Management Accounting & Control",
+    "courseNo": "1326",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2: Harnessing uncertainty and change",
+    "course": "Innovation Management",
+    "courseNo": "1318",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2: Harnessing uncertainty and change",
+    "course": "Brand Strategy",
+    "courseNo": "1319",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2: Harnessing uncertainty and change",
+    "course": "Digital Transformation",
+    "courseNo": "1330",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2: Harnessing uncertainty and change",
+    "course": "Leading Change",
+    "courseNo": "1321",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3: Customize your studies",
+    "course": "Electives at SSE",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3: Customize your studies",
+    "course": "Electives at Stockholm School of Entrepreneurship",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3: Customize your studies",
+    "course": "Electives within the Global Network for Advanced Management",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3: Customize your studies",
+    "course": "Electives and seminars within CIVICA",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3: Customize your studies",
+    "course": "Executive Trainee Module",
+    "courseNo": "9310",
+    "ects": 30.0,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3: Customize your studies",
+    "course": "Data Analytics Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3: Customize your studies",
+    "course": "Sustainability Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3: Customize your studies",
+    "course": "Exchange Program",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3: Customize your studies",
+    "course": "Wallenberg International Fellows Program",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3: Customize your studies",
+    "course": "MSc-PhD Parallel Enrollment Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 4: Master's thesis and reflection",
+    "course": "Master's thesis",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 4: Master's thesis and reflection",
+    "course": "Out-troduction module",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 4: Master's thesis and reflection",
+    "course": "Double degree with Sciences Po – Paris School of International Affairs",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   }
+  ]
+ },
+ "msc-economics": {
+  "name": "MSc Economics",
+  "level": "Master",
+  "source": "https://www.hhs.se/education/master/economics/program-structure/",
+  "courses": [
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Advanced Mathematics for Economic Analysis",
+    "courseNo": "5301",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Econometrics",
+    "courseNo": "5304",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Advanced Microeconomic Theory",
+    "courseNo": "5330",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Advanced Macroeconomics",
+    "courseNo": "5303",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "Electives at SSE",
+    "courseNo": null,
+    "ects": 30.0,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives at SSE",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives at Stockholm School of Entrepreneurship",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives within the Global Network for Advanced Management",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives and seminars within CIVICA",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Executive Trainee Module",
+    "courseNo": "9310",
+    "ects": 30.0,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Data Analytics Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Sustainability Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "CEMS Master in International Management",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Exchange Program",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Wallenberg International Fellows Program",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "MSc-PhD Parallel Enrollment Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Applied Econometric Time Series",
+    "courseNo": "5314",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "BE912 - Development Economics",
+    "courseNo": "BE912",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Behavioral Economics",
+    "courseNo": "5316",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Industrial Organization",
+    "courseNo": "5321",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Natural Resource and Energy Economics",
+    "courseNo": "5324",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "The Economics of Pollution and Climate Change",
+    "courseNo": "5327",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Gender and the Labor Market",
+    "courseNo": "5328",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Inequality, Household Behavior, and the Macroeconomy",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Game Theory",
+    "courseNo": "5332",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Monetary Economics",
+    "courseNo": "5334",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Double degree with the University of St.Gallen",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Double degree with Sciences Po – Paris School of International Affairs",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Joint degree: CEMS Master in International Management",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   }
+  ]
+ },
+ "msc-finance": {
+  "name": "MSc Finance",
+  "level": "Master",
+  "source": "https://www.hhs.se/education/master/finance/program-structure/",
+  "courses": [
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Responsibility and Sustainability",
+    "courseNo": "4331",
+    "ects": 1.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Asset Pricing and Investments",
+    "courseNo": "4339",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Accounting and Financial Statement Analysis",
+    "courseNo": "3314",
+    "ects": 6.0,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Empirical Methods in Finance",
+    "courseNo": "4338",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Corporate Finance",
+    "courseNo": "4319",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "Core electives",
+    "courseNo": null,
+    "ects": 30.0,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives at SSE",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives at Stockholm School of Entrepreneurship",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives within the Global Network for Advanced Management",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives and seminars within CIVICA",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "MFIN Business Project / Internship course",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Executive Trainee Module",
+    "courseNo": "9310",
+    "ects": 30.0,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Data Analytics Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Sustainability Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "CEMS Master in International Management",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Exchange Program",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Wallenberg International Fellows Program",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "MSc-PhD Parallel Enrollment Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "AI in Finance",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Asset Management",
+    "courseNo": "4335",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Behavioral Finance",
+    "courseNo": "4314",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Empirical Methods of Finance",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Entrepreneurial Finance and Venture Capital",
+    "courseNo": "4326",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Household Finances and Wealth Management",
+    "courseNo": "4327",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "International Financial Management",
+    "courseNo": "4306",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Macroeconomics and Finance",
+    "courseNo": "4330",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Private Equity",
+    "courseNo": "4310",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Real Estate Finance",
+    "courseNo": "4333",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Risk Management",
+    "courseNo": "4340",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Special Situation Investing",
+    "courseNo": "4336",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "BE923 - Climate Finance",
+    "courseNo": "BE923",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Value Investing I",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Value Investing II: Frontiers",
+    "courseNo": "4325",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Double degree with Bocconi University",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Double degree with the University of St.Gallen",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Double degree with Sciences Po – Paris School of International Affairs",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Joint degree: CEMS Master in International Management",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   }
+  ]
+ },
+ "msc-international-business": {
+  "name": "MSc International Business",
+  "level": "Master",
+  "source": "https://www.hhs.se/education/master/international-business/program-structure/",
+  "courses": [
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Creating International Firms",
+    "courseNo": null,
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Managing Human Dynamics in the Global Firm",
+    "courseNo": "6118",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "Foundations of the Global Economy",
+    "courseNo": "6124",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1",
+    "course": "NDH203 - Supply Chain Management",
+    "courseNo": "NDH203",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "Shaping Global Markets",
+    "courseNo": "6122",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "Corporate Finance in Global Firms",
+    "courseNo": "6123",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "Managing Data and AI in the Global Workplace",
+    "courseNo": "6125",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "MIB International Immersion Internship",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "MIB Research Project",
+    "courseNo": "6181",
+    "ects": 15.0,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 2",
+    "course": "CEMS International Internship",
+    "courseNo": "6194",
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 (at a CEMS partner school)",
+    "course": "Strategic Thinking in a Global Digital World",
+    "courseNo": "9481",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 (at a CEMS partner school)",
+    "course": "Electives",
+    "courseNo": null,
+    "ects": 22.5,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 4 (at SSE)",
+    "course": "Global Leadership",
+    "courseNo": "9480",
+    "ects": 7.5,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 4 (at SSE)",
+    "course": "Elective",
+    "courseNo": null,
+    "ects": 7.5,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 4 (at SSE)",
+    "course": "CEMS Business Project",
+    "courseNo": "9476",
+    "ects": 15.0,
+    "kind": "course"
+   }
+  ]
+ },
+ "msc-public-policy": {
+  "name": "MSc Public Policy",
+  "level": "Master",
+  "source": "https://www.hhs.se/education/master/public-policy/program-structure/",
+  "courses": [
+   {
+    "year": "Year 1",
+    "semester": "Semester 1 and 2",
+    "course": "Contemporary Policy Challenges in a Global Context",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1 and 2",
+    "course": "Economic Foundations for Public Policy",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1 and 2",
+    "course": "Fiscal Policy, Budgeting, and Public Finance",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1 and 2",
+    "course": "Quantitative Methods for Policy Evaluation",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1 and 2",
+    "course": "Political Economy and EU Institutions",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1 and 2",
+    "course": "Law and Regulation for Public Policy",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1 and 2",
+    "course": "Public Management",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 1",
+    "semester": "Semester 1 and 2",
+    "course": "Implementation and Delivery",
+    "courseNo": null,
+    "ects": null,
+    "kind": "course"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives at SSE",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives at Stockholm School of Entrepreneurship",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives within the Global Network for Advanced Management",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Electives and seminars within CIVICA",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Data Analytics Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Sustainability Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Exchange Program",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Wallenberg International Fellows Program",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "MSc-PhD Parallel Enrollment Track",
+    "courseNo": null,
+    "ects": null,
+    "kind": "option"
+   }
+  ]
+ }
+}
