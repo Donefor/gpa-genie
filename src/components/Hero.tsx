@@ -21,6 +21,9 @@ export const Hero = () => {
               Plan and track your grade point average for the Bachelor in Business and
               Economics at the Stockholm School of Economics.
             </p>
+            <p className="mt-3 text-xs text-[var(--bronze)]/70">
+              A student-led project. Not officially endorsed by SSE.
+            </p>
           </div>
 
           <div className="hidden justify-center text-[var(--bronze)] sm:flex">
