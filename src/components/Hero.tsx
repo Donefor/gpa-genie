@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { contextualMessage, randomMessage } from '@/data/messages';
 import { PapersMark } from './PapersMark';
 
@@ -38,8 +39,12 @@ export const Hero = () => {
             </h1>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-[var(--bronze)]/85">
               Plan and track your grade point average for the Bachelor in Business and
-              Economics at the Stockholm School of Economics. Your grades are anonymous, but
-              they are saved in your browser.
+              Economics at the Stockholm School of Economics. No sign-up: your grades are
+              saved in your own browser.{' '}
+              <Link to="/privacy" className="underline underline-offset-2">
+                How your data is handled
+              </Link>
+              .
             </p>
           </div>
 
