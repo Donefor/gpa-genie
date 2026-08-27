@@ -2,37 +2,10 @@ import { useState } from 'react';
 import { pickFrom, poolFor, scopeFor } from '@/data/messages';
 import { PapersMark } from './PapersMark';
 
-const SESSION_KEY = 'sse-gpa-calculator:message';
-
-/**
- * The headline is drawn once per session and cached, so it holds steady while
- * you move between the calculator and the statistics.
- */
-const messageForSession = (): string => {
-  // The scope is stored alongside the message, so a line cached during
-  // freshers' week is not still on screen in November.
-  const scope = scopeFor();
-  const pool = poolFor(scope);
-
-  try {
-    const raw = window.sessionStorage.getItem(SESSION_KEY);
-    if (raw) {
-      const cached = JSON.parse(raw) as { scope?: string; message?: string };
-      if (cached.scope === scope && cached.message && pool.includes(cached.message)) {
-        return cached.message;
-      }
-    }
-    const fresh = pickFrom(pool);
-    window.sessionStorage.setItem(SESSION_KEY, JSON.stringify({ scope, message: fresh }));
-    return fresh;
-  } catch {
-    // Session storage can be unavailable; a fresh message each load is fine.
-    return pickFrom(pool);
-  }
-};
-
 export const Hero = () => {
-  const [message] = useState(messageForSession);
+  // Drawn once per mount, so it is a new line on every page load but does not
+  // flicker as the calculator re-renders underneath it.
+  const [message] = useState(() => pickFrom(poolFor(scopeFor())));
 
   return (
     <section className="relative bg-[var(--sage)]">

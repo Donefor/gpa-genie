@@ -1,9 +1,8 @@
 /**
- * Headline encouragement. One message is drawn per browser session and held,
- * so it stays put while you move between pages and changes when you come back.
+ * Headline encouragement. A line is drawn at random on every page load.
  *
- * The clock and the calendar can override the general pool: late at night, and
- * across the start of the academic year when the intake is new.
+ * The clock and the calendar can override the general pool: late at night,
+ * across the start of the academic year, and over Christmas.
  */
 
 export const MESSAGES = [

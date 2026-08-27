@@ -172,9 +172,8 @@ const Privacy = () => (
 
       <Section number={4} title="Cookies and local storage">
         <p>
-          The Service uses browser local storage to remember the grades and choices you enter,
-          and session storage to keep the page heading stable while you browse. These are not
-          cookies, are readable only by this site, and are never transmitted to us.
+          The Service uses browser local storage to remember the grades and choices you enter.
+          This is not a cookie, is readable only by this site, and is never transmitted to us.
         </p>
         <p>
           <strong className="font-medium text-foreground">Your tracking choice</strong> is
