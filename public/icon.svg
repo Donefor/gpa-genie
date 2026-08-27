@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
   <rect width="100" height="100" fill="#8fad8a"/>
-  <g fill="#3e3a35" font-family="Georgia,'Times New Roman',serif" font-weight="700"
+  <g fill="#ffffff" font-family="Georgia,'Times New Roman',serif" font-weight="700"
      font-size="40" letter-spacing="-1.5" text-anchor="middle">
     <text x="50" y="43">SSE</text>
     <text x="50" y="80">GPA</text>
