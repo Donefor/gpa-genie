@@ -934,7 +934,7 @@
     "course": "Core electives",
     "courseNo": null,
     "ects": 30.0,
-    "kind": "core"
+    "kind": "electiveBlock"
    },
    {
     "year": "Year 2",

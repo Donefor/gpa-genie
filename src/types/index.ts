@@ -61,6 +61,12 @@ export type GradeMap = Record<string, Grade>;
 
 /** Everything the user has chosen. Course lists are derived from this. */
 export interface ProgramConfig {
+  /** Which programme is being tracked. */
+  programme: string;
+  /** Elective type per slot, keyed "<termKey>:<slot>". */
+  programmeElectives: Record<string, ElectiveType | null>;
+  /** Which members of a "choose N of M" group the student actually took. */
+  programmeChoices: Record<string, boolean>;
   specialization: Specialization | null;
   secondSpecialization: Specialization | null;
   /** Year 2 electives, keyed "p3" | "p4" -> slot index. */

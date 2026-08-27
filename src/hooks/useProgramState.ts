@@ -12,6 +12,9 @@ import {
 const STORAGE_KEY = 'sse-gpa-calculator:v2';
 
 export const emptyConfig: ProgramConfig = {
+  programme: 'bsc-business-economics',
+  programmeElectives: {},
+  programmeChoices: {},
   specialization: null,
   secondSpecialization: null,
   year2Electives: {},
@@ -32,6 +35,9 @@ type Action =
   | { type: 'setExchange'; exchange: ExchangeOption }
   | { type: 'setInternship'; internship: boolean }
   | { type: 'setThesis'; thesis: ThesisOption }
+  | { type: 'setProgramme'; programme: string }
+  | { type: 'setProgrammeElective'; key: string; elective: ElectiveType | null }
+  | { type: 'toggleProgrammeChoice'; key: string; taken: boolean }
   | { type: 'reset' }
   | { type: 'hydrate'; state: ProgramState };
 
@@ -49,6 +55,28 @@ const reducer = (state: ProgramState, action: Action): ProgramState => {
     // so switching options around can no longer wipe entered grades.
     case 'setGrade':
       return { ...state, grades: { ...state.grades, [action.id]: action.grade } };
+
+    // Grades are keyed per programme, so switching keeps each programme's work.
+    case 'setProgramme':
+      return { ...state, config: { ...config, programme: action.programme } };
+
+    case 'setProgrammeElective':
+      return {
+        ...state,
+        config: {
+          ...config,
+          programmeElectives: { ...config.programmeElectives, [action.key]: action.elective },
+        },
+      };
+
+    case 'toggleProgrammeChoice':
+      return {
+        ...state,
+        config: {
+          ...config,
+          programmeChoices: { ...config.programmeChoices, [action.key]: action.taken },
+        },
+      };
 
     case 'setSpecialization':
       return {
@@ -148,6 +176,11 @@ export const useProgramState = () => {
   const actions = useMemo(
     () => ({
       setGrade: (id: string, grade: Grade) => dispatch({ type: 'setGrade', id, grade }),
+      setProgramme: (programme: string) => dispatch({ type: 'setProgramme', programme }),
+      setProgrammeElective: (key: string, elective: ElectiveType | null) =>
+        dispatch({ type: 'setProgrammeElective', key, elective }),
+      toggleProgrammeChoice: (key: string, taken: boolean) =>
+        dispatch({ type: 'toggleProgrammeChoice', key, taken }),
       setSpecialization: (spec: Specialization | null) =>
         dispatch({ type: 'setSpecialization', spec }),
       setSecondSpecialization: (spec: Specialization | null) =>
