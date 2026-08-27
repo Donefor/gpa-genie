@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <rect width="100" height="100" fill="#8fad8a"/>
+  <!-- One sheet only, and a heavy mark: anything finer dissolves at 16px -->
+  <rect x="22" y="16" width="56" height="68" rx="5"
+        fill="#ffffff" stroke="#3e3a35" stroke-width="7"/>
+  <path d="M35 52 L46 64 L70 34" fill="none" stroke="#3e3a35"
+        stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
