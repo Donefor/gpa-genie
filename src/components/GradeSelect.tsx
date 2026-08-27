@@ -31,7 +31,9 @@ export const GradeSelect = ({ value, onChange, label }: GradeSelectProps) => (
     <SelectContent data-hj-suppress>
       {GRADE_OPTIONS.map((option) => (
         <SelectItem key={option.value} value={option.value}>
-          <span className="flex items-baseline gap-2">
+          {/* The points sit at the far edge rather than jammed against the
+              name, which on a phone left most of the row empty. */}
+          <span className="flex w-full items-baseline justify-between gap-4">
             <span>{option.label}</span>
             {option.points !== null && (
               <span className="numeric text-xs text-muted-foreground">
