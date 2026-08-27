@@ -95,7 +95,8 @@ export const ElectiveSlotSelect = ({
     const spent = !!where && where !== slotKey;
     return (
       <SelectItem key={course.courseNo} value={course.courseNo} disabled={spent}>
-        {course.name} · {course.credits}
+        {course.name}
+        {course.ambiguous && ` (${course.courseNo})`} · {course.credits}
         {!course.creditsKnown && '*'} ECTS
         {spent && (where === 'mandatory' ? ' · already required' : ' · already chosen')}
       </SelectItem>

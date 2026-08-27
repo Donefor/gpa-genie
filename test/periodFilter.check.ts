@@ -26,7 +26,8 @@ console.log('\n--- A single-period course appears in exactly one period ---');
   check('221 of all 290 rows run in one period', ALL_CATALOGUE.filter(c=>c.periods.length===1).length===221,
     String(ALL_CATALOGUE.filter(c=>c.periods.length===1).length));
   const only=CATALOGUE.filter(c=>c.periods.length===1);
-  check('215 of the pickable ones do (7 zero-credit excluded)', only.length===215, String(only.length));
+  check('202 of the pickable ones do (zero-credit and retired excluded)', only.length===202,
+    String(only.length));
   const sample=only.slice(0,3);
   sample.forEach(c=>{
     const appears=[1,2,3,4].filter(p=>coursesInPeriods([p]).some(x=>x.courseNo===c.courseNo));

@@ -10,7 +10,8 @@ const check=(n:string,c:boolean,d='')=>{ if(!c) fail++; console.log(`${c?'PASS':
 
 console.log('--- Catalogue ---');
 check('290 rows in the export', ALL_CATALOGUE.length===290, String(ALL_CATALOGUE.length));
-check('283 pickable (7 zero-credit excluded)', CATALOGUE.length===283, String(CATALOGUE.length));
+check('270 pickable (7 zero-credit and 13 retired excluded)', CATALOGUE.length===270,
+  String(CATALOGUE.length));
 check('published credits on most', ALL_CATALOGUE.filter(c=>c.creditsKnown).length===248,
   String(ALL_CATALOGUE.filter(c=>c.creditsKnown).length));
 check('unknown credits fall back to 7.5',
