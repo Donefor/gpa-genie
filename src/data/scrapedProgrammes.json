@@ -10,7 +10,7 @@
     "course": "Introductory Course in Happiness and Wellbeing",
     "courseNo": null,
     "ects": 0.0,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -18,7 +18,7 @@
     "course": "Introduction to Retailing",
     "courseNo": "NDH101",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -26,7 +26,7 @@
     "course": "Economics I",
     "courseNo": "NDH401",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -34,7 +34,7 @@
     "course": "Accounting",
     "courseNo": "NDH302",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -42,7 +42,7 @@
     "course": "Marketing",
     "courseNo": "NDH201",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -50,7 +50,7 @@
     "course": "Management Control",
     "courseNo": "NDH301",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -58,7 +58,7 @@
     "course": "Supply Chain Management",
     "courseNo": "NDH203",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -66,7 +66,7 @@
     "course": "Economics II",
     "courseNo": "NDH402",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -74,7 +74,7 @@
     "course": "Marketing Research",
     "courseNo": "NDH204",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -82,7 +82,7 @@
     "course": "Finance",
     "courseNo": "NDH403",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -90,7 +90,7 @@
     "course": "Management & Organization",
     "courseNo": "NDH303",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -98,7 +98,7 @@
     "course": "Retail Accounting and Financial Management",
     "courseNo": "NDH306",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -106,7 +106,7 @@
     "course": "Business Law",
     "courseNo": "NDH801",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -114,7 +114,7 @@
     "course": "Data Analytics for Retail Management",
     "courseNo": "NDH803",
     "ects": 6.0,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -122,7 +122,7 @@
     "course": "Principles of Happiness",
     "courseNo": "NDH307",
     "ects": 3.0,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -130,7 +130,7 @@
     "course": "Marketing Communications",
     "courseNo": "NDH215",
     "ects": 6.0,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -138,7 +138,7 @@
     "course": "Customer Experience Management",
     "courseNo": "NDH216",
     "ects": 9.0,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -146,7 +146,7 @@
     "course": "Data Science for Retail Management",
     "courseNo": "NDH113",
     "ects": 6.0,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 3",
@@ -154,7 +154,7 @@
     "course": "Current Issues in Retailing",
     "courseNo": "NDH108",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 3",
@@ -162,7 +162,7 @@
     "course": "Applied Retail Track",
     "courseNo": "NDH007",
     "ects": 7.5,
-    "kind": "option"
+    "kind": "core"
    },
    {
     "year": "Year 3",
@@ -170,7 +170,7 @@
     "course": "Retail Operations",
     "courseNo": "NDH305",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 3",
@@ -178,7 +178,7 @@
     "course": "Advanced Customer Management",
     "courseNo": "NDH103",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 3",
@@ -186,7 +186,7 @@
     "course": "Brand and Category Management",
     "courseNo": "NDH105",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 3",
@@ -194,7 +194,7 @@
     "course": "Degree Project in Retail Management",
     "courseNo": "NDH900",
     "ects": 15.0,
-    "kind": "course"
+    "kind": "thesis"
    },
    {
     "year": "Year 3",
@@ -202,7 +202,7 @@
     "course": "Innovation Strategy",
     "courseNo": "NDH107",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    }
   ]
  },
@@ -217,7 +217,7 @@
     "course": "Strategic Management Control",
     "courseNo": "3302",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -225,7 +225,7 @@
     "course": "Financial Analysis",
     "courseNo": "3303",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -233,7 +233,7 @@
     "course": "International Financial Reporting",
     "courseNo": "3301",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -241,7 +241,7 @@
     "course": "Corporate Valuation",
     "courseNo": "3304",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -249,7 +249,11 @@
     "course": "Accounting for Grand Challenges",
     "courseNo": "3315",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "choice",
+    "choose": {
+     "pick": 4,
+     "outOf": 6
+    }
    },
    {
     "year": "Year 1",
@@ -257,7 +261,11 @@
     "course": "Auditing, Governance, and Investor Assurance",
     "courseNo": "3309",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "choice",
+    "choose": {
+     "pick": 4,
+     "outOf": 6
+    }
    },
    {
     "year": "Year 1",
@@ -265,7 +273,11 @@
     "course": "CFO Challenges in Multinational Corporations",
     "courseNo": null,
     "ects": 7.5,
-    "kind": "course"
+    "kind": "choice",
+    "choose": {
+     "pick": 4,
+     "outOf": 6
+    }
    },
    {
     "year": "Year 1",
@@ -273,7 +285,11 @@
     "course": "Current Issues in Financial Reporting",
     "courseNo": "3305",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "choice",
+    "choose": {
+     "pick": 4,
+     "outOf": 6
+    }
    },
    {
     "year": "Year 1",
@@ -281,7 +297,11 @@
     "course": "Financial Communication",
     "courseNo": "3311",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "choice",
+    "choose": {
+     "pick": 4,
+     "outOf": 6
+    }
    },
    {
     "year": "Year 1",
@@ -289,7 +309,11 @@
     "course": "Uncovering the Dark Side of Accounting with Python",
     "courseNo": null,
     "ects": 7.5,
-    "kind": "course"
+    "kind": "choice",
+    "choose": {
+     "pick": 4,
+     "outOf": 6
+    }
    },
    {
     "year": "Year 2",
@@ -329,7 +353,7 @@
     "course": "Executive Trainee Module",
     "courseNo": "9310",
     "ects": 30.0,
-    "kind": "option"
+    "kind": "electiveBlock"
    },
    {
     "year": "Year 2",
@@ -385,7 +409,7 @@
     "course": "Investments and Value Creation in Global Sports",
     "courseNo": "3313",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -393,7 +417,7 @@
     "course": "Finance for Start-Ups",
     "courseNo": "8088",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -401,7 +425,7 @@
     "course": "International Financial Management",
     "courseNo": "4306",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -409,7 +433,7 @@
     "course": "Corporate Finance",
     "courseNo": "4319",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -417,7 +441,7 @@
     "course": "Private Equity",
     "courseNo": "4310",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -425,7 +449,15 @@
     "course": "AI in Finance",
     "courseNo": null,
     "ects": null,
-    "kind": "course"
+    "kind": "electiveOption"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Master's thesis",
+    "courseNo": null,
+    "ects": 30.0,
+    "kind": "thesis"
    }
   ]
  },
@@ -440,7 +472,7 @@
     "course": "Business Creation and Development",
     "courseNo": "1313",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -448,7 +480,7 @@
     "course": "Advanced Strategic Management",
     "courseNo": "1329",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -456,7 +488,7 @@
     "course": "Operations Strategy",
     "courseNo": "1328",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -464,7 +496,7 @@
     "course": "Management Accounting & Control",
     "courseNo": "1326",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -472,7 +504,7 @@
     "course": "Innovation Management",
     "courseNo": "1318",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -480,7 +512,7 @@
     "course": "Brand Strategy",
     "courseNo": "1319",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -488,7 +520,7 @@
     "course": "Digital Transformation",
     "courseNo": "1330",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -496,7 +528,7 @@
     "course": "Leading Change",
     "courseNo": "1321",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -536,7 +568,7 @@
     "course": "Executive Trainee Module",
     "courseNo": "9310",
     "ects": 30.0,
-    "kind": "option"
+    "kind": "electiveBlock"
    },
    {
     "year": "Year 2",
@@ -583,8 +615,8 @@
     "semester": "Semester 4: Master's thesis and reflection",
     "course": "Master's thesis",
     "courseNo": null,
-    "ects": null,
-    "kind": "course"
+    "ects": 30.0,
+    "kind": "thesis"
    },
    {
     "year": "Year 2",
@@ -592,7 +624,7 @@
     "course": "Out-troduction module",
     "courseNo": null,
     "ects": null,
-    "kind": "course"
+    "kind": "option"
    },
    {
     "year": "Year 2",
@@ -615,7 +647,7 @@
     "course": "Advanced Mathematics for Economic Analysis",
     "courseNo": "5301",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -623,7 +655,7 @@
     "course": "Econometrics",
     "courseNo": "5304",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -631,7 +663,7 @@
     "course": "Advanced Microeconomic Theory",
     "courseNo": "5330",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -639,7 +671,7 @@
     "course": "Advanced Macroeconomics",
     "courseNo": "5303",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -647,7 +679,7 @@
     "course": "Electives at SSE",
     "courseNo": null,
     "ects": 30.0,
-    "kind": "option"
+    "kind": "electiveBlock"
    },
    {
     "year": "Year 2",
@@ -687,7 +719,7 @@
     "course": "Executive Trainee Module",
     "courseNo": "9310",
     "ects": 30.0,
-    "kind": "option"
+    "kind": "electiveBlock"
    },
    {
     "year": "Year 2",
@@ -743,7 +775,7 @@
     "course": "Applied Econometric Time Series",
     "courseNo": "5314",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -751,7 +783,7 @@
     "course": "Development Economics",
     "courseNo": "BE912",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -759,7 +791,7 @@
     "course": "Behavioral Economics",
     "courseNo": "5316",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -767,7 +799,7 @@
     "course": "Industrial Organization",
     "courseNo": "5321",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -775,7 +807,7 @@
     "course": "Natural Resource and Energy Economics",
     "courseNo": "5324",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -783,7 +815,7 @@
     "course": "The Economics of Pollution and Climate Change",
     "courseNo": "5327",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -791,7 +823,7 @@
     "course": "Gender and the Labor Market",
     "courseNo": "5328",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -799,7 +831,7 @@
     "course": "Inequality, Household Behavior, and the Macroeconomy",
     "courseNo": null,
     "ects": null,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -807,7 +839,7 @@
     "course": "Game Theory",
     "courseNo": "5332",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -815,7 +847,7 @@
     "course": "Monetary Economics",
     "courseNo": "5334",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -840,6 +872,14 @@
     "courseNo": null,
     "ects": null,
     "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Master's thesis",
+    "courseNo": null,
+    "ects": 30.0,
+    "kind": "thesis"
    }
   ]
  },
@@ -854,7 +894,7 @@
     "course": "Responsibility and Sustainability",
     "courseNo": "4331",
     "ects": 1.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -862,7 +902,7 @@
     "course": "Asset Pricing and Investments",
     "courseNo": "4339",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -870,7 +910,7 @@
     "course": "Accounting and Financial Statement Analysis",
     "courseNo": "3314",
     "ects": 6.0,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -878,7 +918,7 @@
     "course": "Empirical Methods in Finance",
     "courseNo": "4338",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -886,7 +926,7 @@
     "course": "Corporate Finance",
     "courseNo": "4319",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -894,7 +934,7 @@
     "course": "Core electives",
     "courseNo": null,
     "ects": 30.0,
-    "kind": "option"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -934,7 +974,7 @@
     "course": "MFIN Business Project / Internship course",
     "courseNo": null,
     "ects": null,
-    "kind": "course"
+    "kind": "option"
    },
    {
     "year": "Year 2",
@@ -942,7 +982,7 @@
     "course": "Executive Trainee Module",
     "courseNo": "9310",
     "ects": 30.0,
-    "kind": "option"
+    "kind": "electiveBlock"
    },
    {
     "year": "Year 2",
@@ -998,7 +1038,7 @@
     "course": "AI in Finance",
     "courseNo": null,
     "ects": null,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1006,7 +1046,7 @@
     "course": "Asset Management",
     "courseNo": "4335",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1014,7 +1054,7 @@
     "course": "Behavioral Finance",
     "courseNo": "4314",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1022,7 +1062,7 @@
     "course": "Empirical Methods of Finance",
     "courseNo": null,
     "ects": null,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1030,7 +1070,7 @@
     "course": "Entrepreneurial Finance and Venture Capital",
     "courseNo": "4326",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1038,7 +1078,7 @@
     "course": "Household Finances and Wealth Management",
     "courseNo": "4327",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1046,7 +1086,7 @@
     "course": "International Financial Management",
     "courseNo": "4306",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1054,7 +1094,7 @@
     "course": "Macroeconomics and Finance",
     "courseNo": "4330",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1062,7 +1102,7 @@
     "course": "Private Equity",
     "courseNo": "4310",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1070,7 +1110,7 @@
     "course": "Real Estate Finance",
     "courseNo": "4333",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1078,7 +1118,7 @@
     "course": "Risk Management",
     "courseNo": "4340",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1086,7 +1126,7 @@
     "course": "Special Situation Investing",
     "courseNo": "4336",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1094,7 +1134,7 @@
     "course": "Climate Finance",
     "courseNo": "BE923",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1102,7 +1142,7 @@
     "course": "Value Investing I",
     "courseNo": null,
     "ects": null,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1110,7 +1150,7 @@
     "course": "Value Investing II: Frontiers",
     "courseNo": "4325",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "electiveOption"
    },
    {
     "year": "Year 2",
@@ -1143,6 +1183,14 @@
     "courseNo": null,
     "ects": null,
     "kind": "option"
+   },
+   {
+    "year": "Year 2",
+    "semester": "Semester 3 and 4",
+    "course": "Master's thesis",
+    "courseNo": null,
+    "ects": 30.0,
+    "kind": "thesis"
    }
   ]
  },
@@ -1157,7 +1205,7 @@
     "course": "Creating International Firms",
     "courseNo": null,
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -1165,7 +1213,7 @@
     "course": "Managing Human Dynamics in the Global Firm",
     "courseNo": "6118",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -1173,7 +1221,7 @@
     "course": "Foundations of the Global Economy",
     "courseNo": "6124",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -1181,7 +1229,7 @@
     "course": "Supply Chain Management",
     "courseNo": "NDH203",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
@@ -1189,7 +1237,11 @@
     "course": "Shaping Global Markets",
     "courseNo": "6122",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "choice",
+    "choose": {
+     "pick": 2,
+     "outOf": 3
+    }
    },
    {
     "year": "Year 1",
@@ -1197,7 +1249,11 @@
     "course": "Corporate Finance in Global Firms",
     "courseNo": "6123",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "choice",
+    "choose": {
+     "pick": 2,
+     "outOf": 3
+    }
    },
    {
     "year": "Year 1",
@@ -1205,7 +1261,11 @@
     "course": "Managing Data and AI in the Global Workplace",
     "courseNo": "6125",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "choice",
+    "choose": {
+     "pick": 2,
+     "outOf": 3
+    }
    },
    {
     "year": "Year 1",
@@ -1213,7 +1273,7 @@
     "course": "MIB International Immersion Internship",
     "courseNo": null,
     "ects": null,
-    "kind": "course"
+    "kind": "option"
    },
    {
     "year": "Year 1",
@@ -1221,15 +1281,15 @@
     "course": "MIB Research Project",
     "courseNo": "6181",
     "ects": 15.0,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 1",
-    "semester": "Semester 2",
+    "semester": "Summer",
     "course": "CEMS International Internship",
     "courseNo": "6194",
     "ects": null,
-    "kind": "course"
+    "kind": "option"
    },
    {
     "year": "Year 2",
@@ -1237,7 +1297,7 @@
     "course": "Strategic Thinking in a Global Digital World",
     "courseNo": "9481",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -1245,7 +1305,7 @@
     "course": "Electives",
     "courseNo": null,
     "ects": 22.5,
-    "kind": "option"
+    "kind": "electiveBlock"
    },
    {
     "year": "Year 2",
@@ -1253,7 +1313,7 @@
     "course": "Global Leadership",
     "courseNo": "9480",
     "ects": 7.5,
-    "kind": "course"
+    "kind": "core"
    },
    {
     "year": "Year 2",
@@ -1261,7 +1321,7 @@
     "course": "Elective",
     "courseNo": null,
     "ects": 7.5,
-    "kind": "option"
+    "kind": "electiveBlock"
    },
    {
     "year": "Year 2",
@@ -1269,8 +1329,9 @@
     "course": "CEMS Business Project",
     "courseNo": "9476",
     "ects": 15.0,
-    "kind": "course"
+    "kind": "core"
    }
-  ]
+  ],
+  "thesisNote": "The MIB Research Project in year 1 and the CEMS Business Project in year 2 together satisfy the master's thesis requirement; there is no separate thesis course."
  }
 }
