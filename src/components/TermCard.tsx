@@ -82,7 +82,8 @@ export const TermCard = ({
         <div className="mb-3 rounded-md bg-muted/50 p-3">
           <p className="mb-2 text-xs text-muted-foreground">
             {term.electiveKeys.length} elective{term.electiveKeys.length > 1 ? 's' : ''} to fill.
-            Pick from your department, or leave a course unnamed.
+            A standard elective is enough for the average; name the course to use
+            its real credits.
           </p>
           <div className="grid gap-2 sm:grid-cols-2">
             {term.electiveKeys.map((key, index) => (

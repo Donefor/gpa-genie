@@ -91,6 +91,11 @@ export const ElectiveSlotSelect = ({
       <SelectContent className="max-h-80">
         <SelectItem value={EMPTY}>Empty slot</SelectItem>
 
+        {/* First, because it is the answer most of the time: the course does
+            not need naming for the average to be right. */}
+        <SelectItem value={OTHER_GRADED}>Standard elective · 7.5 ECTS</SelectItem>
+        <SelectItem value={OTHER_PASS_FAIL}>Standard elective · Pass/Fail</SelectItem>
+
         {department.length > 0 && (
           <SelectGroup>
             <SelectLabel>Courses in your department</SelectLabel>
@@ -98,7 +103,6 @@ export const ElectiveSlotSelect = ({
               <SelectItem key={course.courseNo} value={course.courseNo}>
                 {course.name} · {course.credits}
                 {!course.creditsKnown && '*'} ECTS
-                {course.periods.length ? ` · P${course.periods.join('/')}` : ''}
               </SelectItem>
             ))}
           </SelectGroup>
@@ -111,17 +115,10 @@ export const ElectiveSlotSelect = ({
               <SelectItem key={course.courseNo} value={course.courseNo}>
                 {course.name} · {course.credits}
                 {!course.creditsKnown && '*'} ECTS
-                {course.periods.length ? ` · P${course.periods.join('/')}` : ''}
               </SelectItem>
             ))}
           </SelectGroup>
         )}
-
-        <SelectGroup>
-          <SelectLabel>Somewhere else</SelectLabel>
-          <SelectItem value={OTHER_GRADED}>Elective · graded · 7.5 ECTS</SelectItem>
-          <SelectItem value={OTHER_PASS_FAIL}>Elective · Pass/Fail · 7.5 ECTS</SelectItem>
-        </SelectGroup>
       </SelectContent>
     </Select>
   );
