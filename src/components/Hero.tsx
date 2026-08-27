@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { contextualMessage, randomMessage } from '@/data/messages';
+import { pickFrom, poolFor, scopeFor } from '@/data/messages';
 import { PapersMark } from './PapersMark';
 
 const SESSION_KEY = 'sse-gpa-calculator:message';
@@ -9,19 +9,25 @@ const SESSION_KEY = 'sse-gpa-calculator:message';
  * you move between the calculator and the statistics.
  */
 const messageForSession = (): string => {
-  // Time-sensitive messages always win, so they are never read from the cache.
-  const contextual = contextualMessage();
-  if (contextual) return contextual;
+  // The scope is stored alongside the message, so a line cached during
+  // freshers' week is not still on screen in November.
+  const scope = scopeFor();
+  const pool = poolFor(scope);
 
   try {
-    const stored = window.sessionStorage.getItem(SESSION_KEY);
-    if (stored) return stored;
-    const fresh = randomMessage();
-    window.sessionStorage.setItem(SESSION_KEY, fresh);
+    const raw = window.sessionStorage.getItem(SESSION_KEY);
+    if (raw) {
+      const cached = JSON.parse(raw) as { scope?: string; message?: string };
+      if (cached.scope === scope && cached.message && pool.includes(cached.message)) {
+        return cached.message;
+      }
+    }
+    const fresh = pickFrom(pool);
+    window.sessionStorage.setItem(SESSION_KEY, JSON.stringify({ scope, message: fresh }));
     return fresh;
   } catch {
     // Session storage can be unavailable; a fresh message each load is fine.
-    return randomMessage();
+    return pickFrom(pool);
   }
 };
 

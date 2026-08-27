@@ -1,7 +1,11 @@
 /**
- * Headline encouragement. One message is chosen per browser session, so it
- * stays put while you move between pages and changes when you come back.
+ * Headline encouragement. One message is drawn per browser session and held,
+ * so it stays put while you move between pages and changes when you come back.
+ *
+ * The clock and the calendar can override the general pool: late at night, and
+ * across the start of the academic year when the intake is new.
  */
+
 export const MESSAGES = [
   // Straight encouragement
   'Your best round is still ahead',
@@ -38,10 +42,25 @@ export const MESSAGES = [
 ];
 
 /** Shown late at night, whatever else would have been picked. */
-export const LATE_NIGHT_MESSAGE = 'School closes soon, the bunker awaits you';
+export const LATE_NIGHT_MESSAGES = [
+  'School closes soon, the bunker awaits you',
+  'Whatever this is, it will look better after sleep',
+  'Nothing good gets learned after midnight',
+];
 
-/** Shown across the start of the academic year. */
-export const SCHOOL_START_MESSAGE = 'Välkommen alla nya småttingar!';
+/** Shown across the start of the academic year, aimed at the new intake. */
+export const SCHOOL_START_MESSAGES = [
+  'Välkommen alla nya småttingar!',
+  'Do not catch småttingsjukan, remember to wash your hands',
+  'The first maths test is not that important',
+  'Data Analytics I is only 3 ECTS, do not forget the other two courses!',
+  'You do not need 5.0 to end up in consulting or banking',
+  'Everyone around you is just as lost this week',
+  'Nobody will ever ask you about your first exam',
+  'Say yes to things this term, the grades will still be there',
+];
+
+export type MessageScope = 'school-start' | 'late-night' | 'general';
 
 /** Local calendar and clock in Stockholm, wherever the reader happens to be. */
 export const stockholmNow = (now: Date = new Date()) => {
@@ -65,20 +84,22 @@ export const isSchoolStart = ({ month, day }: { month: number; day: number }) =>
 /** 22:00 up to but not including 05:00. */
 export const isLateNight = ({ hour }: { hour: number }) => hour >= 22 || hour < 5;
 
-/**
- * The message the date and clock dictate, or null when nothing special is on.
- * School start wins outright; otherwise late night takes over.
- */
-export const contextualMessage = (now: Date = new Date()): string | null => {
+/** School start wins outright; otherwise late night takes over. */
+export const scopeFor = (now: Date = new Date()): MessageScope => {
   const clock = stockholmNow(now);
-  if (isSchoolStart(clock)) return SCHOOL_START_MESSAGE;
-  if (isLateNight(clock)) return LATE_NIGHT_MESSAGE;
-  return null;
+  if (isSchoolStart(clock)) return 'school-start';
+  if (isLateNight(clock)) return 'late-night';
+  return 'general';
 };
 
-export const randomMessage = (random: number = Math.random()): string =>
-  MESSAGES[Math.min(MESSAGES.length - 1, Math.floor(random * MESSAGES.length))];
+export const poolFor = (scope: MessageScope): string[] => {
+  if (scope === 'school-start') return SCHOOL_START_MESSAGES;
+  if (scope === 'late-night') return LATE_NIGHT_MESSAGES;
+  return MESSAGES;
+};
 
-/** Contextual message if there is one, otherwise a random one. */
+export const pickFrom = (pool: string[], random: number = Math.random()): string =>
+  pool[Math.min(pool.length - 1, Math.floor(random * pool.length))];
+
 export const pickMessage = (now: Date = new Date(), random: number = Math.random()): string =>
-  contextualMessage(now) ?? randomMessage(random);
+  pickFrom(poolFor(scopeFor(now)), random);

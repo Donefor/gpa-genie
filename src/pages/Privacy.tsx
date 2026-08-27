@@ -245,15 +245,19 @@ const Privacy = () => (
         </p>
         <p>
           The GDPR also gives you the right to ask us for a copy of your personal data, or to
-          have it corrected or deleted.{' '}
+          have it corrected or deleted. Being straight about what that means here: we do hold
+          things that can single out a browser — the identifier Hotjar sets, your device,
+          operating system and browser, and the country you visited from — but{' '}
           <strong className="font-medium text-foreground">
-            We should be straight about what that is worth here: we hold nothing that
-            identifies you, so we have no way to tell which visit or which recording was
-            yours.
-          </strong>{' '}
-          We cannot hand over your data or delete it on request, because we cannot find it.
-          The three controls above are the ones that genuinely work, and they are all in your
-          hands rather than ours.
+            none of it is tied to a name, an email address or a student number, so we cannot
+            look you up.
+          </strong>
+        </p>
+        <p>
+          If you can tell us roughly when you visited and from what sort of device, we can try
+          to find the session and have it deleted. Without something to go on we have no way
+          of telling which of the recordings is yours. The three controls above do not depend
+          on us at all, which is why they are the ones worth using.
         </p>
         <p>
           If you think something here has been handled wrongly, you can complain to the Swedish
@@ -275,9 +279,9 @@ const Privacy = () => (
           after a change constitutes acceptance of the revised notice.
         </p>
         <p>
-          Questions are welcome through the links in the site footer. We cannot promise to
-          find or remove a particular recording, for the reason given in section 9, but if
-          something here looks wrong we would rather hear about it.
+          Questions are welcome through the links in the site footer. If you want a recording
+          removed, tell us roughly when you visited and on what sort of device and we will try
+          to find it — see section 9 for why we cannot simply look you up.
         </p>
       </Section>
 
