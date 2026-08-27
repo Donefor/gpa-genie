@@ -19,6 +19,8 @@ export const GradeSelect = ({ value, onChange, label }: GradeSelectProps) => (
   <Select value={value} onValueChange={(next) => onChange(next as Grade)}>
     <SelectTrigger
       aria-label={label}
+      // Masked so the chosen grade never reaches session recording.
+      data-hj-suppress
       className={cn('h-9 w-full', value === 'Not finished' && 'text-muted-foreground')}
     >
       <SelectValue placeholder="Not finished" />

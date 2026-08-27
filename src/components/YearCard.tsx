@@ -40,7 +40,7 @@ export const YearCard = ({
             {stats.pendingCourses > 0 && ` · ${stats.pendingCourses} awaiting a grade`}
           </p>
         </div>
-        <div className="text-right">
+        <div className="text-right" data-hj-suppress>
           <p className="text-xs text-muted-foreground">Year GPA</p>
           <p
             className={cn(

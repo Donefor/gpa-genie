@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Index from './pages/Index';
 import Stats from './pages/Stats';
 import Privacy from './pages/Privacy';
+import { ConsentBanner } from '@/components/ConsentBanner';
 import NotFound from './pages/NotFound';
 
 const App = () => (
@@ -12,6 +13,7 @@ const App = () => (
     <Toaster />
     <Sonner />
     <BrowserRouter basename="/">
+      <ConsentBanner />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/stats" element={<Stats />} />

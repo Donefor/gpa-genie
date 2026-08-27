@@ -49,7 +49,8 @@ const Privacy = () => (
           <li>
             <strong className="font-medium text-foreground">We can see how the site is
             used</strong> — roughly where a visit came from, what device and browser, and a
-            replay of what happened on screen, which includes the grades entered.
+            replay of how you moved around the page. The grades you enter are masked before
+            they reach our providers.
           </li>
           <li>
             <strong className="font-medium text-foreground">This still counts as personal
@@ -65,9 +66,9 @@ const Privacy = () => (
           <strong className="font-medium text-foreground">Information you enter.</strong> The
           Service lets you record grades, specialisations and other programme choices. This
           information is stored locally in your browser and is not submitted to a server or
-          held in any account or database operated by us. Please note, however, that
-          information displayed on screen may be captured by our session recording provider as
-          described in section 2.
+          held in any account or database operated by us. The grade selectors and the
+          calculated averages are masked from session recording, as described in section 2, so
+          they are not transmitted to our providers either.
         </p>
         <p>
           <strong className="font-medium text-foreground">Information collected
@@ -103,9 +104,8 @@ const Privacy = () => (
           <li>Referring page, the pages you visit, and the dates and times of your visit</li>
           <li>Mouse movement, clicks and taps, scrolling and other interactions</li>
           <li>
-            A replay of what was rendered on your screen. Because the grades and programme
-            choices you select are displayed on the page, they appear in the replay along with
-            the grade point average calculated from them.
+            A replay of what was rendered on your screen, excluding the masked areas described
+            below
           </li>
           <li>
             Cookies that identify your browser between visits, including{' '}
@@ -115,8 +115,12 @@ const Privacy = () => (
         </ul>
 
         <p>
-          Hotjar suppresses the contents of text input fields by default, so anything typed
-          into a text box is not recorded. The Service does not ask you to type anything.
+          <strong className="font-medium text-foreground">Grades are masked.</strong> The grade
+          selectors, the grade point average and the per-year figures are marked for
+          suppression, so Hotjar replaces them with placeholder characters at the moment of
+          capture. The grades you enter are therefore not transmitted to Hotjar and do not
+          appear in any recording. Hotjar additionally suppresses the contents of text input
+          fields by default.
         </p>
 
         <p>
@@ -142,8 +146,7 @@ const Privacy = () => (
         <p>
           <strong className="font-medium text-foreground">Identifiability.</strong> This data
           is pseudonymous: it is not linked to your name, email address or student number, and
-          we make no attempt to identify you. The grades shown in a recording are self-reported
-          and unverified, and are not an official academic record.
+          we make no attempt to identify you.
         </p>
         <p>
           <strong className="font-medium text-foreground">Opting out.</strong> Hotjar honours

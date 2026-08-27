@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { openConsentSettings } from '@/lib/consent';
 
 export const SiteFooter = () => (
   <footer className="mt-16 border-t border-border bg-secondary/40">
@@ -27,13 +28,20 @@ export const SiteFooter = () => (
         </div>
       </div>
 
-      <div className="mb-6 flex justify-center">
+      <div className="mb-6 flex flex-wrap justify-center gap-x-6 gap-y-2">
         <Link
           to="/privacy"
           className="text-sm font-medium text-primary underline-offset-4 hover:underline"
         >
           Privacy Notice
         </Link>
+        <button
+          type="button"
+          onClick={openConsentSettings}
+          className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+        >
+          Cookie settings
+        </button>
       </div>
 
       <p className="border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">

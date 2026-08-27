@@ -13,7 +13,10 @@ export const GpaSummary = ({ courses, grades, perYear }: GpaSummaryProps) => {
   const hasGrades = stats.gradedCredits > 0;
 
   return (
-    <section className="surface-card flex flex-wrap items-end justify-between gap-6 p-5 sm:p-6">
+    <section
+      data-hj-suppress
+      className="surface-card flex flex-wrap items-end justify-between gap-6 p-5 sm:p-6"
+    >
       <div>
         <p className="text-xs font-medium text-muted-foreground">Cumulative GPA</p>
         <p
