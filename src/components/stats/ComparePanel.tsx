@@ -274,28 +274,18 @@ export const ComparePanel = () => {
               style={{ left: hover.x, top: hover.y }}
               role="tooltip"
             >
-              <p className="max-w-56 truncate text-xs font-medium">{hover.course}</p>
-              <ul className="mt-1 space-y-0.5">
-                {BAND_ORDER.map((band) => (
-                  <li
-                    key={band}
-                    className={cn(
-                      'flex items-center gap-1.5 text-xs',
-                      band === hover.band ? 'text-foreground' : 'text-muted-foreground',
-                    )}
-                  >
-                    <span
-                      aria-hidden
-                      className="h-2 w-2 rounded-sm"
-                      style={{ background: BAND_COLOR[band] }}
-                    />
-                    <span className={cn(band === hover.band && 'font-semibold')}>{band}</span>
-                    <span className="numeric ml-auto pl-3 font-medium">
-                      {hover.dist[band].toFixed(1)}%
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              <p className="max-w-56 truncate numeric text-xs font-medium">{hover.course}</p>
+              <p className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground">
+                <span
+                  aria-hidden
+                  className="h-2 w-2 rounded-sm"
+                  style={{ background: BAND_COLOR[hover.band] }}
+                />
+                <span>{hover.band}</span>
+                <span className="numeric font-medium text-foreground">
+                  {hover.dist[hover.band].toFixed(1)}%
+                </span>
+              </p>
             </div>
           )}
 
