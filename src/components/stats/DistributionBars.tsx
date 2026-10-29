@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { cn } from '@/lib/utils';
 import { StatGrade } from '@/data/gradeStats';
 import { TermSlice } from '@/utils/statsMath';
 import { BAND_COLOR, BAND_ORDER } from './bands';
 
 interface Hover {
   band: StatGrade;
-  share: number;
+  dist: Record<StatGrade, number>;
   label: string;
   x: number;
   y: number;
@@ -54,7 +55,7 @@ export const DistributionBars = ({ slices }: { slices: TermSlice[] }) => {
                       onMouseEnter={(event) =>
                         setHover({
                           band,
-                          share: value,
+                          dist: slice.distribution as Record<StatGrade, number>,
                           label: slice.label,
                           x: event.clientX,
                           y: event.clientY,
@@ -87,17 +88,27 @@ export const DistributionBars = ({ slices }: { slices: TermSlice[] }) => {
           role="tooltip"
         >
           <p className="numeric text-xs font-medium">{hover.label}</p>
-          <p className="mt-0.5 flex items-center gap-1.5 text-xs text-muted-foreground">
-            <span
-              aria-hidden
-              className="h-2 w-2 rounded-sm"
-              style={{ background: BAND_COLOR[hover.band] }}
-            />
-            <span>{hover.band}</span>
-            <span className="numeric font-medium text-foreground">
-              {hover.share.toFixed(1)}%
-            </span>
-          </p>
+          <ul className="mt-1 space-y-0.5">
+            {BAND_ORDER.map((band) => (
+              <li
+                key={band}
+                className={cn(
+                  'flex items-center gap-1.5 text-xs',
+                  band === hover.band ? 'text-foreground' : 'text-muted-foreground',
+                )}
+              >
+                <span
+                  aria-hidden
+                  className="h-2 w-2 rounded-sm"
+                  style={{ background: BAND_COLOR[band] }}
+                />
+                <span className={cn(band === hover.band && 'font-semibold')}>{band}</span>
+                <span className="numeric ml-auto pl-3 font-medium">
+                  {hover.dist[band].toFixed(1)}%
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
