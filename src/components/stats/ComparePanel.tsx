@@ -25,6 +25,14 @@ import { BandLegend } from './BandLegend';
 
 const MAX_COMPARE = 4;
 
+interface Hover {
+  course: string;
+  band: StatGrade;
+  dist: Record<StatGrade, number>;
+  x: number;
+  y: number;
+}
+
 /**
  * Best value in a column, compared at the precision actually shown — otherwise
  * two rows can display 4.14 and only one gets marked.
@@ -57,6 +65,7 @@ const BestValue = ({ text, best }: { text: string; best: boolean }) => {
 
 export const ComparePanel = () => {
   const [query, setQuery] = useState('');
+  const [hover, setHover] = useState<Hover | null>(null);
   // Kept in the URL so a comparison can be shared as a link.
   const [params, setParams] = useSearchParams();
   const picked = useMemo(() => {
@@ -216,12 +225,28 @@ export const ComparePanel = () => {
                           return (
                             <div
                               key={band}
-                              className="h-full first:rounded-l last:rounded-r"
+                              className="h-full cursor-default transition-opacity first:rounded-l last:rounded-r hover:opacity-80"
                               style={{
                                 width: `${(value / total) * 100}%`,
                                 background: BAND_COLOR[band],
                               }}
-                              title={`${band}: ${value.toFixed(1)}%`}
+                              onMouseEnter={(event) =>
+                                setHover({
+                                  course: column.course,
+                                  band,
+                                  dist,
+                                  x: event.clientX,
+                                  y: event.clientY,
+                                })
+                              }
+                              onMouseMove={(event) =>
+                                setHover((current) =>
+                                  current
+                                    ? { ...current, x: event.clientX, y: event.clientY }
+                                    : current,
+                                )
+                              }
+                              onMouseLeave={() => setHover(null)}
                             />
                           );
                         })}
@@ -242,6 +267,37 @@ export const ComparePanel = () => {
               })}
             </div>
           </section>
+
+          {hover && (
+            <div
+              className="pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-[calc(100%+12px)] rounded-md border border-border bg-popover px-2.5 py-1.5 text-popover-foreground shadow-md"
+              style={{ left: hover.x, top: hover.y }}
+              role="tooltip"
+            >
+              <p className="max-w-56 truncate text-xs font-medium">{hover.course}</p>
+              <ul className="mt-1 space-y-0.5">
+                {BAND_ORDER.map((band) => (
+                  <li
+                    key={band}
+                    className={cn(
+                      'flex items-center gap-1.5 text-xs',
+                      band === hover.band ? 'text-foreground' : 'text-muted-foreground',
+                    )}
+                  >
+                    <span
+                      aria-hidden
+                      className="h-2 w-2 rounded-sm"
+                      style={{ background: BAND_COLOR[band] }}
+                    />
+                    <span className={cn(band === hover.band && 'font-semibold')}>{band}</span>
+                    <span className="numeric ml-auto pl-3 font-medium">
+                      {hover.dist[band].toFixed(1)}%
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <section className="surface-card p-4 sm:p-5">
             <h3 className="mb-3 text-sm font-semibold tracking-tight">Side by side</h3>
